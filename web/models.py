@@ -5,8 +5,8 @@ from ckeditor.fields import RichTextField
 
 class Event(models.Model):
     date = models.DateTimeField()
-    location = models.CharField(max_length=500)
-    title = models.CharField(max_length=200)
+    location = models.TextField(max_length=200)
+    title = models.CharField(max_length=100)
     agenda = RichTextField()
     minutes = models.FileField(blank=True)
     presentation_materials = models.FileField(blank=True)
@@ -25,3 +25,22 @@ class Page(models.Model):
         return self.title
 
 # Resources
+
+class TechnicalResources(models.Model):
+    category_choices = [
+        ("RP", "Regional Plans"),
+        ("MT", "Municipal Tools"),
+        ("RR", "Research and Reports"),
+    ]
+    name = models.CharField(max_length=200)
+    date = models.DateField()
+    source = models.CharField(max_length=100)
+    category = models.CharField(
+        max_length=2,
+        choices=category_choices,
+    )
+
+class FundingResources(models.Model):
+    name = models.CharField(max_length=200)
+    date = models.DateField()
+    source = models.CharField(max_length=100)

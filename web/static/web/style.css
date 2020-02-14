@@ -148,22 +148,18 @@ hr {
 h1 {
   font-size: 2rem;
   margin-bottom: 12px;
-  text-align: center;
 }
 h2 {
   font-size: 1.75rem;
   margin-bottom: 12px;
-  text-align: center;
 }
 h3 {
   font-size: 1.5rem;
   margin-bottom: 12px;
-  text-align: center;
 }
 h4 {
   font-size: 1.25rem;
   margin-bottom: 10px;
-  text-align: center;
 }
 .bold {
   font-weight: bold;

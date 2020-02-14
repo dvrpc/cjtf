@@ -3,13 +3,13 @@
 {% block main %}
   <div class="row">
     <div class="column left two_thirds orange">
-      <h2>{{page.title|safe}}</h2>
+      <h2 class="center">{{page.title|safe}}</h2>
       <div>{{page.main_content|safe|linebreaks}}</div>
       
       {# Events & Meetings #}
       {% if page.internal_name == 'events_meetings' %}
         <br>
-        <h3>Upcoming</h3>
+        <h3 class="center">Upcoming</h3>
         {% if upcoming_events %}
           {% for event in upcoming_events %}
             <p><a href="{% url 'web:event_detail' event.id %}">{{event.title}}</a> - 
@@ -22,7 +22,7 @@
           </p>
         {% endif %}
         <br>
-        <h3>Past</h3>
+        <h3 class="center">Past</h3>
         {% if past_events %}
           {% for event in past_events %}
             <p>

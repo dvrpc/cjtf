@@ -4,16 +4,16 @@
 
   <div class="row">
     <div class="column left two_thirds orange">
-      <h2>{{event.title}}</h2>
-      <p class="center"><span style="font-weight:bold">{{event.date|date:"l, F j, Y" }}</span><br>
-        {{event.date|date:"g:i a"}}
-      </p>
-      <p>{{event.location|safe|linebreaks}}</p>
-      <p></p>
-      <p>{{event.agenda|safe|linebreaks}}
+      <h2 class="center">{{event.title}}</h2>
+      <div class="center">
+        <span class="bold">{{ event.date|date:"l, F j, Y" }}</span><br>
+        {{ event.date|date:"g:i a"}}<br>
+        {{ event.location|linebreaks }}
+      </div>
+      <div>{{event.agenda|safe}}</div>
     </div>
     <div class="column right one_third light_green">
-      <h3>Documents</h3>
+      <h3 class="center">Documents</h3>
       {% if event.minutes  or event.presentation_materials %}
         {% if event.minutes %}
           <p>&#11123; &nbsp;<a href="{{ event.minutes.url }}">Minutes/Highlights</a> </p>

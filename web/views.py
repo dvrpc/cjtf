@@ -8,6 +8,12 @@ from .models import Event, Page
 
 
 def index(request):
+    """
+    Home Page. Get recently updated internal pages (events/meetings and resources) and also
+    set up the Twitter list feed.
+    """
+    
+    
     context = {
         'title': 'Central Jersey Transportation Forum'
     }
@@ -25,6 +31,7 @@ def about(request):
 
 
 def membership(request):
+    page = get_object_or_404(Page, internal_name="membership")
     context = {
         'title': 'Membership'
     }
@@ -33,8 +40,6 @@ def membership(request):
 
 def events(request):
     page = get_object_or_404(Page, internal_name="events_meetings")
-
-    # upcoming_events = Event.objects.all()
     upcoming_events = Event.objects.filter(date__gte=datetime.date.today())
     past_events = Event.objects.filter(date__lt=datetime.date.today())
 
@@ -45,22 +50,6 @@ def events(request):
         'past_events': past_events,
     }
     return render(request, 'web/default.html', context)
-
-# class EventsIndexView(generic.ListView):
-#     """List of all events, using Django's generic index view"""
-
-#     template_name = 'web/default.html'
-#     context_object_name = 'events'
-#     queryset = Event.objects.order_by('-date')
-
-#     def get_context_data(self, **kwargs):
-#         """Overwrite in order to add additional variable (title) in context"""
-#         # Call the base implementation first to get a context
-#         context = super().get_context_data(**kwargs)
-#         # Add in the publisher
-#         context['title'] = "Meetings and Events"
-#         context['internal_name'] = 'events_meetings'
-#         return context
 
 
 def event_details(request, event_id):
@@ -73,10 +62,12 @@ def event_details(request, event_id):
 
 
 def resources(request):
+    page = get_object_or_404(Page, internal_name="resources")
     context = {
-        'title': 'Resources'
+        'title': page.title,
+        'page': page,
     }
-    return render(request, 'web/resources.html', context)
+    return render(request, 'web/default.html', context)
 
 
 def contact(request):
