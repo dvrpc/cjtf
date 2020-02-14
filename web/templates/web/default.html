@@ -1,0 +1,13 @@
+{% extends "web/base.html" %}
+
+{% block main %}
+  <div class="row">
+    <div class="column left two_thirds orange">
+      <h2>{{page.title|safe}}</h2>
+      <div>{{page.left_column|safe|linebreaks}}</div>
+    </div>
+    <div class="column right one_third light_green">
+      <p>{{page.right_column|safe}}<p>
+    </div>
+  </div>
+{% endblock %}

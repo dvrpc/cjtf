@@ -1,0 +1,24 @@
+{% extends "web/base.html" %}
+
+{% block main %}
+
+  <div class="row">
+    <div class="column left two_thirds orange">
+      <h2>{{event.title}}</h2>
+      <p>{{event.date}}</p>
+      <p>{{event.location}}</p>
+      <p></p>
+      <p>{{event.agenda}}
+    </div>
+    <div class="column right one_third light_green">
+      <h3>Materials</h3>
+      {% if event.minutes or event.presentation_materials %}
+        <p>{{ event.minutes }}</p>
+        <p>{{ event.presentation_materials }}</p>
+      {% else %}
+        <p>No available materials.</p>
+      {% endif %}
+    </div>
+  </div>
+ 
+{% endblock %}

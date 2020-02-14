@@ -1,14 +1,13 @@
 {% load static %}
 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  {% block title %}
-
-  {% endblock %}
-
-  <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{% static 'web/style.css' %}">
+  <title>{{ title }}</title>
 </head>
 
 <body>
@@ -16,47 +15,34 @@
   <div id="header">
     <div class="row">
       <div style="float:left">
-        <img src="/cjtf/images/logo_header.png">
+        <a href="/"><img src="{% static 'web/images/logo_header.png' %}"></a>
       </div>
       <div style="float:right">
         <span class="search">Search box here</span>
-        <img src="/cjtf/images/dvrpc_small.png" style="padding-bottom: 15px">
+        <img src="{% static 'web/images/dvrpc_small.png' %}" style="padding-bottom: 15px">
         <br>
-        <img src="/cjtf/images/njtpa_small.png" style="float: right">
+        <img src="{% static 'web/images/njtpa_small.png' %}" style="float: right">
       </div>
     </div>
     <div id="top_nav">
       <ul>
-        {% for child in data.home._children %}
-          <li>
-          {% if child._id == data.page._id %}
-            <a class="current" href="{{ child._url }}"> 
-          {% else %}
-            <a href="{{ child._url }}"> 
-          {% endif %}
-          {# new #}
-            {# {% if child._children.length %}
-                <ul class="tabs">
-                  {% for grand_child in child._children %}
-                    <li><a href="{{ grand_child._url }}">{{ grand_child.title }}</a></li>
-                  {% endfor %}
-                </ul>
-              {% endif %} #}
-            {# end new #}
-          {{ child.title }}</a></li>
-        {% endfor %}
-      </ul>
+        <li><a href="{% url 'web:about' %}">About</a></li>
+        <li><a href="{% url 'web:membership' %}">Membership</a></li>
+        <li><a href="{% url 'web:events' %}">Events & Meetings</a></li>
+        <li><a href="{% url 'web:resources' %}">Resources</a></li>
+        <li><a href="{% url 'web:contact' %}">Contact</a></li>
     </div>
   </div>
 
+  <div id="main_content">
+    {% block main %}
 
-  {% block main %}
-
-  {% endblock %}
+    {% endblock %}
+  </div>
 
   <div id="footer">
-    <img src="/cjtf/images/dvrpc_tiny.png" class="spacer">
-    <img src="/cjtf/images/njtpa_tiny.png">
+    <img src="{% static 'web/images/dvrpc_tiny.png' %}" class="spacer">
+    <img src="{% static 'web/images/njtpa_tiny.png' %}">
   </div>
 
 </body>
