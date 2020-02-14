@@ -4,10 +4,46 @@
   <div class="row">
     <div class="column left two_thirds orange">
       <h2>{{page.title|safe}}</h2>
-      <div>{{page.left_column|safe|linebreaks}}</div>
+      <div>{{page.main_content|safe|linebreaks}}</div>
+      
+      {# Events & Meetings #}
+      {% if page.internal_name == 'events_meetings' %}
+        <br>
+        <h3>Upcoming</h3>
+        {% if upcoming_events %}
+          {% for event in upcoming_events %}
+            <p><a href="{% url 'web:event_detail' event.id %}">{{event.title}}</a> - 
+              {{event.date}}</p>
+          {% endfor %}
+        {% else %}
+          <p>There are no meetings or events scheduled at this time. Please 
+            <a href="/contact">contact the Forum</a> for initial thinking about the next meeting 
+            date, which will be posted here once it is set.
+          </p>
+        {% endif %}
+        <br>
+        <h3>Past</h3>
+        {% if past_events %}
+          {% for event in past_events %}
+            <p>
+              <a href="{% url 'web:event_detail' event.id %}">{{event.date|date:"M j, Y" }}</a>
+              {% if event.minutes %}
+                | <a href="{{ event.minutes }}">Minutes/Highlights</a> &#11123;
+              {% endif %}
+              {% if event.presentation_materials %}
+                | <a href="{{ event.presentation_materials }}">Presentations/Materials</a> &#11123;
+              {% endif %}
+            </p>
+          {% endfor %}
+        {% endif %}
+      {% endif %}
+
+      {# Resources #}
+
+
     </div>
     <div class="column right one_third light_green">
-      <p>{{page.right_column|safe}}<p>
+      <p>{{page.sidebar|safe}}<p>
     </div>
   </div>
 {% endblock %}

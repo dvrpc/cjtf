@@ -1,3 +1,5 @@
+import datetime
+
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.views import generic
@@ -29,20 +31,36 @@ def membership(request):
     return render(request, 'web/default.html', context)
 
 
-class EventsIndexView(generic.ListView):
-    """List of all events, using Django's generic index view"""
+def events(request):
+    page = get_object_or_404(Page, internal_name="events_meetings")
 
-    template_name = 'web/events.html'
-    context_object_name = 'events'
-    queryset = Event.objects.order_by('-date')
+    # upcoming_events = Event.objects.all()
+    upcoming_events = Event.objects.filter(date__gte=datetime.date.today())
+    past_events = Event.objects.filter(date__lt=datetime.date.today())
 
-    def get_context_data(self, **kwargs):
-        """Overwrite in order to add additional variable (title) in context"""
-        # Call the base implementation first to get a context
-        context = super().get_context_data(**kwargs)
-        # Add in the publisher
-        context['title'] = "Meetings and Events"
-        return context
+    context = {
+        'title': page.title,
+        'page': page,
+        'upcoming_events': upcoming_events,
+        'past_events': past_events,
+    }
+    return render(request, 'web/default.html', context)
+
+# class EventsIndexView(generic.ListView):
+#     """List of all events, using Django's generic index view"""
+
+#     template_name = 'web/default.html'
+#     context_object_name = 'events'
+#     queryset = Event.objects.order_by('-date')
+
+#     def get_context_data(self, **kwargs):
+#         """Overwrite in order to add additional variable (title) in context"""
+#         # Call the base implementation first to get a context
+#         context = super().get_context_data(**kwargs)
+#         # Add in the publisher
+#         context['title'] = "Meetings and Events"
+#         context['internal_name'] = 'events_meetings'
+#         return context
 
 
 def event_details(request, event_id):

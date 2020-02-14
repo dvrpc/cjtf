@@ -5,18 +5,24 @@
   <div class="row">
     <div class="column left two_thirds orange">
       <h2>{{event.title}}</h2>
-      <p>{{event.date}}</p>
-      <p>{{event.location}}</p>
+      <p class="center"><span style="font-weight:bold">{{event.date|date:"l, F j, Y" }}</span><br>
+        {{event.date|date:"g:i a"}}
+      </p>
+      <p>{{event.location|safe|linebreaks}}</p>
       <p></p>
-      <p>{{event.agenda}}
+      <p>{{event.agenda|safe|linebreaks}}
     </div>
     <div class="column right one_third light_green">
-      <h3>Materials</h3>
-      {% if event.minutes or event.presentation_materials %}
-        <p>{{ event.minutes }}</p>
-        <p>{{ event.presentation_materials }}</p>
+      <h3>Documents</h3>
+      {% if event.minutes  or event.presentation_materials %}
+        {% if event.minutes %}
+          <p>&#11123; &nbsp;<a href="{{ event.minutes.url }}">Minutes/Highlights</a> </p>
+        {% endif %}
+        {% if event.presentation_materials %}
+          <p>&#11123; &nbsp;<a href="{{ event.presentation_materials.url }}">Presentations/Materials</p>
+        {% endif %}
       {% else %}
-        <p>No available materials.</p>
+        <p>No available documents.</p>
       {% endif %}
     </div>
   </div>

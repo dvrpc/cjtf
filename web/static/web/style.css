@@ -27,20 +27,32 @@ body {
 #top_nav li {
   display: inline;
   padding-right: 10px;
-  color: #193091;
   font-size: 1.3rem;
 }
 #top_nav li .current {
+  text-decoration: underline;
+}
+#top_nav a {
+  text-decoration: none;
+  color: #474747;
+}
+#top_nav a .current {
   color: #1b75bc;
   text-decoration: underline;
+}
+#top_nav a:hover {
+  color: #1b75bc;
 }
 #main_content {
   padding: 0 50px 25px 50px;
   color: white;
 }
-#main_content .login-link {
-  float: right;
-  color: white;
+#main_content a {
+  text-decoration: none;
+  color: #474747;
+}
+#main_content a:hover {
+  color: #1b75bc;
 }
 #hero_image {
   box-shadow: 5px 5px 8px gray;
@@ -136,33 +148,29 @@ hr {
 h1 {
   font-size: 2rem;
   margin-bottom: 12px;
+  text-align: center;
 }
 h2 {
   font-size: 1.75rem;
   margin-bottom: 12px;
+  text-align: center;
 }
 h3 {
   font-size: 1.5rem;
   margin-bottom: 12px;
+  text-align: center;
 }
 h4 {
   font-size: 1.25rem;
   margin-bottom: 10px;
+  text-align: center;
 }
-strong {
+.bold {
   font-weight: bold;
 }
-em {
+.italic {
   font-style: italic;
 }
-a {
-  text-decoration: none;
-  color: #474747;
-}
-a .current {
-  color: #1b75bc;
-  text-decoration: underline;
-}
-a:hover {
-  color: #1b75bc;
+.center {
+  text-align: center;
 }

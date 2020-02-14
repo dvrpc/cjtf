@@ -17,8 +17,8 @@ class Event(models.Model):
 
 class Page(models.Model):
     title = models.CharField(max_length=30, help_text="Title of the page.")
-    left_column = RichTextField(help_text="Content in left column.")
-    right_column = RichTextField(help_text="Content in right column.")
+    main_content = RichTextField(help_text="Main content (left column).")
+    sidebar = RichTextField(help_text="Sidebar/additional info (right column).")
     internal_name = models.CharField(max_length=30, help_text="Do not change!")
 
     def __str__(self):

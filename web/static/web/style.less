@@ -41,13 +41,27 @@ body {
 #top_nav  li {
   display: inline;
   padding-right: 10px;
-  color: @dark_blue;
+  // color: @dark_blue;
   font-size: 1.3rem;
 }
 
 #top_nav li .current {
+  // color: @light_blue;
+  text-decoration: underline;
+}
+
+#top_nav a {
+  text-decoration: none;
+  color: @dark_gray;
+}
+
+#top_nav a .current {
   color: @light_blue;
   text-decoration: underline;
+}
+
+#top_nav a:hover {
+  color: @light_blue;
 }
 
 #main_content {
@@ -55,9 +69,13 @@ body {
   color: white;
 }
 
-#main_content .login-link {
-  float: right;
-  color: white;
+#main_content a {
+  text-decoration: none;
+  color: @dark_gray;
+}
+
+#main_content a:hover {
+  color: @light_blue;
 }
 
 #hero_image {
@@ -149,7 +167,6 @@ body {
 
 /* end columns */ 
 
-
 .orange {
   background-color: @orange;
 }
@@ -178,38 +195,29 @@ hr {
 h1 {
   font-size: 2rem;
   margin-bottom: 12px;
+  text-align: center;
 }
 
 h2 {
   font-size: 1.75rem;
   margin-bottom: 12px;
+  text-align: center;
 }
 
 h3 {
   font-size: 1.5rem;
   margin-bottom: 12px;
+  text-align: center;
 }
 
 h4 {
   font-size: 1.25rem;
   margin-bottom: 10px;
+  text-align: center;
 }
 
-strong { font-weight: bold; }
-em { font-style: italic; }
+.bold { font-weight: bold; }
+.italic { font-style: italic; }
+.center { text-align: center; }
 
-a {
-  text-decoration: none;
-  color: @dark_gray;
-
-}
-
-a .current {
-  color: @light_blue;
-  text-decoration: underline;
-}
-
-a:hover {
-  color: @light_blue;
-}
 
