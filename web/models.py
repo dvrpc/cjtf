@@ -26,21 +26,31 @@ class Page(models.Model):
 
 # Resources
 
-class TechnicalResources(models.Model):
+class TechnicalResource(models.Model):
     category_choices = [
         ("RP", "Regional Plans"),
         ("MT", "Municipal Tools"),
         ("RR", "Research and Reports"),
     ]
     name = models.CharField(max_length=200)
+    summary = models.TextField()
     date = models.DateField()
     source = models.CharField(max_length=100)
     category = models.CharField(
         max_length=2,
         choices=category_choices,
     )
+    pdf = models.FileField(blank=True)
 
-class FundingResources(models.Model):
+    def __str__(self):
+        return self.name
+
+class FundingResource(models.Model):
     name = models.CharField(max_length=200)
-    date = models.DateField()
-    source = models.CharField(max_length=100)
+    due_date = models.DateField()
+    source_name = models.CharField(max_length=200)
+    source_url = models.URLField()
+
+    def __str__(self):
+        return self.name
+

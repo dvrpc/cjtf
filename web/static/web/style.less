@@ -7,6 +7,8 @@
 @dark_gray: #474747;
 @light_gray: #757575;
 
+@table_border_color: @dark_blue;
+
 body { 
   margin: 100px auto;
   margin-top: 0px;
@@ -78,6 +80,66 @@ main {
   }
 }
 
+footer {
+  text-align: center;
+  padding: 25px 50px 0px 50px;
+  height: 100px;
+  
+  .spacer {
+    padding-right: 15px
+  }
+}
+
+hr {
+  margin-bottom: 10px;
+  border: 1px solid white;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.75rem;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+h4 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+table {
+  border: 2px solid @table_border_color;
+  // border-spacing: 5px;
+  border-collapse: collapse;
+  width: 100%;
+  // padding: 15px;
+}
+
+th {
+  text-align: left;
+  border-bottom: 2px solid @table_border_color;
+  background-color: @light_blue;
+}
+
+td {
+  border-bottom: 1px solid @table_border_color;
+}
+
+th, td {
+  padding: 15px;
+}
+
 #hero_image {
   box-shadow: 5px 5px 8px gray;
 }
@@ -111,17 +173,30 @@ main {
   color: white;
 }
 
-footer {
-  text-align: center;
-  padding: 25px 50px 0px 50px;
-  height: 100px;
-  
-  .spacer {
-    padding-right: 15px
-  }
+.bold { font-weight: bold; }
+.italic { font-style: italic; }
+.center { text-align: center; }
+.orange {
+  background-color: @orange;
 }
 
+.light_green {
+  background-color: @light_green;
+}
 
+.dark_blue {
+  background-color: @dark_blue;
+}
+
+.medium_blue {
+  background-color: @medium_blue;
+}
+
+.light_blue {
+  background-color: @light_blue;
+}
+
+// columns
 .row {
   margin-bottom: 1%; 
 }
@@ -159,60 +234,47 @@ footer {
   width: 33.5%;
 }
 
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+// end columns 
+
+/* Responsive layout */
 @media screen and (max-width: 600px) { 
+  
+  // make the two columns stack on top of each other instead of next to each other
   .left, .right {
     width: 100%;
   }
+
+  /* an alternative way to go for a responsive table, instead of using a horizontal scroll bar */
+  // make the table tds stack, remove the heading
+  .responsive_table {
+    margin:0px auto;
+    // width:500px;
+  }
+  
+  .responsive_table th {
+    display: none;
+  }
+  
+  .responsive_table td {
+    display: block;
+  }
+  
+  // .responsive_table td:first-child { border: none; }
+  .responsive_table td { border: none; }
+  // .responsive_table td:child { border: none; }
+  
+  .responsive_table td:first-child {
+    padding-top: .5em;
+  }
+  
+  .responsive_table td:last-child {
+    padding-bottom: .5em;
+    border-bottom: 1px solid @table_border_color;
+  }
+  .responsive_table td:before {
+    content: attr(data-th) ": ";
+    display:block;
+    font-weight:bold;
+  }
 }
 
-/* end columns */ 
-
-.orange {
-  background-color: @orange;
-}
-
-.light_green {
-  background-color: @light_green;
-}
-
-.dark_blue {
-  background-color: @dark_blue;
-}
-
-.medium_blue {
-  background-color: @medium_blue;
-}
-
-.light_blue {
-  background-color: @light_blue;
-}
-
-hr {
-  margin-bottom: 10px;
-  border: 1px solid white;
-}
-
-h1 {
-  font-size: 2rem;
-  margin-bottom: 12px;
-}
-
-h2 {
-  font-size: 1.75rem;
-  margin-bottom: 12px;
-}
-
-h3 {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
-}
-
-h4 {
-  font-size: 1.25rem;
-  margin-bottom: 10px;
-}
-
-.bold { font-weight: bold; }
-.italic { font-style: italic; }
-.center { text-align: center; }

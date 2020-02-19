@@ -1,0 +1,28 @@
+{% extends "web/base.html" %}
+
+{% block main %}
+  <div class="row">
+    <div class="column left two_thirds orange">
+      <h2 class="center">Funding Resources</h2>
+      {# <div style="overflow-x:auto"> #}
+        <table class="responsive_table">
+          <tr>
+            <th>Program Name</th>
+            <th>Due Date</th>
+            <th>Source</th>
+          </tr>
+          {% for resource in resources %}
+            <tr>
+              <td data-th="Program Name">{{resource.name}}</td>
+              <td data-th="Due Date">{{resource.due_date}}</td>
+              <td data-th="Source"><a href="{{ resource.source_url }}">{{ resource.source_name }}</a></td>
+            </tr>
+          {% endfor %}
+        </table>
+      {# </div> #}
+    </div>
+    <div class="column right one_third light_green">
+      <p>?<p>
+    </div>
+  </div>
+{% endblock %}

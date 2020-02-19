@@ -1,10 +1,10 @@
 import datetime
 
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.views import generic
 
-from .models import Event, Page
+from .models import Event, Page, TechnicalResource, FundingResource
 
 
 def index(request):
@@ -68,6 +68,26 @@ def resources(request):
         'page': page,
     }
     return render(request, 'web/default.html', context)
+
+
+def technical_resources(request):
+    technical_resources = get_list_or_404(TechnicalResource)
+    context = {
+        'title': 'Technical Resources',
+        'technical_resources': technical_resources,
+    }
+    return render(request, 'web/resources_technical.html', context)
+
+
+def funding_resources(request):
+    resources = get_list_or_404(FundingResource)
+    resources = FundingResource.objects.filter(due_date__gte=datetime.datetime.today()).order_by('due_date')
+    context = {
+        'title': 'Funding Resources',
+        'resources': resources,
+    }
+    return render(request, 'web/resources_funding.html', context)
+
 
 
 def contact(request):

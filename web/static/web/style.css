@@ -54,6 +54,54 @@ main a {
 main a:hover {
   color: #1b75bc;
 }
+footer {
+  text-align: center;
+  padding: 25px 50px 0px 50px;
+  height: 100px;
+}
+footer .spacer {
+  padding-right: 15px;
+}
+hr {
+  margin-bottom: 10px;
+  border: 1px solid white;
+}
+h1 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  text-align: center;
+}
+h2 {
+  font-size: 1.75rem;
+  margin-bottom: 12px;
+  text-align: center;
+}
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  text-align: center;
+}
+h4 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+table {
+  border: 2px solid #193091;
+  border-collapse: collapse;
+  width: 100%;
+}
+th {
+  text-align: left;
+  border-bottom: 2px solid #193091;
+  background-color: #1b75bc;
+}
+td {
+  border-bottom: 1px solid #193091;
+}
+th,
+td {
+  padding: 15px;
+}
 #hero_image {
   box-shadow: 5px 5px 8px gray;
 }
@@ -81,13 +129,29 @@ main a:hover {
 #top_content_bar a {
   color: white;
 }
-footer {
-  text-align: center;
-  padding: 25px 50px 0px 50px;
-  height: 100px;
+.bold {
+  font-weight: bold;
 }
-footer .spacer {
-  padding-right: 15px;
+.italic {
+  font-style: italic;
+}
+.center {
+  text-align: center;
+}
+.orange {
+  background-color: #f27b38;
+}
+.light_green {
+  background-color: #8db23f;
+}
+.dark_blue {
+  background-color: #193091;
+}
+.medium_blue {
+  background-color: #16669b;
+}
+.light_blue {
+  background-color: #1b75bc;
 }
 .row {
   margin-bottom: 1%;
@@ -118,55 +182,35 @@ footer .spacer {
 .one_third {
   width: 33.5%;
 }
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+/* Responsive layout */
 @media screen and (max-width: 600px) {
   .left,
   .right {
     width: 100%;
   }
-}
-/* end columns */
-.orange {
-  background-color: #f27b38;
-}
-.light_green {
-  background-color: #8db23f;
-}
-.dark_blue {
-  background-color: #193091;
-}
-.medium_blue {
-  background-color: #16669b;
-}
-.light_blue {
-  background-color: #1b75bc;
-}
-hr {
-  margin-bottom: 10px;
-  border: 1px solid white;
-}
-h1 {
-  font-size: 2rem;
-  margin-bottom: 12px;
-}
-h2 {
-  font-size: 1.75rem;
-  margin-bottom: 12px;
-}
-h3 {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
-}
-h4 {
-  font-size: 1.25rem;
-  margin-bottom: 10px;
-}
-.bold {
-  font-weight: bold;
-}
-.italic {
-  font-style: italic;
-}
-.center {
-  text-align: center;
+  /* an alternative way to go for a responsive table, instead of using a horizontal scroll bar */
+  .responsive_table {
+    margin: 0px auto;
+  }
+  .responsive_table th {
+    display: none;
+  }
+  .responsive_table td {
+    display: block;
+  }
+  .responsive_table td {
+    border: none;
+  }
+  .responsive_table td:first-child {
+    padding-top: 0.5em;
+  }
+  .responsive_table td:last-child {
+    padding-bottom: 0.5em;
+    border-bottom: 1px solid #193091;
+  }
+  .responsive_table td:before {
+    content: attr(data-th) ": ";
+    display: block;
+    font-weight: bold;
+  }
 }
