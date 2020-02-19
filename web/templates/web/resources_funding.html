@@ -4,7 +4,7 @@
   <div class="row">
     <div class="column left two_thirds orange">
       <h2 class="center">Funding Resources</h2>
-      {# <div style="overflow-x:auto"> #}
+      <div style="margin:15px">
         <table class="responsive_table">
           <tr>
             <th>Program Name</th>
@@ -13,13 +13,13 @@
           </tr>
           {% for resource in resources %}
             <tr>
-              <td data-th="Program Name">{{resource.name}}</td>
+              <td data-th="Program Name"><a href="{{ resource.url }}">{{resource.name}}</a></td>
               <td data-th="Due Date">{{resource.due_date}}</td>
-              <td data-th="Source"><a href="{{ resource.source_url }}">{{ resource.source_name }}</a></td>
+              <td data-th="Source">{{ resource.source_name }}</td>
             </tr>
           {% endfor %}
         </table>
-      {# </div> #}
+      </div>
     </div>
     <div class="column right one_third light_green">
       <p>?<p>

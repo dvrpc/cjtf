@@ -47,10 +47,10 @@ class TechnicalResource(models.Model):
 
 class FundingResource(models.Model):
     name = models.CharField(max_length=200)
+    url = models.URLField()
     due_date = models.DateField()
     source_name = models.CharField(max_length=200)
-    source_url = models.URLField()
-
+    
     def __str__(self):
         return self.name
 
