@@ -1,6 +1,5 @@
 import datetime
 
-from django.http import HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.views import generic
 
@@ -62,6 +61,7 @@ def event_details(request, event_id):
 
 
 def resources(request):
+
     page = get_object_or_404(Page, internal_name="resources")
     context = {
         'title': page.title,
@@ -71,16 +71,18 @@ def resources(request):
 
 
 def technical_resources(request):
-    technical_resources = get_list_or_404(TechnicalResource)
+
+    categories = TechnicalResource._meta.get_field('category').choices
+    technical_resources = TechnicalResource.objects.all()
     context = {
         'title': 'Technical Resources',
-        'technical_resources': technical_resources,
+        'resources': technical_resources,
+        'categories': categories,
     }
     return render(request, 'web/resources_technical.html', context)
 
 
 def funding_resources(request):
-    resources = get_list_or_404(FundingResource)
     resources = FundingResource.objects.filter(due_date__gte=datetime.datetime.today()).order_by('due_date')
     context = {
         'title': 'Funding Resources',

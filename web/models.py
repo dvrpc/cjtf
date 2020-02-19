@@ -14,7 +14,6 @@ class Event(models.Model):
     def __str__(self):
         return self.title
 
-
 class Page(models.Model):
     title = models.CharField(max_length=30, help_text="Title of the page.")
     main_content = RichTextField(help_text="Main content (left column).")
@@ -24,8 +23,6 @@ class Page(models.Model):
     def __str__(self):
         return self.title
 
-# Resources
-
 class TechnicalResource(models.Model):
     category_choices = [
         ("RP", "Regional Plans"),
@@ -33,8 +30,9 @@ class TechnicalResource(models.Model):
         ("RR", "Research and Reports"),
     ]
     name = models.CharField(max_length=200)
+    url = models.URLField()
     summary = models.TextField()
-    date = models.DateField()
+    publication_date = models.DateField()
     source = models.CharField(max_length=100)
     category = models.CharField(
         max_length=2,
