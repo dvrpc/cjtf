@@ -8,50 +8,50 @@ body {
   font-size: 16px;
 }
 /* #header is container for everything above main_content */
-#header {
+header {
   margin-top: 25px;
   padding: 25px 50px 10px 50px;
 }
-#header .search {
+header .search {
   vertical-align: top;
   padding-right: 50px;
 }
-#top_nav {
+nav {
   padding-top: 10px;
 }
-#top_nav ul {
+nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
-#top_nav li {
+nav li {
   display: inline;
   padding-right: 10px;
   font-size: 1.3rem;
 }
-#top_nav li .current {
+nav li .current {
   text-decoration: underline;
 }
-#top_nav a {
+nav a {
   text-decoration: none;
   color: #474747;
 }
-#top_nav a .current {
+nav a .current {
   color: #1b75bc;
   text-decoration: underline;
 }
-#top_nav a:hover {
+nav a:hover {
   color: #1b75bc;
 }
-#main_content {
+main {
   padding: 0 50px 25px 50px;
   color: white;
 }
-#main_content a {
+main a {
   text-decoration: none;
   color: #474747;
 }
-#main_content a:hover {
+main a:hover {
   color: #1b75bc;
 }
 #hero_image {
@@ -81,12 +81,12 @@ body {
 #top_content_bar a {
   color: white;
 }
-#footer {
+footer {
   text-align: center;
   padding: 25px 50px 0px 50px;
   height: 100px;
 }
-#footer .spacer {
+footer .spacer {
   padding-right: 15px;
 }
 .row {

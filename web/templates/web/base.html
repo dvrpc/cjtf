@@ -12,7 +12,7 @@
 
 <body>
 
-  <div id="header">
+  <header>
     <div class="row">
       <div style="float:left">
         <a href="/"><img src="{% static 'web/images/logo_header.png' %}"></a>
@@ -24,7 +24,7 @@
         <img src="{% static 'web/images/njtpa_small.png' %}" style="float: right">
       </div>
     </div>
-    <div id="top_nav">
+    <nav>
       <ul>
         <li><a href="{% url 'web:about' %}">About</a></li>
         <li><a href="{% url 'web:membership' %}">Membership</a></li>
@@ -32,19 +32,19 @@
         <li><a href="{% url 'web:resources' %}">Resources</a></li>
         <li><a href="{% url 'web:contact' %}">Contact</a></li>
       </ul>
-    </div>
-  </div>
+    </nav>
+  </header>
 
-  <div id="main_content">
+  <main>
     {% block main %}
 
     {% endblock %}
-  </div>
+  </main>
 
-  <div id="footer">
+  <footer>
     <img src="{% static 'web/images/dvrpc_tiny.png' %}" class="spacer">
     <img src="{% static 'web/images/njtpa_tiny.png' %}">
-  </div>
+  </footer>
 
 </body>
 </html>

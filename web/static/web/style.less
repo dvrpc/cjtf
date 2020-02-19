@@ -18,64 +18,64 @@ body {
 }
 
 /* #header is container for everything above main_content */
-#header {
+header {
   margin-top: 25px;
   padding: 25px 50px 10px 50px;
+
+  .search {
+    vertical-align: top; 
+    padding-right: 50px;
+  }
 }
 
-#header .search {
-  vertical-align: top; 
-  padding-right: 50px;
-}
-
-#top_nav {
+nav {
   padding-top: 10px;
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li {
+    display: inline;
+    padding-right: 10px;
+    // color: @dark_blue;
+    font-size: 1.3rem;
+  
+    .current {
+      // color: @light_blue;
+      text-decoration: underline;
+    }
+  }
+  
+  a {
+    text-decoration: none;
+    color: @dark_gray;
+
+    .current {
+      color: @light_blue;
+      text-decoration: underline;
+    }
+  }
+  
+  a:hover {
+    color: @light_blue;
+  }
 }
 
-#top_nav  ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-#top_nav  li {
-  display: inline;
-  padding-right: 10px;
-  // color: @dark_blue;
-  font-size: 1.3rem;
-}
-
-#top_nav li .current {
-  // color: @light_blue;
-  text-decoration: underline;
-}
-
-#top_nav a {
-  text-decoration: none;
-  color: @dark_gray;
-}
-
-#top_nav a .current {
-  color: @light_blue;
-  text-decoration: underline;
-}
-
-#top_nav a:hover {
-  color: @light_blue;
-}
-
-#main_content {
+main {
   padding: 0 50px 25px 50px;
   color: white;
-}
+  
+  a {
+    text-decoration: none;
+    color: @dark_gray;
+  }
 
-#main_content a {
-  text-decoration: none;
-  color: @dark_gray;
-}
-
-#main_content a:hover {
-  color: @light_blue;
+  a:hover {
+    color: @light_blue;
+  }
 }
 
 #hero_image {
@@ -111,15 +111,16 @@ body {
   color: white;
 }
 
-#footer {
+footer {
   text-align: center;
   padding: 25px 50px 0px 50px;
   height: 100px;
+  
+  .spacer {
+    padding-right: 15px
+  }
 }
 
-#footer .spacer {
-  padding-right: 15px
-}
 
 .row {
   margin-bottom: 1%; 
@@ -215,5 +216,3 @@ h4 {
 .bold { font-weight: bold; }
 .italic { font-style: italic; }
 .center { text-align: center; }
-
-
