@@ -105,6 +105,7 @@ td {
 #breadcrumbs {
   background-color: #16669b;
   padding: 5px;
+  box-shadow: 5px 5px 8px gray;
 }
 #breadcrumbs a {
   color: white;
