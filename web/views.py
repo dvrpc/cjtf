@@ -62,7 +62,6 @@ def event_details(request, event_id):
 
 def resources(request):
 
-    
     page = get_object_or_404(Page, internal_name="resources")
     context = {
         'title': page.title,
@@ -72,7 +71,6 @@ def resources(request):
 
 
 def technical_resources(request):
-    
     
     categories = TechnicalResource._meta.get_field('category').choices
     technical_resources = TechnicalResource.objects.all()
@@ -86,10 +84,11 @@ def technical_resources(request):
         'resources': technical_resources,
         'categories': categories,
     }
-    return render(request, 'web/resources_technical.html', context)
+    return render(request, 'web/resources.html', context)
 
 
 def funding_resources(request):
+    
     funding_resources = FundingResource.objects.filter(
         due_date__gte=datetime.datetime.today()
     ).order_by('due_date')
@@ -102,7 +101,7 @@ def funding_resources(request):
         'resources': funding_resources,
         'page': page,
     }
-    return render(request, 'web/resources_funding.html', context)
+    return render(request, 'web/resources.html', context)
 
 
 

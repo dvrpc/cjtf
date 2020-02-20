@@ -7,7 +7,7 @@
       <div>{{page.main_content|safe|linebreaks}}</div>
       
       {# Events & Meetings #}
-      {% if page.internal_name == 'events_meetings' %}
+      {% if request.resolver_match.url_name == 'events' %}
         <br>
         <h3 class="center">Upcoming</h3>
         {% if upcoming_events %}
@@ -39,7 +39,20 @@
       {% endif %}
     </div>
     <div class="column right one_third light_green">
-      <p>{{page.sidebar|safe}}<p>
+      {% if page.sidebar %}
+        {{ page.sidebar|safe }}
+      {% else %}
+        <div>
+          {# include some default language for sidebar if content not provided in Page in admin #}
+          {% if request.resolver_match.url_name == 'contact' %}
+            {% include 'web/sidebar_contact.html' %}
+          {% elif request.resolver_match.url_name == 'resources' %}
+            {% include 'web/sidebar_resources.html' %}
+          {% elif request.resolver_match.url_name == 'events' %}
+            {% include 'web/sidebar_events.html' %}
+          {% endif %}
+        </div>
+      {% endif %}    
     </div>
   </div>
 {% endblock %}
