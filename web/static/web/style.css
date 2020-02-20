@@ -102,6 +102,16 @@ th,
 td {
   padding: 15px;
 }
+#breadcrumbs {
+  background-color: #16669b;
+  padding: 5px;
+}
+#breadcrumbs a {
+  color: white;
+}
+#breadcrumbs a:hover {
+  color: #f27b38;
+}
 #hero_image {
   box-shadow: 5px 5px 8px gray;
 }
@@ -183,7 +193,10 @@ td {
   width: 33.5%;
 }
 /* Responsive layout */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
+  #top_logos {
+    display: none;
+  }
   .left,
   .right {
     width: 100%;

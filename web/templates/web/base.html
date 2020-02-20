@@ -19,9 +19,11 @@
       </div>
       <div style="float:right">
         <span class="search">Search box here</span>
-        <img src="{% static 'web/images/dvrpc_small.png' %}" style="padding-bottom: 15px">
-        <br>
-        <img src="{% static 'web/images/njtpa_small.png' %}" style="float: right">
+        <div style="float:right" id="top_logos">
+          <img src="{% static 'web/images/dvrpc_small.png' %}" style="padding-bottom: 15px">
+          <br>
+          <img src="{% static 'web/images/njtpa_small.png' %}" style="float: right">
+        </div>
       </div>
     </div>
     <nav>
@@ -36,6 +38,17 @@
   </header>
 
   <main>
+    <div id="breadcrumbs">
+      {% if request.resolver_match.url_name != 'index' %}
+        {% if request.resolver_match.url_name != 'technical_resources' and request.resolver_match.url_name != 'funding_resources' %}
+          <a href="{% url 'web:index' %}">Home</a> &rsaquo; {{title}}
+        {% else %}
+          <a href="{% url 'web:index' %}">Home</a> &rsaquo; 
+          <a href="{% url 'web:resources' %}">Resources</a> &rsaquo;
+          {{title}}
+        {% endif %}
+      {% endif %} 
+    </div>
     {% block main %}
 
     {% endblock %}

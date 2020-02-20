@@ -37,14 +37,6 @@
           {% endfor %}
         {% endif %}
       {% endif %}
-
-      {# Resources #}
-      {% if page.internal_name == 'resources' %}
-        <p><a href="{% url 'web:technical_resources' %}">Technical Resources</a></p>
-        <p><a href="{% url 'web:funding_resources' %}">Funding Resources</a></p>
-      {% endif %}
-
-
     </div>
     <div class="column right one_third light_green">
       <p>{{page.sidebar|safe}}<p>
