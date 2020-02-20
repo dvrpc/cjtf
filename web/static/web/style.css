@@ -124,24 +124,6 @@ td {
   font-size: 1.2rem;
   line-height: 1.5em;
 }
-#top_content_bar {
-  background-color: #16669b;
-  padding: 10px;
-  margin-bottom: 5px;
-  box-shadow: 5px 5px 8px gray;
-  color: white;
-}
-#top_content_bar ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-#top_content_bar li {
-  display: inline;
-}
-#top_content_bar a {
-  color: white;
-}
 .bold {
   font-weight: bold;
 }

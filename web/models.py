@@ -25,9 +25,9 @@ class Page(models.Model):
 
 class TechnicalResource(models.Model):
     category_choices = [
-        ("RP", "Regional Plans"),
-        ("MT", "Municipal Tools"),
-        ("RR", "Research and Reports"),
+        ("regional_plans", "Regional Plans"),
+        ("municipal_tools", "Municipal Tools"),
+        ("research_and_reports", "Research and Reports"),
     ]
     name = models.CharField(max_length=200)
     url = models.URLField()
@@ -35,7 +35,7 @@ class TechnicalResource(models.Model):
     publication_date = models.DateField()
     source = models.CharField(max_length=100)
     category = models.CharField(
-        max_length=2,
+        max_length=30,
         choices=category_choices,
     )
     pdf = models.FileField(blank=True)
@@ -49,6 +49,13 @@ class FundingResource(models.Model):
     due_date = models.DateField()
     source_name = models.CharField(max_length=200)
     
+    def __str__(self):
+        return self.name
+
+class FileUpload(models.Model):
+    name = models.CharField(max_length=200)
+    file = models.FileField()
+
     def __str__(self):
         return self.name
 

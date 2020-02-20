@@ -3,13 +3,21 @@
 {% block main %}
   <div class="row">
     <div class="column left two_thirds orange">
+      
       {% if request.resolver_match.url_name == 'technical_resources' %}
-        <h2 class="center">Technical Resources</h2>
+        <h2 class="center">
+        Technical Resources : 
+        {% if not category %}
+          All
+        {% elif category == 'regional_plans' %}
+          Regional Plans
+        {% elif category == 'municipal_tools' %}
+          Municipal Tools 
+        {% elif category == 'research_and_reports' %}
+          Research and Reports 
+        {% endif %}
+        </h2>
         {% if resources %}
-          {% for category in categories %}
-            {{category.1}}
-          {% endfor %}
-
           <div style="margin:15px">
             <table class="responsive_table">
               <tr>
@@ -29,13 +37,22 @@
             </table>
           </div>
         {% else %}
-          <p>There are no technical resources available at this time.</p>
+          <p>There are no 
+            {% if not category %}
+              technical resources 
+            {% elif category == 'regional_plans' %}
+              regional plans
+            {% elif category == 'municipal_tools' %}
+              municipal tools 
+            {% elif category == 'research_and_reports' %}
+              research and reports 
+            {% endif %}
+          available at this time.</p>
         {% endif %}
       {% endif %}
 
       {% if request.resolver_match.url_name == 'funding_resources' %}
         <h2 class="center">Funding Resources</h2>
-        
         {% if resources %}
           <div style="margin:15px">
             <table class="responsive_table">
@@ -57,12 +74,13 @@
           <p>There are no funding resources available at this time.</p>
         {% endif %}
       {% endif %}
+
     </div>
     <div class="column right one_third light_green">
       {% if page.sidebar %}
         {{ page.sidebar|safe }}
       {% else %}
-        {% include 'web/resources_sidebar.html' %}
+        {% include 'web/sidebar_resources.html' %}
       {% endif %}
     </div>
   </div>

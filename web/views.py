@@ -72,9 +72,13 @@ def resources(request):
 
 def technical_resources(request):
     
-    categories = TechnicalResource._meta.get_field('category').choices
-    technical_resources = TechnicalResource.objects.all()
-    
+    category = request.GET.get('category', '')
+
+    if category in ['regional_plans', 'municipal_tools', 'research_and_reports']:
+        technical_resources = TechnicalResource.objects.filter(category=category)
+    else:
+        technical_resources = TechnicalResource.objects.all()
+
     # get and send the page so we can include the same sidebar across all resources pages
     page = get_object_or_404(Page, internal_name="resources")
     
@@ -82,7 +86,7 @@ def technical_resources(request):
         'title': 'Technical Resources',
         'page': page,
         'resources': technical_resources,
-        'categories': categories,
+        'category': category,
     }
     return render(request, 'web/resources.html', context)
 
