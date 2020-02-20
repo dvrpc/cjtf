@@ -28,10 +28,10 @@
             <p>
               <a href="{% url 'web:event_detail' event.id %}">{{event.date|date:"M j, Y" }}</a>
               {% if event.minutes %}
-                | <a href="{{ event.minutes }}">Minutes/Highlights</a> &#11123;
+                | <a href="{{ event.minutes.url }}">Minutes/Highlights</a> &#11123;
               {% endif %}
               {% if event.presentation_materials %}
-                | <a href="{{ event.presentation_materials }}">Presentations/Materials</a> &#11123;
+                | <a href="{{ event.presentation_materials.url }}">Presentations/Materials</a> &#11123;
               {% endif %}
             </p>
           {% endfor %}
