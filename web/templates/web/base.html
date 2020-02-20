@@ -40,12 +40,14 @@
   <main>
     <div id="breadcrumbs">
       {% if request.resolver_match.url_name != 'index' %}
-        {% if request.resolver_match.url_name != 'technical_resources' and request.resolver_match.url_name != 'funding_resources' %}
-          <a href="{% url 'web:index' %}">Home</a> &rsaquo; {{title}}
+        {% if request.resolver_match.url_name == 'technical_resources' or request.resolver_match.url_name == 'funding_resources' %}
+          <a href="{% url 'web:index' %}">Home</a> &rsaquo;
+          <a href="{% url 'web:resources' %}">Resources</a> &rsaquo; {{ title }} 
+        {% elif request.resolver_match.url_name == 'event_detail' %}
+          <a href="{% url 'web:index' %}">Home</a> &rsaquo;
+          <a href="{% url 'web:events' %}">Events & Meetings</a> &rsaquo; {{ title }} 
         {% else %}
-          <a href="{% url 'web:index' %}">Home</a> &rsaquo; 
-          <a href="{% url 'web:resources' %}">Resources</a> &rsaquo;
-          {{title}}
+          <a href="{% url 'web:index' %}">Home</a> &rsaquo; {{title}}
         {% endif %}
       {% endif %} 
     </div>
