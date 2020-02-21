@@ -5,17 +5,42 @@
   </div>
   <div id="mission_text">
     Identify. Discuss. Coordinate. Research. Assist. Educate.<br>
-    We are the Central Jersey Transorpation Forum.
+    We are the Central Jersey Transportation Forum.
   </div>
 
   <div class="row">  
     <div class="column left half orange">
       <h2>Updates</h2>
       <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-        <li></li>
+        {% if next_event %}
+          <li>Next regular meeting: 
+            <a href="{% url 'web:event_detail' next_event.id %}">{{ next_event.date }}</a>
+          </li>
+        {% endif %}
+
+        {% if updated_meetings %}
+          {% for meeting in updated_meetings %}
+            <li>Minutes added for the <a href="{% url 'web:event_detail' meeting.id %}">
+              {{ meeting.date|date:"F" }} meeting</a>
+            </li>
+          {% endfor %}
+        {% endif %}
+        
+        {% if tech_resources %}
+          {% for resource in tech_resources %}
+            <li>Recently published: <a href="{{ resource.url }}">{{ resource.name }}</a></li>
+          {% endfor %}
+        {% endif %}
+
+        {% if funding_resources %}
+          {% for resource in funding_resources %}
+            <li>Upcoming funding deadline: <a href="{{ resource.url }}">{{ resource.name }}</a></li>
+          {% endfor %}
+        {% endif %}
+
+        
+
+        <li><mark>need to write code for minutes/presentation materials being added</mark></li>
       </ul>
     </div>
     <div class="column right half light_green">

@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 
 from ckeditor.fields import RichTextField
@@ -6,13 +8,21 @@ from ckeditor.fields import RichTextField
 class Event(models.Model):
     date = models.DateTimeField()
     location = models.TextField(max_length=200)
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, default="CJTF Regular")
     agenda = RichTextField()
     minutes = models.FileField(blank=True)
+    minutes_added = models.DateField(blank=True, null=True)
     presentation_materials = models.FileField(blank=True)
 
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        if self.minutes:
+            self.minutes_added = datetime.date.today()
+        super().save(*args, **kwargs)
+
+        
 
 class Page(models.Model):
     title = models.CharField(max_length=30, help_text="Title of the page.")

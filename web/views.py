@@ -7,14 +7,54 @@ from .models import Event, Page, TechnicalResource, FundingResource
 
 
 def index(request):
-    """
+    '''
     Home Page. Get recently updated internal pages (events/meetings and resources) and also
     set up the Twitter list feed.
-    """
+    '''
+
+    # Get various new/updated resources to display.
     
+    two_weeks_ago = datetime.date.today() - datetime.timedelta(days=14)
+
+    # get the event/meeting coming up next, if any
+    try:
+        next_event = Event.objects.filter(date__gte=datetime.date.today()).order_by('date').first()
+    except Event.DoesNotExist:
+        next_event = None
+
+
+    # get 3 newest technical resources (3 at most)
+    try:
+        tech_resources = TechnicalResource.objects.filter(
+            publication_date__gte=two_weeks_ago).order_by('publication_date')
+        tech_resources = tech_resources[0:3]
+    except TechnicalResource.DoesNotExist:
+        tech_resources = None
+
+    # get at most 3 funding resources that are coming up
+    try:
+        funding_resources = FundingResource.objects.filter(
+            due_date__gte=datetime.date.today()).order_by('due_date')
+        funding_resources = funding_resources[0:3]
+    except FundingResource.DoesNotExist:
+        funding_resources = None
+
+    # get any newly added meeting minutes/highlights
+    try:
+        # @TODO: make sure there are minutes - I think this will work as is if the minutes have 
+        # been added and then deleted.
+        updated_meetings = Event.objects.all().filter(
+            minutes_added__gte=two_weeks_ago).order_by('minutes_added')
+        updated_meetings = updated_meetings[0:3]
+    except Event.DoesNotExist:
+        updated_meetings = None
     
     context = {
-        'title': 'Central Jersey Transportation Forum'
+        'title': 'Central Jersey Transportation Forum',
+        'next_event': next_event,
+        'tech_resources': tech_resources,
+        'funding_resources': funding_resources,
+        'updated_meetings': updated_meetings,
     }
     return render(request, 'web/home.html', context)
 

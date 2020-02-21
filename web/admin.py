@@ -3,6 +3,7 @@ from django.contrib import admin
 from .models import Event, Page, TechnicalResource, FundingResource, FileUpload
 
 class PageAdmin(admin.ModelAdmin):
+    
     def get_readonly_fields(self, request, obj=None):
         ''' Make internal_name read-only unless user is superuser.'''
         fields = list(super().get_readonly_fields(request))
@@ -12,6 +13,7 @@ class PageAdmin(admin.ModelAdmin):
 
 class EventAdmin(admin.ModelAdmin):
     list_display = ('title', 'date', 'location')
+    exclude = ('minutes_added',)
 
 class FundingResourceAdmin(admin.ModelAdmin):
     list_display = ('name', 'due_date', 'source_name')
