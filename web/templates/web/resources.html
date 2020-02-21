@@ -78,7 +78,7 @@
     </div>
     <div class="column right one_third light_green">
       {% if page.sidebar %}
-        {{ page.sidebar|safe }}
+        {{ page.sidebar|safe|linebreaks }}
       {% else %}
         {% include 'web/sidebar_resources.html' %}
       {% endif %}

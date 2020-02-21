@@ -3,8 +3,8 @@
 {% block main %}
   <div class="row">
     <div class="column left two_thirds orange">
-      <h2 class="center">{{page.title|safe}}</h2>
-      <div>{{page.main_content|safe|linebreaks}}</div>
+      <h2 class="center">{{ page.title|safe }}</h2>
+      <div>{{ page.main_content|safe|linebreaks }}</div>
       
       {# Events & Meetings #}
       {% if request.resolver_match.url_name == 'events' %}
@@ -38,13 +38,16 @@
         {% endif %}
       {% endif %}
     </div>
+
     <div class="column right one_third light_green">
       {% if page.sidebar %}
-        {{ page.sidebar|safe }}
+        {{ page.sidebar|safe|linebreaks }}
       {% else %}
         <div>
           {# include some default language for sidebar if content not provided in Page in admin #}
-          {% if request.resolver_match.url_name == 'contact' %}
+          {% if request.resolver_match.url_name == 'about' %}
+            {% include 'web/sidebar_about.html' %}
+          {% elif request.resolver_match.url_name == 'contact' %}
             {% include 'web/sidebar_contact.html' %}
           {% elif request.resolver_match.url_name == 'resources' %}
             {% include 'web/sidebar_resources.html' %}
