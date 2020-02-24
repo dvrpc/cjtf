@@ -10,7 +10,7 @@ class Event(models.Model):
     location = models.TextField(max_length=200)
     title = models.CharField(max_length=100, default="CJTF Regular")
     agenda = RichTextField()
-    minutes = models.FileField(blank=True)
+    minutes = models.FileField(blank=True, null=True)
     minutes_added = models.DateField(blank=True, null=True)
     presentation_materials = models.FileField(blank=True)
 

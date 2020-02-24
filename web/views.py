@@ -24,30 +24,27 @@ def index(request):
 
 
     # get 3 newest technical resources (3 at most)
-    try:
-        tech_resources = TechnicalResource.objects.filter(
-            publication_date__gte=two_weeks_ago).order_by('publication_date')
-        tech_resources = tech_resources[0:3]
-    except TechnicalResource.DoesNotExist:
-        tech_resources = None
+    tech_resources = (TechnicalResource
+        .objects.filter(publication_date__gte=two_weeks_ago)
+        .order_by('publication_date')[0:3])
+        # tech_resources = tech_resources[0:3]
+    
 
     # get at most 3 funding resources that are coming up
-    try:
-        funding_resources = FundingResource.objects.filter(
-            due_date__gte=datetime.date.today()).order_by('due_date')
-        funding_resources = funding_resources[0:3]
-    except FundingResource.DoesNotExist:
-        funding_resources = None
+    funding_resources = (FundingResource
+        .objects.filter(due_date__gte=datetime.date.today())
+        .order_by('due_date')[0:3])
+    # funding_resources = funding_resources[0:3]
+    
 
     # get any newly added meeting minutes/highlights
-    try:
-        # @TODO: make sure there are minutes - I think this will work as is if the minutes have 
-        # been added and then deleted.
-        updated_meetings = Event.objects.all().filter(
-            minutes_added__gte=two_weeks_ago).order_by('minutes_added')
-        updated_meetings = updated_meetings[0:3]
-    except Event.DoesNotExist:
-        updated_meetings = None
+    updated_meetings = (Event
+        .objects
+        .filter(minutes_added__gte=two_weeks_ago)
+        .exclude(minutes='')
+        .order_by('minutes_added')[0:3])
+    # updated_meetings = updated_meetings[0:3]
+    
     
     context = {
         'title': 'Central Jersey Transportation Forum',
