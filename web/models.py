@@ -22,8 +22,6 @@ class Event(models.Model):
             self.minutes_added = datetime.date.today()
         super().save(*args, **kwargs)
 
-        
-
 class Page(models.Model):
     title = models.CharField(max_length=30, help_text="Title of the page.")
     main_content = RichTextField(help_text="Main content (left column).")

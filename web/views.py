@@ -14,7 +14,7 @@ def index(request):
 
     # Get various new/updated resources to display.
     
-    two_weeks_ago = datetime.date.today() - datetime.timedelta(days=14)
+    six_weeks_ago = datetime.date.today() - datetime.timedelta(days=14)
 
     # get the event/meeting coming up next, if any
     try:
@@ -22,29 +22,22 @@ def index(request):
     except Event.DoesNotExist:
         next_event = None
 
-
     # get 3 newest technical resources (3 at most)
     tech_resources = (TechnicalResource
-        .objects.filter(publication_date__gte=two_weeks_ago)
-        .order_by('publication_date')[0:3])
-        # tech_resources = tech_resources[0:3]
-    
+        .objects.filter(publication_date__gte=six_weeks_ago)
+        .order_by('publication_date')[0:3])   
 
     # get at most 3 funding resources that are coming up
     funding_resources = (FundingResource
         .objects.filter(due_date__gte=datetime.date.today())
         .order_by('due_date')[0:3])
-    # funding_resources = funding_resources[0:3]
-    
 
     # get any newly added meeting minutes/highlights
     updated_meetings = (Event
         .objects
-        .filter(minutes_added__gte=two_weeks_ago)
+        .filter(minutes_added__gte=six_weeks_ago)
         .exclude(minutes='')
         .order_by('minutes_added')[0:3])
-    # updated_meetings = updated_meetings[0:3]
-    
     
     context = {
         'title': 'Central Jersey Transportation Forum',
@@ -104,7 +97,7 @@ def resources(request):
         'title': page.title,
         'page': page,
     }
-    return render(request, 'web/default.html', context)
+    return render(request, 'web/resources.html', context)
 
 
 def technical_resources(request):

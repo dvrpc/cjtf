@@ -2,7 +2,12 @@
 
 {% block main %}
   <div class="row">
-    <div class="column left two_thirds orange">
+    <div class="column full orange">
+
+      {% if request.resolver_match.url_name == 'resources' %}
+        <h2 class="center">{{ page.title|safe }}</h2>
+        <div>{{ page.main_content|safe|linebreaks }}</div>
+      {% endif %}
       
       {% if request.resolver_match.url_name == 'technical_resources' %}
         <h2 class="center">
@@ -75,13 +80,6 @@
         {% endif %}
       {% endif %}
 
-    </div>
-    <div class="column right one_third light_green">
-      {% if page.sidebar %}
-        {{ page.sidebar|safe|linebreaks }}
-      {% else %}
-        {% include 'web/sidebar_resources.html' %}
-      {% endif %}
     </div>
   </div>
 {% endblock %}

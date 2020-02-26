@@ -10,6 +10,8 @@ class PageAdmin(admin.ModelAdmin):
         if not request.user.is_superuser:
             fields.append('internal_name')
         return fields
+    
+    
 
 class EventAdmin(admin.ModelAdmin):
     list_display = ('title', 'date', 'location')

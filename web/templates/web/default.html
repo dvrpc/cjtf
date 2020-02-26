@@ -22,7 +22,7 @@
           </p>
         {% endif %}
         <br>
-        <h3 class="center">Past</h3>
+        <h3 class="center">Past Forum Meetings</h3>
         {% if past_events %}
           {% for event in past_events %}
             <p>
@@ -49,8 +49,6 @@
             {% include 'web/sidebar_about.html' %}
           {% elif request.resolver_match.url_name == 'contact' %}
             {% include 'web/sidebar_contact.html' %}
-          {% elif request.resolver_match.url_name == 'resources' %}
-            {% include 'web/sidebar_resources.html' %}
           {% elif request.resolver_match.url_name == 'events' %}
             {% include 'web/sidebar_events.html' %}
           {% endif %}

@@ -31,38 +31,45 @@ header {
 }
 
 nav {
-  padding-top: 10px;
+  padding-top: 5px;
 
   ul {
-    list-style-type: none;
+    list-style: none;
     margin: 0;
     padding: 0;
-  }
   
-  li {
-    display: inline;
-    padding-right: 10px;
-    // color: @dark_blue;
-    font-size: 1.3rem;
-  
-    .current {
-      // color: @light_blue;
-      text-decoration: underline;
+    li {
+      display: inline;
+      padding-right: 10px;
+      font-size: 1.3rem;
+      position: relative;
+      padding-bottom: 1rem;
+
+      &:hover >ul {
+        visibility: visible;
+        opacity: .9;
+        display: block;
+      }
+    
+      ul {
+        background-color: #FFF8F0;
+        visibility: hidden;
+        min-width: 13rem;
+        position: absolute;
+        padding: 1rem .5rem .5rem .5rem;
+        left: 0;
+        display: none;
+      }
     }
   }
-  
+
   a {
     text-decoration: none;
     color: @dark_gray;
-
-    .current {
+    
+    &:hover {
       color: @light_blue;
-      text-decoration: underline;
     }
-  }
-  
-  a:hover {
-    color: @light_blue;
   }
 }
 
@@ -73,10 +80,10 @@ main {
   a {
     text-decoration: none;
     color: @dark_gray;
-  }
 
-  a:hover {
-    color: @light_blue;
+    &:hover {
+      color: @light_blue;
+    }
   }
 }
 
@@ -147,10 +154,10 @@ th, td {
   
   a {
     color: white;
-  }
 
-  a:hover {
-    color: @orange;
+    &:hover {
+      color: @orange;
+    }
   }
 }
 
@@ -203,8 +210,13 @@ th, td {
   float: right;
 }
 
+.full {
+  width: 100%;
+  float: left;
+}
+
 .half {
-  width: 49.5%
+  width: 49.5%;
 }
 
 .two_thirds {
