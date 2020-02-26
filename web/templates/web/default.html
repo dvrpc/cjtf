@@ -7,31 +7,35 @@
       <div>{{ page.main_content|safe|linebreaks }}</div>
       
       {# Events & Meetings #}
-      {% if request.resolver_match.url_name == 'events' %}
+      {% if request.resolver_match.url_name == 'events_meetings' %}
         <br>
         <h3 class="center">Upcoming</h3>
-        {% if upcoming_events %}
-          {% for event in upcoming_events %}
-            <p><a href="{% url 'web:event_detail' event.id %}">{{event.title}}</a> - 
-              {{event.date}}</p>
+
+        {% if upcoming_events_meetings %}
+          {% for event_meeting in upcoming_events_meetings %}
+            <p>{{ event_meeting.date }} - 
+              <a href="{{event_meeting.url}}">{{event_meeting.title}}</a></p>
           {% endfor %}
         {% else %}
           <p>There are no meetings or events scheduled at this time. Please 
-            <a href="/contact">contact the Forum</a> for initial thinking about the next meeting 
-            date, which will be posted here once it is set.
+            <a href="/contact">contact the Forum</a> for initial thinking about the next regular 
+            meeting date, which will be posted here once it is set.
           </p>
         {% endif %}
         <br>
         <h3 class="center">Past Forum Meetings</h3>
-        {% if past_events %}
-          {% for event in past_events %}
+        {% if past_meetings %}
+          {% for meeting in past_meetings %}
             <p>
-              <a href="{% url 'web:event_detail' event.id %}">{{event.date|date:"M j, Y" }}</a>
-              {% if event.minutes %}
-                | <a href="{{ event.minutes.url }}">Minutes/Highlights</a> &#11123;
+              {{meeting.date|date:"M j, Y" }} 
+              {% if agenda.minutes.url %}
+                | <a href="{{meeting.agenda.url}}">Agenda</a>
               {% endif %}
-              {% if event.presentation_materials %}
-                | <a href="{{ event.presentation_materials.url }}">Presentations/Materials</a> &#11123;
+              {% if meeting.minutes %}
+                | <a href="{{ meeting.minutes.url }}">Minutes/Highlights</a> &#11123;
+              {% endif %}
+              {% if meeting.presentation_materials %}
+                | <a href="{{ meeting.presentation_materials.url }}">Presentations/Materials</a> &#11123;
               {% endif %}
             </p>
           {% endfor %}
@@ -49,7 +53,7 @@
             {% include 'web/sidebar_about.html' %}
           {% elif request.resolver_match.url_name == 'contact' %}
             {% include 'web/sidebar_contact.html' %}
-          {% elif request.resolver_match.url_name == 'events' %}
+          {% elif request.resolver_match.url_name == 'events_meetings' %}
             {% include 'web/sidebar_events.html' %}
           {% endif %}
         </div>

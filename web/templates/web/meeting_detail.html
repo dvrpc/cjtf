@@ -1,0 +1,30 @@
+{% extends "web/base.html" %}
+
+{% block main %}
+
+  <div class="row">
+    <div class="column left two_thirds orange">
+      <h2 class="center">{{meeting.title}}</h2>
+      <div class="center">
+        <span class="bold">{{ meeting.date|date:"l, F j, Y" }}</span><br>
+        {{ meeting.date|date:"g:i a"}}<br>
+        {{ meeting.location|linebreaks }}
+      </div>
+      <div>{{meeting.agenda|safe}}</div>
+    </div>
+    <div class="column right one_third light_green">
+      <h3 class="center">Documents</h3>
+      {% if meeting.minutes  or meeting.presentation_materials %}
+        {% if meeting.minutes %}
+          <p>&#11123; &nbsp;<a href="{{ meeting.minutes.url }}">Minutes/Highlights</a> </p>
+        {% endif %}
+        {% if meeting.presentation_materials %}
+          <p>&#11123; &nbsp;<a href="{{ meeting.presentation_materials.url }}">Presentations/Materials</p>
+        {% endif %}
+      {% else %}
+        <p>No available documents.</p>
+      {% endif %}
+    </div>
+  </div>
+ 
+{% endblock %}

@@ -5,22 +5,36 @@ from django.db import models
 from ckeditor.fields import RichTextField
 
 
-class Event(models.Model):
+class Meeting(models.Model):
     date = models.DateTimeField()
-    location = models.TextField(max_length=200)
-    title = models.CharField(max_length=100, default="CJTF Regular")
-    agenda = RichTextField()
+    url = models.URLField(help_text="Be sure to include the full url, i.e. start with http://")
+    agenda = models.FileField(blank=True, null=True)
     minutes = models.FileField(blank=True, null=True)
     minutes_added = models.DateField(blank=True, null=True)
     presentation_materials = models.FileField(blank=True)
+    pre_mat_added = models.DateField(blank=True, null=True)
 
     def __str__(self):
-        return self.title
+        return str(self.date.strftime('%B %d, %Y'))
+    
+    date.admin_order_field = 'date'
     
     def save(self, *args, **kwargs):
         if self.minutes:
             self.minutes_added = datetime.date.today()
+        if self.presentation_materials:
+            self.pre_mat_added = datetime.date.today()
         super().save(*args, **kwargs)
+
+
+class Event(models.Model):
+    date = models.DateTimeField()
+    title = models.CharField(max_length=100)
+    url = models.URLField()
+
+    def __str__(self):
+        return self.title
+
 
 class Page(models.Model):
     title = models.CharField(max_length=30, help_text="Title of the page.")

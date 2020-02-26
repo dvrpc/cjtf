@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Event, Page, TechnicalResource, FundingResource, FileUpload
+from .models import Meeting, Event, Page, TechnicalResource, FundingResource, FileUpload
 
 class PageAdmin(admin.ModelAdmin):
     
@@ -12,10 +12,12 @@ class PageAdmin(admin.ModelAdmin):
         return fields
     
     
+class MeetingAdmin(admin.ModelAdmin):
+    list_display = ['date']
+    exclude = ('minutes_added', 'pre_mat_added')
 
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('title', 'date', 'location')
-    exclude = ('minutes_added',)
+    list_display = ('title', 'date')
 
 class FundingResourceAdmin(admin.ModelAdmin):
     list_display = ('name', 'due_date', 'source_name')
@@ -23,6 +25,7 @@ class FundingResourceAdmin(admin.ModelAdmin):
 class TechnicalResourceAdmin(admin.ModelAdmin):
     list_display = ('name', 'publication_date', 'source', 'category')
 
+admin.site.register(Meeting, MeetingAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Page, PageAdmin)
 admin.site.register(TechnicalResource, TechnicalResourceAdmin)

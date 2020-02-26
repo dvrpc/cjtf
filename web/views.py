@@ -1,9 +1,10 @@
 import datetime
+from itertools import chain
 
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.views import generic
 
-from .models import Event, Page, TechnicalResource, FundingResource
+from .models import Meeting, Event, Page, TechnicalResource, FundingResource
 
 
 def index(request):
@@ -16,35 +17,42 @@ def index(request):
     
     six_weeks_ago = datetime.date.today() - datetime.timedelta(days=14)
 
-    # get the event/meeting coming up next, if any
     try:
-        next_event = Event.objects.filter(date__gte=datetime.date.today()).order_by('date').first()
-    except Event.DoesNotExist:
-        next_event = None
+        next_meeting = Meeting.objects.filter(date__gte=datetime.datetime.now()).order_by('date').first()
+    except Meeting.DoesNotExist:
+        next_meeting = None
 
-    # get 3 newest technical resources (3 at most)
+    upcoming_events = Event.objects.filter(date__gte=datetime.datetime.now()).order_by('date')[0:3]
+
     tech_resources = (TechnicalResource
         .objects.filter(publication_date__gte=six_weeks_ago)
         .order_by('publication_date')[0:3])   
 
-    # get at most 3 funding resources that are coming up
     funding_resources = (FundingResource
         .objects.filter(due_date__gte=datetime.date.today())
         .order_by('due_date')[0:3])
 
-    # get any newly added meeting minutes/highlights
-    updated_meetings = (Event
+    # get meetings with updated minutes, and meetings with updated presentations, and then combine them
+    meetings_updated_minutes = (Meeting
         .objects
         .filter(minutes_added__gte=six_weeks_ago)
         .exclude(minutes='')
         .order_by('minutes_added')[0:3])
+
+    meetings_updated_presentations = (Meeting
+        .objects
+        .filter(pre_mat_added__gte=six_weeks_ago)
+        .exclude(presentation_materials='')
+        .order_by('pre_mat_added')[0:3])
     
     context = {
         'title': 'Central Jersey Transportation Forum',
-        'next_event': next_event,
+        'next_meeting': next_meeting,
         'tech_resources': tech_resources,
         'funding_resources': funding_resources,
-        'updated_meetings': updated_meetings,
+        'meetings_udpated_minutes': meetings_updated_minutes,
+        'meetings_updated_presentations': meetings_updated_presentations,
+        'upcoming_events': upcoming_events,
     }
     return render(request, 'web/home.html', context)
 
@@ -62,32 +70,43 @@ def about(request):
 def membership(request):
     page = get_object_or_404(Page, internal_name="membership")
     context = {
-        'title': 'Membership'
+        'title': page.title,
+        'page': page,
     }
     return render(request, 'web/default.html', context)
 
 
-def events(request):
+def events_meetings(request):
     page = get_object_or_404(Page, internal_name="events_meetings")
-    upcoming_events = Event.objects.filter(date__gte=datetime.date.today())
-    past_events = Event.objects.filter(date__lt=datetime.date.today())
+    upcoming_events = Event.objects.filter(date__gte=datetime.datetime.now()).order_by('date')
+    upcoming_meetings = Meeting.objects.filter(date__gte=datetime.datetime.now()).order_by('date')
+    past_meetings = Meeting.objects.filter(date__lt=datetime.date.today()).order_by('-date')
+
+    # so we can order chronologically regardless if thing is an event or meeting, combine upcoming
+    # meetings and upcoming events into one list, sorted
+
+    for meeting in upcoming_meetings:
+        meeting.title = "Forum Regular Meeting"  # meetings don't have a title, so add one
+        
+    upcoming_events_meetings = sorted(chain(upcoming_events, upcoming_meetings), 
+        key=lambda x: x.date)
 
     context = {
         'title': page.title,
         'page': page,
-        'upcoming_events': upcoming_events,
-        'past_events': past_events,
+        'upcoming_events_meetings': upcoming_events_meetings,
+        'past_meetings': past_meetings,
     }
     return render(request, 'web/default.html', context)
 
 
-def event_details(request, event_id):
-    event = get_object_or_404(Event, pk=event_id)
+def meeting_detail(request, meeting_id):
+    meeting = get_object_or_404(Meeting, pk=meeting_id)
     context = {
-        'event': event,
-        'title': event.title,
+        'meeting': meeting,
+        'title': "Regular Meeting",
     }
-    return render(request, 'web/event_detail.html', context)
+    return render(request, 'web/meeting_detail.html', context)
 
 
 def resources(request):
@@ -136,7 +155,6 @@ def funding_resources(request):
         'page': page,
     }
     return render(request, 'web/resources.html', context)
-
 
 
 def contact(request):

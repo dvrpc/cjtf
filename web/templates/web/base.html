@@ -7,6 +7,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{% static 'web/style.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
   <title>{{ title }}</title>
 </head>
 
@@ -21,12 +22,10 @@
         <span class="search">Search box here</span>
         <div style="float:right" id="top_logos">
           <a href="https://www.dvrpc.org/">
-            <img src="{% static 'web/images/dvrpc_small.png' %}" style="padding-bottom: 15px">
-          </a>
+            <img src="{% static 'web/images/dvrpc_small.png' %}" style="padding-bottom: 15px"></a>
           <br>
           <a href="https://www.njtpa.org">
-            <img src="{% static 'web/images/njtpa_small.png' %}" style="float: right">
-          </a>
+            <img src="{% static 'web/images/njtpa_small.png' %}" style="float: right"></a>
         </div>
       </div>
     </div>
@@ -34,7 +33,7 @@
       <ul>
         <li><a href="{% url 'web:about' %}">About</a></li>
         <li><a href="{% url 'web:membership' %}">Membership</a></li>
-        <li><a href="{% url 'web:events' %}">Events & Meetings</a></li>
+        <li><a href="{% url 'web:events_meetings' %}">Events & Meetings</a></li>
         <li><a href="{% url 'web:resources' %}">Resources</a>
           <ul>
             <li><a href="{% url 'web:technical_resources' %}">Technical Resources</a></li>
@@ -66,8 +65,12 @@
   </main>
 
   <footer>
-    <img src="{% static 'web/images/dvrpc_tiny.png' %}" class="spacer">
-    <img src="{% static 'web/images/njtpa_tiny.png' %}">
+    <div>
+    <a href="https://www.dvrpc.org/">
+      <img src="{% static 'web/images/dvrpc_tiny.png' %}" class="spacer"></a>
+    <a href="https://www.njtpa.org">
+      <img src="{% static 'web/images/njtpa_tiny.png' %}"></a>
+    </div>
   </footer>
 
 </body>

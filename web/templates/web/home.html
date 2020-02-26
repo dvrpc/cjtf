@@ -12,16 +12,24 @@
     <div class="column left half orange">
       <h2>Updates</h2>
       <ul>
-        {% if next_event %}
-          <li>Next regular meeting: 
-            <a href="{% url 'web:event_detail' next_event.id %}">{{ next_event.date }}</a>
+        {% if next_meeting %}
+          <li>Next regular meeting of the Forum: 
+            <a href="{{ next_meeting.url }}">{{ next_meeting.date }}</a>
           </li>
         {% endif %}
 
-        {% if updated_meetings %}
-          {% for meeting in updated_meetings %}
-            <li>Minutes added for the <a href="{% url 'web:event_detail' meeting.id %}">
+        {% if meetings_updated_minutes %}
+          {% for meeting in meetings_updated_minutes %}
+            <li><a href="{{meeting.minutes.url}}">Minutes</a> added for the 
               {{ meeting.date|date:"F" }} meeting</a>
+            </li>
+          {% endfor %}
+        {% endif %}
+
+        {% if meetings_updated_presentations %}
+          {% for meeting in meetings_updated_presentations %}
+            <li><a href="{{meeting.presentation_materials.url}}">Presentation materials</a> 
+              added for the {{ meeting.date|date:"F" }} meeting</a>
             </li>
           {% endfor %}
         {% endif %}
@@ -35,6 +43,12 @@
         {% if funding_resources %}
           {% for resource in funding_resources %}
             <li>Upcoming funding deadline: <a href="{{ resource.url }}">{{ resource.name }}</a></li>
+          {% endfor %}
+        {% endif %}
+
+        {% if upcoming_events %}
+          {% for event in upcoming_events %}
+            <li>Event: <a href="{{ event.url }}">{{ event.title }}</a> ({{event.date}})</li>
           {% endfor %}
         {% endif %}
 
