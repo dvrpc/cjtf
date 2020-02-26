@@ -23,22 +23,39 @@
           </p>
         {% endif %}
         <br>
+
         <h3 class="center">Past Forum Meetings</h3>
         {% if past_meetings %}
-          {% for meeting in past_meetings %}
-            <p>
-              {{meeting.date|date:"M j, Y" }} 
-              {% if agenda.minutes.url %}
-                | <a href="{{meeting.agenda.url}}">Agenda</a>
-              {% endif %}
-              {% if meeting.minutes %}
-                | <a href="{{ meeting.minutes.url }}">Minutes/Highlights</a> &#11123;
-              {% endif %}
-              {% if meeting.presentation_materials %}
-                | <a href="{{ meeting.presentation_materials.url }}">Presentations/Materials</a> &#11123;
-              {% endif %}
-            </p>
-          {% endfor %}
+          <table class="past_meetings">
+            {% for meeting in past_meetings %}
+              <tr>
+                <td><b>{{meeting.year}}<b></td>
+                <td>{{meeting.date|date:"M"}}</td>
+                <td>
+                  {% if meeting.agenda %}
+                    <a href="{{ meeting.agenda.url }}" class="download">Agenda</a>
+                  {% else %}
+                    &nbsp;
+                  {% endif %}
+                </td>
+                <td>
+                  {% if meeting.minutes %}
+                    <a href="{{ meeting.minutes.url }}" class="download">Minutes/Highlights</a>
+                  {% else %}
+                    &nbsp;
+                  {% endif %}
+                </td>
+                <td>
+                  {% if meeting.presentation_materials %}
+                    <a href="{{ meeting.presentation_materials.url }}" class="download">
+                    Presentations/Materials</a>
+                  {% else %}
+                    &nbsp;
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
         {% endif %}
       {% endif %}
     </div>

@@ -127,24 +127,22 @@ h4 {
 
 table {
   border: 2px solid @table_border_color;
-  // border-spacing: 5px;
   border-collapse: collapse;
   width: 100%;
-  // padding: 15px;
-}
 
-th {
-  text-align: left;
-  border-bottom: 2px solid @table_border_color;
-  background-color: @light_blue;
-}
+  th {
+    text-align: left;
+    border-bottom: 2px solid @dark_blue;
+    background-color: @light_blue;
+  }
 
-td {
-  border-bottom: 1px solid @table_border_color;
-}
+  tr {
+    border-bottom: 1px solid @table_border_color;
+  }
 
-th, td {
-  padding: 15px;
+  th, td {
+    padding: 10px;
+  }
 }
 
 #breadcrumbs {
@@ -183,6 +181,12 @@ th, td {
 .dark_blue { background-color: @dark_blue; }
 .medium_blue { background-color: @medium_blue; }
 .light_blue { background-color: @light_blue; }
+
+.download:after {
+  content: "\2B73";
+  padding-left: 2px;
+  color: white;
+}
 
 // columns
 .row {
@@ -228,6 +232,23 @@ th, td {
 }
 
 // end columns 
+
+
+.past_meetings {
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+  // white-space: nowrap;
+  border: none;
+
+  tr {
+    border-bottom: 1px solid black;
+  
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
 
 /* Responsive layout */
 @media screen and (max-width: 650px) { 

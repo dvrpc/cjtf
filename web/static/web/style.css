@@ -99,17 +99,17 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
-th {
+table th {
   text-align: left;
   border-bottom: 2px solid #193091;
   background-color: #1b75bc;
 }
-td {
+table tr {
   border-bottom: 1px solid #193091;
 }
-th,
-td {
-  padding: 15px;
+table th,
+table td {
+  padding: 10px;
 }
 #breadcrumbs {
   background-color: #16669b;
@@ -157,6 +157,11 @@ td {
 .light_blue {
   background-color: #1b75bc;
 }
+.download:after {
+  content: "\2B73";
+  padding-left: 2px;
+  color: white;
+}
 .row {
   margin-bottom: 1%;
 }
@@ -189,6 +194,18 @@ td {
 }
 .one_third {
   width: 33.5%;
+}
+.past_meetings {
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+  border: none;
+}
+.past_meetings tr {
+  border-bottom: 1px solid black;
+}
+.past_meetings tr:last-child {
+  border-bottom: none;
 }
 /* Responsive layout */
 @media screen and (max-width: 650px) {
