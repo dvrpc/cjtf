@@ -57,9 +57,15 @@
             {% endfor %}
           </table>
         {% endif %}
-      {% endif %}
-    </div>
 
+      {# Membership #}
+      {% elif request.resolver_match.url_name == 'membership' %}
+        <div id="map">
+          This text is hard-coded into the template in a div named "map". Marc's webmap will go here.
+        </div>
+      {% endif %}
+
+    </div>
     <div class="column right one_third light_green">
       {% if page.sidebar %}
         {{ page.sidebar|safe|linebreaks }}

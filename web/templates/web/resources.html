@@ -30,6 +30,7 @@
                 <th>Publication Date</th>
                 <th>Source</th>
                 <th>Summary</th>
+                <th>Category</th>
               </tr>
               {% for resource in resources %}
                 <tr>
@@ -37,6 +38,7 @@
                   <td data-th="Publication Date">{{resource.publication_date}}</td>
                   <td data-th="Source">{{ resource.source }}</td>
                   <td data-th="Summary">{{ resource.summary }}</td>
+                  <td data-th="Category">{{ resource.get_category_display }}</td>
                 </tr>
               {% endfor %}
             </table>

@@ -18,38 +18,48 @@
           </li>
         {% endif %}
 
-        {% if meetings_updated_minutes %}
-          {% for meeting in meetings_updated_minutes %}
-            <li><a href="{{meeting.minutes.url}}">Minutes</a> added for the 
-              {{ meeting.date|date:"F" }} meeting</a>
-            </li>
-          {% endfor %}
-        {% endif %}
-
-        {% if meetings_updated_presentations %}
-          {% for meeting in meetings_updated_presentations %}
-            <li><a href="{{meeting.presentation_materials.url}}">Presentation materials</a> 
-              added for the {{ meeting.date|date:"F" }} meeting</a>
-            </li>
-          {% endfor %}
+        {% if meetings_updated %}
+          <li>Updated meeting materials:
+            <ul>
+              {% for meeting in meetings_updated %}
+                <li><a href="{{meeting.minutes.url}}">Minutes</a> and 
+                  <a href="{{meeting.presentation_materials.url}}">Presentation Materials</a>
+                  are available for the {{ meeting.date|date:"F Y" }} meeting</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
         {% endif %}
         
         {% if tech_resources %}
-          {% for resource in tech_resources %}
-            <li>Recently published: <a href="{{ resource.url }}">{{ resource.name }}</a></li>
-          {% endfor %}
+          <li>Recently published:
+            <ul>
+              {% for resource in tech_resources %}
+                <li>{{ resource.publication_date }}:
+                  <a href="{{ resource.url }}">{{ resource.name }}</a></li>
+              {% endfor %}    
+            </ul>
+          </li>
         {% endif %}
 
         {% if funding_resources %}
-          {% for resource in funding_resources %}
-            <li>Upcoming funding deadline: <a href="{{ resource.url }}">{{ resource.name }}</a></li>
-          {% endfor %}
+          <li>Upcoming funding deadlines:
+            <ul>
+              {% for resource in funding_resources %}
+                <li>{{resource.due_date}}: <a href="{{ resource.url }}">{{ resource.name }}</a></li>
+              {% endfor %}  
+            </ul>
+          </li>
         {% endif %}
 
         {% if upcoming_events %}
-          {% for event in upcoming_events %}
-            <li>Event: <a href="{{ event.url }}">{{ event.title }}</a> ({{event.date}})</li>
-          {% endfor %}
+          <li>Upcoming events:
+            <ul>
+              {% for event in upcoming_events %}
+                <li>{{event.date}}: <a href="{{ event.url }}">{{ event.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </li>
         {% endif %}
 
       </ul>

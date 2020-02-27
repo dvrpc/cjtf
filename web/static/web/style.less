@@ -7,6 +7,9 @@
 @dark_gray: #474747;
 @light_gray: #757575;
 
+@main_link: #dfeaf5;
+@main_link_hover: @light_blue;
+
 @table_border_color: @dark_blue;
 
 body { 
@@ -79,10 +82,10 @@ main {
   
   a {
     text-decoration: none;
-    color: @dark_gray;
+    color: @main_link;
 
     &:hover {
-      color: @light_blue;
+      color: @main_link_hover;
     }
   }
 }
@@ -238,7 +241,6 @@ table {
   border-collapse: collapse;
   display: block;
   overflow-x: auto;
-  // white-space: nowrap;
   border: none;
 
   tr {

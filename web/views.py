@@ -1,6 +1,7 @@
 import datetime
 from itertools import chain
 
+from django.db.models import Q
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.views import generic
 
@@ -14,7 +15,7 @@ def index(request):
     '''
 
     # Get various new/updated resources to display.
-    
+
     six_weeks_ago = datetime.date.today() - datetime.timedelta(days=14)
 
     try:
@@ -31,27 +32,24 @@ def index(request):
     funding_resources = (FundingResource
         .objects.filter(due_date__gte=datetime.date.today())
         .order_by('due_date')[0:3])
-
-    # get meetings with updated minutes, and meetings with updated presentations, and then combine them
-    meetings_updated_minutes = (Meeting
-        .objects
-        .filter(minutes_added__gte=six_weeks_ago)
-        .exclude(minutes='')
-        .order_by('minutes_added')[0:3])
-
-    meetings_updated_presentations = (Meeting
-        .objects
-        .filter(pre_mat_added__gte=six_weeks_ago)
-        .exclude(presentation_materials='')
-        .order_by('pre_mat_added')[0:3])
     
+    # get meetings with newly added minutes or presentation materials; exclude those that have
+    # no values for the file field (because the "added" fields will be updated whether files are
+    # added or deleted)
+    meetings_updated = (Meeting
+        .objects
+        .filter(
+            (Q(minutes_added__gte=six_weeks_ago) & ~Q(minutes='')) |
+            (Q(pre_mat_added__gte=six_weeks_ago) & ~Q(presentation_materials=''))
+        ) 
+        .order_by('date')[0:3])
+
     context = {
         'title': 'Central Jersey Transportation Forum',
         'next_meeting': next_meeting,
         'tech_resources': tech_resources,
         'funding_resources': funding_resources,
-        'meetings_udpated_minutes': meetings_updated_minutes,
-        'meetings_updated_presentations': meetings_updated_presentations,
+        'meetings_updated': meetings_updated,
         'upcoming_events': upcoming_events,
     }
     return render(request, 'web/home.html', context)
@@ -84,8 +82,10 @@ def events_meetings(request):
 
     # so we can order by date regardless if thing is an event or meeting, combine upcoming
     # meetings and upcoming events into one list and sort
+
+    # first, since meetings don't have titles, add one
     for meeting in upcoming_meetings:
-        meeting.title = "Forum Regular Meeting"  # meetings don't have a title, so add one
+        meeting.title = "Forum Regular Meeting"  
         
     upcoming_events_meetings = sorted(chain(upcoming_events, upcoming_meetings), 
         key=lambda x: x.date)
