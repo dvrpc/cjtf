@@ -14,8 +14,7 @@ def index(request):
     set up the Twitter list feed.
     '''
 
-    # Get various new/updated resources to display.
-
+    # how far back to check for added tech resources or added meeting minutes/presentations
     six_weeks_ago = datetime.date.today() - datetime.timedelta(days=14)
 
     try:
