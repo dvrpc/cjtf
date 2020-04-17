@@ -12,28 +12,42 @@
 
 @table_border_color: @dark_blue;
 
-body { 
-  margin: 100px auto;
-  margin-top: 0px;
-  margin-bottom: 0px;
+body {
+  margin: 0 auto;
+  padding: 0 50px 0 50px;
   max-width: 1100px;
   background-color: #FFF8F0; 
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
+  display: grid;
+  grid-template-areas:
+    "header"
+    "nav"
+    "main"
+    "footer";
 }
 
 /* #header is container for everything above main_content */
 header {
+  grid-area: header;
   margin-top: 25px;
-  padding: 25px 50px 10px 50px;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 3fr 1fr 1fr;
 
   .search {
-    vertical-align: top; 
-    padding-right: 50px;
+    justify-self: center;
+  }
+  .logos {
+    justify-self: end;
   }
 }
 
+
+
 nav {
+  grid-area: nav;
+  margin: 0 5px 0 5px;
   padding-top: 5px;
 
   ul {
@@ -77,9 +91,9 @@ nav {
 }
 
 main {
-  padding: 0 50px 25px 50px;
+  grid-area: main;
   color: white;
-  
+
   a {
     text-decoration: none;
     color: @main_link;
@@ -90,14 +104,54 @@ main {
   }
 }
 
-footer {
-  text-align: center;
-  padding: 25px 50px 0px 50px;
-  height: 100px;
-  
-  .spacer {
-    padding-right: 15px
+.home {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "mission mission"
+    "col1 col2"
+}
+
+.default {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas:
+    "col1 col2"
+}
+
+.mission {
+  grid-area: mission;
+  font-size: 1.5rem;
+  letter-spacing: .1rem;
+  padding: 10px;
+  margin-bottom: -20px;
+
+  .staccato {
+    word-spacing: .4rem;
   }
+}
+  
+.col1 {
+  grid-area: col1;
+  padding: 0 10px 10px 10px;
+  background-color: @orange;
+}
+
+.col2 {
+  grid-area: col2;
+  padding: 0 10px 10px 10px;
+  background-color: @light_green;
+}
+
+footer {
+  grid-area: footer;
+  text-align: center;
+  // padding: 25px 50px 0px 50px;
+  margin-top: 50px;
+  margin-bottom: 0;
+  height: 100px;
 }
 
 hr {
@@ -162,25 +216,19 @@ table {
   }
 }
 
-#hero_image {
+.shadow {
   box-shadow: 5px 5px 8px gray;
 }
 
-#mission_text {
+.blue {
   background-color: @medium_blue;
-  padding: 25px;
-  margin-bottom: 1%; 
-  box-shadow: 5px 5px 8px gray;
-  font-size: 1.2rem;
-  line-height: 1.5em;
 }
+
 
 .bold { font-weight: bold; }
 .italic { font-style: italic; }
 .center { text-align: center; }
 
-.orange { background-color: @orange; }
-.light_green { background-color: @light_green; }
 .dark_blue { background-color: @dark_blue; }
 .medium_blue { background-color: @medium_blue; }
 .light_blue { background-color: @light_blue; }
@@ -190,51 +238,6 @@ table {
   padding-left: 2px;
   color: white;
 }
-
-// columns
-.row {
-  margin-bottom: 1%; 
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.column {
-  box-shadow: 5px 5px 8px gray;
-  box-sizing: border-box;
-  padding: 0px 15px 10px 15px;
-  margin-bottom: 8px;
-}
-
-.left {
-  float: left;
-}
-
-.right {
-  float: right;
-}
-
-.full {
-  width: 100%;
-  float: left;
-}
-
-.half {
-  width: 49.5%;
-}
-
-.two_thirds {
-  width: 65.5%;
-}
-
-.one_third {
-  width: 33.5%;
-}
-
-// end columns 
 
 
 .past_meetings {
@@ -253,16 +256,47 @@ table {
 }
 
 /* Responsive layout */
-@media screen and (max-width: 650px) { 
-  // hide the DVPRC and NJTPA logs at the top
-  #top_logos {
-    display: none;
+@media screen and (max-width: 768px) { 
+  // change header grid to just two columns
+  body {
+    padding: 0 25px 0 25px;
+  }
+  
+  header {
+    grid-area: header;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 3fr 1fr;
+
+    .search {
+      justify-self: end;
+    }
+    
+    // hide the DVPRC and NJTPA logs at the top
+    .logos {
+      display: none;
+    }
   }
 
 
   // make the two columns stack on top of each other instead of next to each other
-  .left, .right {
-    width: 100%;
+  .home {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "mission"
+      "col1"
+      "col2";
+  }
+  
+  .default {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "col1"
+      "col2";
+  }
+
+  .mission {
+    margin-bottom: 0;
   }
 
   /* an alternative way to go for a responsive table, instead of using a horizontal scroll bar */

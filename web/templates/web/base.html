@@ -14,40 +14,41 @@
 <body>
 
   <header>
-    <div class="row">
-      <div style="float:left">
-        <a href="/"><img src="{% static 'web/images/logo_header.png' %}"></a>
-      </div>
-      <div style="float:right">
-        <span class="search">Search box here</span>
-        <div style="float:right" id="top_logos">
-          <a href="https://www.dvrpc.org/">
-            <img src="{% static 'web/images/dvrpc_small.png' %}" style="padding-bottom: 15px"></a>
-          <br>
-          <a href="https://www.njtpa.org">
-            <img src="{% static 'web/images/njtpa_small.png' %}" style="float: right"></a>
-        </div>
-      </div>
+    <div><a href="/"><img src="{% static 'web/images/logo_header.png' %}"></a></div>
+    <div class="search">
+      <form method="post" action="something">
+        <input name="search" type="text" placeholder="Search..."></input>
+      </form>
     </div>
-    <nav>
-      <ul>
-        <li><a href="{% url 'web:about' %}">About</a></li>
-        <li><a href="{% url 'web:membership' %}">Membership</a></li>
-        <li><a href="{% url 'web:events_meetings' %}">Events & Meetings</a></li>
-        <li><a href="{% url 'web:resources' %}">Resources</a>
-          <ul>
-            <li><a href="{% url 'web:technical_resources' %}">Technical Resources</a></li>
-            <li><a href="{% url 'web:funding_resources' %}">Funding Resources</a></li>
-          </ul>
-        </li>
-        <li><a href="{% url 'web:contact' %}">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+    <div class="logos" style="text-align:right">
+        <a href="https://www.dvrpc.org/">
+          <img 
+            src="{% static 'web/images/dvrpc_small.png' %}"
+            style="padding-bottom:15px">
+        </a>
+        <a href="https://www.njtpa.org">
+          <img src="{% static 'web/images/njtpa_small.png' %}">
+        </a>
+    </div>
+  </header>  
+  <nav>
+    <ul>
+      <li><a href="{% url 'web:about' %}">About</a></li>
+      <li><a href="{% url 'web:membership' %}">Membership</a></li>
+      <li><a href="{% url 'web:events_meetings' %}">Events & Meetings</a></li>
+      <li><a href="{% url 'web:resources' %}">Resources</a>
+        <ul>
+          <li><a href="{% url 'web:technical_resources' %}">Technical Resources</a></li>
+          <li><a href="{% url 'web:funding_resources' %}">Funding Resources</a></li>
+        </ul>
+      </li>
+      <li><a href="{% url 'web:contact' %}">Contact</a></li>
+    </ul>
+  </nav>
 
   <main>
-    <div id="breadcrumbs">
-      {% if request.resolver_match.url_name != 'index' %}
+    {% if request.resolver_match.url_name != 'index' %}
+      <div id="breadcrumbs">
         {% if request.resolver_match.url_name == 'technical_resources' or request.resolver_match.url_name == 'funding_resources' %}
           <a href="{% url 'web:index' %}">Home</a> &rsaquo;
           <a href="{% url 'web:resources' %}">Resources</a> &rsaquo; {{ title }} 
@@ -57,20 +58,19 @@
         {% else %}
           <a href="{% url 'web:index' %}">Home</a> &rsaquo; {{title}}
         {% endif %}
-      {% endif %} 
-    </div>
+      </div>
+    {% endif %} 
+    
     {% block main %}
 
     {% endblock %}
   </main>
 
   <footer>
-    <div>
     <a href="https://www.dvrpc.org/">
-      <img src="{% static 'web/images/dvrpc_tiny.png' %}" class="spacer"></a>
+      <img src="{% static 'web/images/dvrpc_tiny.png' %}" style="padding-right: 15px"></a>
     <a href="https://www.njtpa.org">
       <img src="{% static 'web/images/njtpa_tiny.png' %}"></a>
-    </div>
   </footer>
 
 </body>

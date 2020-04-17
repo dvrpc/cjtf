@@ -1,15 +1,14 @@
 {% extends "web/base.html" %}
 
 {% block main %}
-  <div id="heroimage">
-  </div>
-  <div id="mission_text">
-    Identify. Discuss. Coordinate. Research. Assist. Educate.<br>
-    We are the Central Jersey Transportation Forum.
-  </div>
+  <div class="home">
+    <div class="mission shadow blue">
+      <div id="heroimage">TK</div>
+      <p><span class="staccato">Identify. Discuss. Coordinate. Research. Assist. Educate.</span><br>
+      We are the Central Jersey Transportation Forum.</p>
+    </div>
 
-  <div class="row">  
-    <div class="column left half orange">
+    <div class="col1 shadow">
       <h2>Updates</h2>
       <ul>
         {% if next_meeting %}
@@ -30,7 +29,7 @@
             </ul>
           </li>
         {% endif %}
-        
+
         {% if tech_resources %}
           <li>Recently published:
             <ul>
@@ -64,10 +63,9 @@
 
       </ul>
     </div>
-    <div class="column right half light_green">
+    <div class="col2 shadow">
       <h2>News</h2>
       <p>Twitter feed?</p>
     </div>
   </div>
- 
 {% endblock %}
