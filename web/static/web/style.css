@@ -103,6 +103,10 @@ main a:hover {
   padding: 0 10px 10px 10px;
   background-color: #8db23f;
 }
+.full {
+  padding: 5px 10px;
+  background-color: #f27b38;
+}
 footer {
   grid-area: footer;
   text-align: center;

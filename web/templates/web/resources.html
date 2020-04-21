@@ -1,87 +1,84 @@
 {% extends "web/base.html" %}
 
 {% block main %}
-  <div class="row">
-    <div class="column full orange">
+  <div class="full">
 
-      {% if request.resolver_match.url_name == 'resources' %}
-        <h2 class="center">{{ page.title|safe }}</h2>
-        <div>{{ page.main_content|safe|linebreaks }}</div>
+    {% if request.resolver_match.url_name == 'resources' %}
+      <h2 class="center">{{ page.title|safe }}</h2>
+      <div>{{ page.main_content|safe|linebreaks }}</div>
+    {% endif %}
+
+    {% if request.resolver_match.url_name == 'technical_resources' %}
+      <h2 class="center">
+      Technical Resources : 
+      {% if not category %}
+        All
+      {% elif category == 'regional_plans' %}
+        Regional Plans
+      {% elif category == 'municipal_tools' %}
+        Municipal Tools 
+      {% elif category == 'research_and_reports' %}
+        Research and Reports 
       {% endif %}
-      
-      {% if request.resolver_match.url_name == 'technical_resources' %}
-        <h2 class="center">
-        Technical Resources : 
-        {% if not category %}
-          All
-        {% elif category == 'regional_plans' %}
-          Regional Plans
-        {% elif category == 'municipal_tools' %}
-          Municipal Tools 
-        {% elif category == 'research_and_reports' %}
-          Research and Reports 
-        {% endif %}
-        </h2>
-        {% if resources %}
-          <div style="margin:15px">
-            <table class="responsive_table">
+      </h2>
+      {% if resources %}
+        <div style="margin:15px">
+          <table class="responsive_table">
+            <tr>
+              <th>Product Name</th>
+              <th>Publication Date</th>
+              <th>Source</th>
+              <th>Summary</th>
+              <th>Category</th>
+            </tr>
+            {% for resource in resources %}
               <tr>
-                <th>Product Name</th>
-                <th>Publication Date</th>
-                <th>Source</th>
-                <th>Summary</th>
-                <th>Category</th>
+                <td data-th="Product Name"><a href="{{ resource.url }}">{{resource.name}}</a></td>
+                <td data-th="Publication Date">{{resource.publication_date}}</td>
+                <td data-th="Source">{{ resource.source }}</td>
+                <td data-th="Summary">{{ resource.summary }}</td>
+                <td data-th="Category">{{ resource.get_category_display }}</td>
               </tr>
-              {% for resource in resources %}
-                <tr>
-                  <td data-th="Product Name"><a href="{{ resource.url }}">{{resource.name}}</a></td>
-                  <td data-th="Publication Date">{{resource.publication_date}}</td>
-                  <td data-th="Source">{{ resource.source }}</td>
-                  <td data-th="Summary">{{ resource.summary }}</td>
-                  <td data-th="Category">{{ resource.get_category_display }}</td>
-                </tr>
-              {% endfor %}
-            </table>
-          </div>
-        {% else %}
-          <p>There are no 
-            {% if not category %}
-              technical resources 
-            {% elif category == 'regional_plans' %}
-              regional plans
-            {% elif category == 'municipal_tools' %}
-              municipal tools 
-            {% elif category == 'research_and_reports' %}
-              research and reports 
-            {% endif %}
-          available at this time.</p>
-        {% endif %}
+            {% endfor %}
+          </table>
+        </div>
+      {% else %}
+        <p>There are no 
+          {% if not category %}
+            technical resources 
+          {% elif category == 'regional_plans' %}
+            regional plans
+          {% elif category == 'municipal_tools' %}
+            municipal tools 
+          {% elif category == 'research_and_reports' %}
+            research and reports 
+          {% endif %}
+        available at this time.</p>
       {% endif %}
+    {% endif %}
 
-      {% if request.resolver_match.url_name == 'funding_resources' %}
-        <h2 class="center">Funding Resources</h2>
-        {% if resources %}
-          <div style="margin:15px">
-            <table class="responsive_table">
+    {% if request.resolver_match.url_name == 'funding_resources' %}
+      <h2 class="center">Funding Resources</h2>
+      {% if resources %}
+        <div style="margin:15px">
+          <table class="responsive_table">
+            <tr>
+              <th>Program Name</th>
+              <th>Due Date</th>
+              <th>Source</th>
+            </tr>
+            {% for resource in resources %}
               <tr>
-                <th>Program Name</th>
-                <th>Due Date</th>
-                <th>Source</th>
+                <td data-th="Program Name"><a href="{{ resource.url }}">{{resource.name}}</a></td>
+                <td data-th="Due Date">{{resource.due_date}}</td>
+                <td data-th="Source">{{ resource.source_name }}</td>
               </tr>
-              {% for resource in resources %}
-                <tr>
-                  <td data-th="Program Name"><a href="{{ resource.url }}">{{resource.name}}</a></td>
-                  <td data-th="Due Date">{{resource.due_date}}</td>
-                  <td data-th="Source">{{ resource.source_name }}</td>
-                </tr>
-              {% endfor %}
-            </table>
-          </div>
-        {% else %}
-          <p>There are no funding resources available at this time.</p>
-        {% endif %}
+            {% endfor %}
+          </table>
+        </div>
+      {% else %}
+        <p>There are no funding resources available at this time.</p>
       {% endif %}
-
-    </div>
+    {% endif %}
   </div>
 {% endblock %}
