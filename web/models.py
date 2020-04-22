@@ -6,8 +6,12 @@ from ckeditor.fields import RichTextField
 
 
 class Meeting(models.Model):
-    date = models.DateTimeField()
-    url = models.URLField(help_text="Be sure to include the full url, i.e. start with http://")
+    date = models.DateTimeField(help_text="24 hr format, i.e. 09:00 for 9am or 13:00 for 1pm")
+    url = models.URLField(
+        blank=True,
+        null=True,
+        help_text="To the Ticketleap page. Include the full url, i.e. start with http://"
+    )
     agenda = models.FileField(blank=True, null=True)
     minutes = models.FileField(blank=True, null=True)
     minutes_added = models.DateField(blank=True, null=True)
