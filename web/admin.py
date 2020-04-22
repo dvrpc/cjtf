@@ -14,7 +14,6 @@ class PageAdmin(admin.ModelAdmin):
     
     
 class MeetingAdmin(admin.ModelAdmin):
-    list_display = ['date']
     exclude = ('minutes_added', 'pre_mat_added')
 
 

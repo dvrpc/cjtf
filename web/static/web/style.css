@@ -58,7 +58,7 @@ nav a {
   color: #474747;
 }
 nav a:hover {
-  color: #1b75bc;
+  color: #16669b;
 }
 main {
   grid-area: main;
@@ -97,6 +97,12 @@ main a:hover {
   grid-area: col1;
   padding: 0 10px 10px 10px;
   background-color: #f27b38;
+}
+.col1 a:link {
+  color: #16669b;
+}
+.col1 a:hover {
+  color: white;
 }
 .col2 {
   grid-area: col2;
@@ -167,9 +173,6 @@ table td {
 }
 .shadow {
   box-shadow: 5px 5px 8px gray;
-}
-.blue {
-  background-color: #16669b;
 }
 .bold {
   font-weight: bold;

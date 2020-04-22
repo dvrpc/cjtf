@@ -22,7 +22,7 @@ class Meeting(models.Model):
     pre_mat_added = models.DateField(blank=True, null=True)
 
     def __str__(self):
-        return str(self.date.strftime('%B %d, %Y'))
+        return str(self.date.strftime('%Y - %B'))
     
     date.admin_order_field = 'date'
     

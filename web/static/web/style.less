@@ -85,7 +85,7 @@ nav {
     color: @dark_gray;
     
     &:hover {
-      color: @light_blue;
+      color: @medium_blue;
     }
   }
 }
@@ -137,6 +137,13 @@ main {
   grid-area: col1;
   padding: 0 10px 10px 10px;
   background-color: @orange;
+
+  a:link {
+    color: @medium_blue;
+  }
+  a:hover {
+    color: white;
+  }
 }
 
 .col2 {
@@ -226,11 +233,6 @@ table {
 .shadow {
   box-shadow: 5px 5px 8px gray;
 }
-
-.blue {
-  background-color: @medium_blue;
-}
-
 
 .bold { font-weight: bold; }
 .italic { font-style: italic; }
