@@ -89,14 +89,14 @@ def events_meetings(request):
     upcoming_events_meetings = sorted(chain(upcoming_events, upcoming_meetings), 
         key=lambda x: x.date)
 
-    # so it's easy to display in template, give the latest past meeting for each year a year attribute
+    # so it's easy to display in template, give the latest past meeting for each year a 'year' attribute
     current_year = ''
     for past_meeting in past_meetings:
         if not current_year or current_year != past_meeting.date.year: 
             past_meeting.year = past_meeting.date.year
+            current_year = past_meeting.date.year
         else:
             past_meeting.year = ''
-        current_year = past_meeting.year
 
     context = {
         'title': page.title,
