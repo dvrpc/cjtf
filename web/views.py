@@ -41,7 +41,7 @@ def index(request):
             (Q(minutes_added__gte=six_weeks_ago) & ~Q(minutes='')) |
             (Q(pre_mat_added__gte=six_weeks_ago) & ~Q(presentation_materials=''))
         ) 
-        .order_by('date')[0:3])
+        .order_by('-date')[0:3])
 
     context = {
         'title': 'Central Jersey Transportation Forum',
