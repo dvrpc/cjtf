@@ -140,7 +140,7 @@ h4 {
 table {
   border: 2px solid #193091;
   border-collapse: collapse;
-  width: 100%;
+  margin: 0 auto;
 }
 table th {
   text-align: left;
@@ -193,12 +193,11 @@ table td {
 }
 .past_meetings {
   border-collapse: collapse;
-  display: block;
   overflow-x: auto;
   border: none;
 }
 .past_meetings tr {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid gray;
 }
 .past_meetings tr:last-child {
   border-bottom: none;

@@ -24,14 +24,32 @@ class Meeting(models.Model):
     def __str__(self):
         return str(self.date.strftime('%Y - %B'))
     
-    date.admin_order_field = 'date'
-    
     def save(self, *args, **kwargs):
         if self.minutes:
             self.minutes_added = datetime.date.today()
         if self.presentation_materials:
             self.pre_mat_added = datetime.date.today()
         super().save(*args, **kwargs)
+    
+    def simplified_date(self):
+        return str(self.date.strftime('%Y - %B'))
+
+    def has_minutes(self):
+        if self.minutes:
+            return True
+        else:
+            return False
+
+    def has_presentation_materials(self):
+        if self.presentation_materials:
+            return True
+        else:
+            return False
+     
+    simplified_date.admin_order_field = 'date'
+    simplified_date.short_description = 'date' # so col heading is not "SIMPLIFIED DATE"
+    has_minutes.boolean = True
+    has_presentation_materials.boolean = True
 
 
 class Event(models.Model):

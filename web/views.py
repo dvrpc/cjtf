@@ -35,6 +35,9 @@ def index(request):
     # get meetings with newly added minutes or presentation materials; exclude those that have
     # no values for the file field (because the "added" fields will be updated whether files are
     # added or deleted)
+    # Note that this orders by most recent date of meeting - not date of when these were added,
+    # but that's ok because we don't really need to highlight updated materials from very old 
+    # meetings, if that should every happen
     meetings_updated = (Meeting
         .objects
         .filter(
