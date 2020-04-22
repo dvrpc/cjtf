@@ -6,7 +6,10 @@ from ckeditor.fields import RichTextField
 
 
 class Meeting(models.Model):
-    date = models.DateTimeField(help_text="24 hr format, i.e. 09:00 for 9am or 13:00 for 1pm")
+    date = models.DateTimeField(
+        help_text="Date in format mm/dd/yyyy or mm/dd/yy  and "
+                  "time in 24 hr format, i.e. 09:00 for 9am or 13:00 for 1pm"
+    )
     url = models.URLField(
         blank=True,
         null=True,
