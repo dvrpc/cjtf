@@ -66,10 +66,10 @@ main {
 }
 main a {
   text-decoration: none;
-  color: #dfeaf5;
+  color: #16669b;
 }
 main a:hover {
-  color: #1b75bc;
+  color: white;
 }
 .home {
   display: grid;
@@ -97,12 +97,6 @@ main a:hover {
   grid-area: col1;
   padding: 0 10px 10px 10px;
   background-color: #f27b38;
-}
-.col1 a:link {
-  color: #16669b;
-}
-.col1 a:hover {
-  color: white;
 }
 .col2 {
   grid-area: col2;

@@ -2,7 +2,7 @@
 
 {% block main %}
   <div class="home">
-    <div class="mission shadow blue">
+    <div class="mission shadow medium_blue">
       <div id="heroimage">TK</div>
       <p><span class="staccato">Identify. Discuss. Coordinate. Research. Assist. Educate.</span><br>
       We are the Central Jersey Transportation Forum.</p>
@@ -21,9 +21,16 @@
           <li>Updated meeting materials:
             <ul>
               {% for meeting in meetings_updated %}
-                <li><a href="{{meeting.minutes.url}}">Minutes</a> and 
-                  <a href="{{meeting.presentation_materials.url}}">Presentation Materials</a>
-                  are available for the {{ meeting.date|date:"F Y" }} meeting</a>
+                <li>
+                    {% if meeting.minutes and meeting.presentation_materials %}
+                      <a href="{{ meeting.minutes.url }}">Minutes</a> and 
+                      <a href="{{ meeting.presentation_materials.url }}">Presentation Materials</a>
+                    {% elif meeting.minutes and not meeting.presentation_materials %}
+                      <a href="{{ meeting.minutes.url }}">Minutes</a>
+                    {% elif not meeting.minutes and meeting.presentation_materials %}
+                      <a href="{{ meeting.presetnation_materials.url }}">Presentation Materials</a>
+                    {% endif %}
+                    are available for the {{ meeting.date|date:"F Y" }} meeting</a>
                 </li>
               {% endfor %}
             </ul>
