@@ -66,12 +66,15 @@
               <th>Program Name</th>
               <th>Due Date</th>
               <th>Source</th>
+              <th>Description<th>
+              
             </tr>
             {% for resource in resources %}
               <tr>
                 <td data-th="Program Name"><a href="{{ resource.url }}">{{resource.name}}</a></td>
                 <td data-th="Due Date">{{resource.due_date}}</td>
                 <td data-th="Source">{{ resource.source_name }}</td>
+                <td data-th="Description">{{ resource.description }}</td>
               </tr>
             {% endfor %}
           </table>

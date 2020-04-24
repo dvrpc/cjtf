@@ -89,8 +89,8 @@ class TechnicalResource(models.Model):
         ("research_and_reports", "Research and Reports"),
     ]
     name = models.CharField(max_length=200)
-    url = models.URLField()
-    summary = models.TextField()
+    url = models.URLField(help_text="Include http://")
+    summary = models.TextField(blank=True, null=True)
     publication_date = models.DateField()
     source = models.CharField(max_length=100)
     category = models.CharField(
@@ -102,11 +102,14 @@ class TechnicalResource(models.Model):
     def __str__(self):
         return self.name
 
+
 class FundingResource(models.Model):
     name = models.CharField(max_length=200)
     url = models.URLField()
     due_date = models.DateField()
     source_name = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    pdf = models.FileField(blank=True)
     
     def __str__(self):
         return self.name
