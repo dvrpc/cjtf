@@ -86,11 +86,11 @@ def events_meetings(request):
     # meetings and upcoming events into one list and sort
 
     # first, since meetings don't have titles, add one
-    for meeting in upcoming_meetings:
-        meeting.title = "Forum Regular Meeting"  
-        
-    upcoming_events_meetings = sorted(chain(upcoming_events, upcoming_meetings), 
-        key=lambda x: x.date)
+    # for meeting in upcoming_meetings:
+    #     meeting.title = "Forum Regular Meeting"  
+    #     
+    # upcoming_events_meetings = sorted(chain(upcoming_events, upcoming_meetings), 
+    #     key=lambda x: x.date)
 
     # so it's easy to display in template, give the latest past meeting for each year a 'year' attribute
     current_year = ''
@@ -104,7 +104,8 @@ def events_meetings(request):
     context = {
         'title': page.title,
         'page': page,
-        'upcoming_events_meetings': upcoming_events_meetings,
+        'upcoming_events': upcoming_events,
+        'upcoming_meetings': upcoming_meetings, 
         'past_meetings': past_meetings,
     }
     return render(request, 'web/default.html', context)

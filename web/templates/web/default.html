@@ -8,27 +8,43 @@
 
       {# Events & Meetings #}
       {% if request.resolver_match.url_name == 'events_meetings' %}
-        <br>
-        <h3 class="center">Upcoming</h3>
-
-        {% if upcoming_events_meetings %}
-          {% for event_meeting in upcoming_events_meetings %}
-            <p>{{ event_meeting.date }} - 
-              {% if event_meeting.url %}
-                <a href="{{event_meeting.url}}">{{event_meeting.title}}</a>
+        <h3>Upcoming Forum Meetings</h3>
+        {% if upcoming_meetings %}
+          {% for meeting in upcoming_meetings %}
+            <p>
+              {% if meeting.url %}
+                <a href="{{ meeting.url }}">{{ meeting.date }}</a>
               {% else %}
-                {{ event_meeting.title }}
+                {{ meeting.date }}
               {% endif %}
             </p>
           {% endfor %}
         {% else %}
-          <p>There are no meetings or events scheduled at this time. Please 
+          <p>There are no meetings scheduled at this time. Please 
             <a href="/contact">contact the Forum</a> for initial thinking about the next regular 
             meeting date, which will be posted here once it is set.
           </p>
         {% endif %}
-        <br>
 
+        {% if upcoming_events %}
+          <h3>Upcoming Events</h3> 
+          {% for event in upcoming_events %}
+            <p class="center bold">{{ event.date }}, 
+              {% if event.url %}
+                <a href="{{event.url}}">{{event.title}}</a>
+              {% else %}
+                {{ event.title }}
+              {% endif %}
+            </p>
+            {% if event.location %}
+              <p class="center">{{ event.location }}</p>
+            {% endif %}
+            {% if event.description %}
+              <p>{{ event.description }}</p>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+        
         <h3 class="center">Past Forum Meetings</h3>
         {% if past_meetings %}
           <table class="past_meetings">

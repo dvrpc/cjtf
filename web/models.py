@@ -7,7 +7,7 @@ from ckeditor.fields import RichTextField
 
 class Meeting(models.Model):
     date = models.DateTimeField(
-        help_text="Date in format mm/dd/yyyy or mm/dd/yy  and "
+        help_text="Date in format m/d/yyyy, m/d/yy, yy-m-d, or yyyy-m-d  and "
                   "time in 24 hr format, i.e. 09:00 for 9am or 13:00 for 1pm"
     )
     url = models.URLField(
@@ -30,7 +30,7 @@ class Meeting(models.Model):
         if self.presentation_materials:
             self.pre_mat_added = datetime.date.today()
         super().save(*args, **kwargs)
-    
+
     def simplified_date(self):
         return str(self.date.strftime('%Y - %B'))
 
@@ -53,8 +53,13 @@ class Meeting(models.Model):
 
 
 class Event(models.Model):
-    date = models.DateTimeField()
+    date = models.DateTimeField(
+        help_text="Date in format m/d/yyyy, m/d/yy, yy-m-d, or yyyy-m-d  and "
+                  "time in 24 hr format, i.e. 09:00 for 9am or 13:00 for 1pm"
+    )
     title = models.CharField(max_length=100)
+    location = RichTextField(null=True, blank=True)
+    description = RichTextField(null=True, blank=True)
     url = models.URLField()
 
     def __str__(self):
