@@ -14,7 +14,12 @@
         {% if upcoming_events_meetings %}
           {% for event_meeting in upcoming_events_meetings %}
             <p>{{ event_meeting.date }} - 
-              <a href="{{event_meeting.url}}">{{event_meeting.title}}</a></p>
+              {% if event_meeting.url %}
+                <a href="{{event_meeting.url}}">{{event_meeting.title}}</a>
+              {% else %}
+                {{ event_meeting.title }}
+              {% endif %}
+            </p>
           {% endfor %}
         {% else %}
           <p>There are no meetings or events scheduled at this time. Please 

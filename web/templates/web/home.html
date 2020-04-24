@@ -12,8 +12,12 @@
       <h2>Updates</h2>
       <ul>
         {% if next_meeting %}
-          <li>Next regular meeting of the Forum: 
-            <a href="{{ next_meeting.url }}">{{ next_meeting.date }}</a>
+          <li>Next regular meeting of the Forum:
+            {% if next_meeting.url %}
+              <a href="{{ next_meeting.url }}">{{ next_meeting.date }}</a>
+            {% else %}
+              {{ next_meeting.date }}
+            {% endif %}
           </li>
         {% endif %}
 
