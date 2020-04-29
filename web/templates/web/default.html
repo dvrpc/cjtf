@@ -86,6 +86,12 @@
         <div id="map">
           This text is hard-coded into the template in a div named "map". Marc's webmap will go here.
         </div>
+
+      {# Search #}
+      {% elif request.resolver_match.url_name == 'search' %}
+        <h3>Search Results</h3>
+        {{search_term}}
+        {{title}}
       {% endif %}
 
     </div>

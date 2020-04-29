@@ -82,16 +82,6 @@ def events_meetings(request):
     upcoming_meetings = Meeting.objects.filter(date__gte=datetime.datetime.now()).order_by('date')
     past_meetings = Meeting.objects.filter(date__lt=datetime.date.today()).order_by('-date')
 
-    # so we can order by date regardless if thing is an event or meeting, combine upcoming
-    # meetings and upcoming events into one list and sort
-
-    # first, since meetings don't have titles, add one
-    # for meeting in upcoming_meetings:
-    #     meeting.title = "Forum Regular Meeting"  
-    #     
-    # upcoming_events_meetings = sorted(chain(upcoming_events, upcoming_meetings), 
-    #     key=lambda x: x.date)
-
     # so it's easy to display in template, give the latest past meeting for each year a 'year' attribute
     current_year = ''
     for past_meeting in past_meetings:
@@ -175,3 +165,21 @@ def contact(request):
         'page': page,
     }
     return render(request, 'web/default.html', context)
+
+
+def search(request):
+    if request.method == 'GET':
+        return render(request, 'web/default.html')
+    if request.method == 'POST':
+        search_term = request.POST.get('search_term', None)
+        
+        if not search_term:
+            return render(request, 'web/default.html')
+        
+        context = {
+            'title': 'Search',
+            'search_term': search_term,
+        }
+        return render(request, 'web/default.html', context)
+
+
