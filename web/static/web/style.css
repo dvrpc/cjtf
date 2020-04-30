@@ -107,6 +107,10 @@ main a:hover {
   padding: 5px 10px;
   background-color: #f27b38;
 }
+.search {
+  max-width: 550px;
+  margin: 0 auto;
+}
 footer {
   grid-area: footer;
   text-align: center;

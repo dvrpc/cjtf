@@ -16,10 +16,7 @@
   <header>
     <div><a href="/"><img src="{% static 'web/images/logo_header.png' %}"></a></div>
     <div class="search">
-      <form method="post" action="{% url 'web:search' %}">
-        {% csrf_token %}
-        <input name="search_term" type="text" placeholder="Search..."></input>
-      </form>
+        {% include 'web/search_form.html' %}      
     </div>
     <div class="logos" style="text-align:right">
         <a href="https://www.dvrpc.org/">

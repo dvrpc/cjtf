@@ -105,7 +105,7 @@ class TechnicalResource(models.Model):
 
 class FundingResource(models.Model):
     name = models.CharField(max_length=200)
-    url = models.URLField()
+    url = models.URLField(help_text="Include http://")
     due_date = models.DateField()
     source_name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)

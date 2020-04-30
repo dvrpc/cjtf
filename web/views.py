@@ -1,6 +1,7 @@
 import datetime
 from itertools import chain
 
+from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Q
 from django.shortcuts import get_list_or_404, get_object_or_404, render
 from django.views import generic
@@ -168,18 +169,70 @@ def contact(request):
 
 
 def search(request):
+    context = {
+        'title': 'Search',
+    }
+
     if request.method == 'GET':
-        return render(request, 'web/default.html')
+       return render(request, 'web/search.html', context)
     if request.method == 'POST':
         search_term = request.POST.get('search_term', None)
         
         if not search_term:
-            return render(request, 'web/default.html')
+            return render(request, 'web/search.html', context)
+       
+        results = {} 
         
-        context = {
-            'title': 'Search',
-            'search_term': search_term,
-        }
-        return render(request, 'web/default.html', context)
+        query = SearchQuery(search_term)
+        
+        # Pages
+        vector = SearchVector('title', weight='A') + SearchVector('main_content', 'sidebar', weight='B')
+        pages =  Page.objects.annotate(
+            search=vector,
+            rank=SearchRank(vector, query)
+        ).filter(search=query).order_by('-rank')
+        if pages.exists():
+            results['pages'] = pages
+
+        # Events
+        vector = SearchVector('title', weight='A') + \
+            SearchVector('description', weight='B') + \
+            SearchVector('location', weight='C')
+        events = Event.objects.annotate(
+            search=vector,
+            rank=SearchRank(vector, query)
+        ).filter(search=query).order_by('rank')
+        if events.exists():
+            results['events'] = events
+       
+        # Technical Resources
+        vector = SearchVector('name', weight='A') + \
+            SearchVector('summary', weight='B') + \
+            SearchVector('source', weight='C')
+        tech_resources = TechnicalResource.objects.annotate(
+            search=vector,
+            rank=SearchRank(vector, query)
+        ).filter(search=query).order_by('rank')
+        
+        if tech_resources.exists():
+            results['tech_resources'] = tech_resources
+        
+        # Funding Resources
+        vector = SearchVector('name', weight='A') + \
+            SearchVector('description', weight='B') + \
+            SearchVector('source_name', weight='C')
+        funding_resources = FundingResource.objects.annotate(
+            search=vector,
+            rank=SearchRank(vector, query)
+        ).filter(search=query, due_date__gte=datetime.datetime.today()).order_by('rank')
+        if funding_resources.exists():
+            results['funding_resources'] = funding_resources
+
+        context.update([
+            ('search_attempt', True),
+            ('search_term', search_term),
+            ('results', results), 
+        ]) 
+        return render(request, 'web/search.html', context)
 
 
