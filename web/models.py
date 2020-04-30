@@ -72,8 +72,7 @@ class Page(models.Model):
     sidebar = RichTextField(
         blank=True,
         null=True,
-        help_text="Sidebar/additional info (right column). If empty, there is default text that "
-            " will be displayed."
+        help_text="Sidebar/additional info (right column)."
     )
     internal_name = models.CharField(
         max_length=30,

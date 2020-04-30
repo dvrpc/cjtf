@@ -160,17 +160,6 @@
     <div class="col2 shadow">
       {% if page.sidebar %}
         {{ page.sidebar|safe }}
-      {% else %}
-        <div>
-          {# include some default language for sidebar if content not provided in Page in admin #}
-          {% if request.resolver_match.url_name == 'about' %}
-            {% include 'web/sidebar_about.html' %}
-          {% elif request.resolver_match.url_name == 'contact' %}
-            {% include 'web/sidebar_contact.html' %}
-          {% elif request.resolver_match.url_name == 'events_meetings' %}
-            {% include 'web/sidebar_events.html' %}
-          {% endif %}
-        </div>
       {% endif %}    
     </div>
   </div>
