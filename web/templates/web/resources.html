@@ -1,24 +1,24 @@
 {% extends "web/base.html" %}
 
 {% block main %}
-  <div class="full">
-
+  <main class="full">
     {% if request.resolver_match.url_name == 'resources' %}
-      <h2 class="center">{{ page.title|safe }}</h2>
-      <div>{{ page.main_content|safe|linebreaks }}</div>
-        <div style="padding-top:1rem; padding-bottom:1rem; line-height: 1.5rem">
-          <span style="font-size:1.3rem"><a href="{% url 'web:technical_resources' %}">Technical Resources</a></span>
-          <div style="margin: 0 0 10px 15px">
-            &rsaquo; <a href="{% url 'web:technical_resources' %}?category=regional_plans">Regional Plans</a><br>
-            &rsaquo; <a href="{% url 'web:technical_resources' %}?category=municipal_tools">Municipal Tools</a><br>
-            &rsaquo; <a href="{% url 'web:technical_resources' %}?category=research_and_reports">Research and Reports</a><br>
-          </div>
-          <span style="font-size:1.3rem"><a href="{% url 'web:funding_resources' %}">Funding Resources</a></span>
+      <h2>{{ page.title|safe }}</h2>
+      <div class="content">
+        {{ page.main_content|safe }}
+        <h3><a href="{% url 'web:technical_resources' %}">Technical Resources</a></h3>
+        <div style="margin: 0 auto; max-width: 15rem"> 
+          <ul style="line-height: 1.5rem">
+            <li><a href="{% url 'web:technical_resources' %}?category=regional_plans">Regional Plans</a></li>
+            <li><a href="{% url 'web:technical_resources' %}?category=municipal_tools">Municipal Tools</a></li>
+            <li><a href="{% url 'web:technical_resources' %}?category=research_and_reports">Research and Reports</a></li>
+          </ul>
         </div>
-    {% endif %}
-
-    {% if request.resolver_match.url_name == 'technical_resources' %}
-      <h2 class="center">
+        <h3><a href="{% url 'web:funding_resources' %}">Funding Resources</a></h3>
+        <br>
+      </div>
+    {% elif request.resolver_match.url_name == 'technical_resources' %}
+      <h2>
       Technical Resources : 
       {% if not category %}
         All
@@ -30,6 +30,12 @@
         Research and Reports 
       {% endif %}
       </h2>
+        <p class="center">
+          <a href="{% url 'web:technical_resources' %}">All</a> |           
+          <a href="{% url 'web:technical_resources' %}?category=regional_plans">Regional Plans</a> | 
+          <a href="{% url 'web:technical_resources' %}?category=municipal_tools">Municipal Tools</a> | 
+          <a href="{% url 'web:technical_resources' %}?category=research_and_reports">Research and Reports</a>
+        </p>
       {% if resources %}
         <div style="margin:15px">
           <table class="responsive_table">
@@ -52,7 +58,7 @@
           </table>
         </div>
       {% else %}
-        <p>There are no 
+        <p class="center">There are no 
           {% if not category %}
             technical resources 
           {% elif category == 'regional_plans' %}
@@ -64,10 +70,8 @@
           {% endif %}
         available at this time.</p>
       {% endif %}
-    {% endif %}
-
-    {% if request.resolver_match.url_name == 'funding_resources' %}
-      <h2 class="center">Funding Resources</h2>
+    {% elif request.resolver_match.url_name == 'funding_resources' %}
+      <h2>Funding Resources</h2>
       {% if resources %}
         <div style="margin:15px">
           <table class="responsive_table">
@@ -76,7 +80,6 @@
               <th>Due Date</th>
               <th>Source</th>
               <th>Description<th>
-              
             </tr>
             {% for resource in resources %}
               <tr>
@@ -89,8 +92,8 @@
           </table>
         </div>
       {% else %}
-        <p>There are no funding resources available at this time.</p>
+        <p class="center">There are no funding resources available at this time.</p>
       {% endif %}
     {% endif %}
-  </div>
+  </main>
 {% endblock %}

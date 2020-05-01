@@ -1,8 +1,8 @@
 {% extends "web/base.html" %}
 
 {% block main %}
-  <div class="full shadow">
-    <div class="search"> 
+  <main class="full shadow">
+    <div class="content"> 
     {% if not search_attempt %} 
       <h2>Search</h2>
       {% if not search_term %}
@@ -72,5 +72,5 @@
       {% endif %}
     {% endif %}
     </div>
-  </div>
+  </main>
 {% endblock %}

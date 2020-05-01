@@ -42,7 +42,7 @@ header {
 
 nav {
   grid-area: nav;
-  margin: 0 5px 0 5px;
+  margin: 0 0px 0 0px;
   padding-top: 5px;
 
   ul {
@@ -83,6 +83,21 @@ nav {
       color: @medium_blue;
     }
   }
+  
+  #breadcrumbs {
+    background-color: @medium_blue;
+    padding: 5px;
+    box-shadow: 5px 5px 8px gray;
+    color: white;
+   
+    a {
+      color: white;
+
+      &:hover {
+        color: @orange;
+      }
+    }
+  }
 }
 
 main {
@@ -97,58 +112,57 @@ main {
       color: white;
     }
   }
-}
 
-.home {
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: 1fr 1fr;
-  grid-template-areas:
-    "mission mission"
-    "col1 col2"
-}
-
-.default {
-  display: grid;
-  grid-gap: 20px;
-  grid-template-columns: 2fr 1fr;
-  grid-template-areas:
-    "col1 col2"
-}
-
-.mission {
-  grid-area: mission;
-  font-size: 1.5rem;
-  letter-spacing: .1rem;
-  padding: 10px;
-  margin-bottom: -20px;
-
-  .staccato {
-    word-spacing: .4rem;
+  &.home {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "mission mission"
+      "col1 col2";
   }
-}
   
-.col1 {
-  grid-area: col1;
-  padding: 0 10px 10px 10px;
-  background-color: @orange;
+  &.default {
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+      "col1 col2"
+  }
 
-}
+  &.full {
+    padding: 5px 10px;
+    background-color: @orange;
+  
+    .content {
+      max-width: 550px;
+      margin: 0 auto;
+    }
+  }
 
-.col2 {
-  grid-area: col2;
-  padding: 0 10px 10px 10px;
-  background-color: @light_green;
-}
-
-.full {
-  padding: 5px 10px;
-  background-color: @orange;
-}
-
-.search {
-  max-width: 550px;
-  margin: 0 auto;
+  .mission {
+    grid-area: mission;
+    font-size: 1.5rem;
+    letter-spacing: .1rem;
+    padding: 10px;
+    margin-bottom: -20px;
+  
+    .staccato {
+      word-spacing: .4rem;
+    }
+  }
+    
+  .col1 {
+    grid-area: col1;
+    padding: 0 10px 10px 10px;
+    background-color: @orange;
+  }
+  
+  .col2 {
+    grid-area: col2;
+    padding: 0 10px 10px 10px;
+    background-color: @light_green;
+  }
 }
 
 footer {
@@ -207,19 +221,7 @@ table {
   }
 }
 
-#breadcrumbs {
-  background-color: @medium_blue;
-  padding: 5px;
-  box-shadow: 5px 5px 8px gray;
-  
-  a {
-    color: white;
 
-    &:hover {
-      color: @orange;
-    }
-  }
-}
 
 .shadow {
   box-shadow: 5px 5px 8px gray;

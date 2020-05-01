@@ -42,9 +42,7 @@
       </li>
       <li><a href="{% url 'web:contact' %}">Contact</a></li>
     </ul>
-  </nav>
 
-  <main>
     {% if request.resolver_match.url_name != 'index' %}
       <div id="breadcrumbs">
         {% if request.resolver_match.url_name == 'technical_resources' or request.resolver_match.url_name == 'funding_resources' %}
@@ -59,10 +57,10 @@
       </div>
     {% endif %} 
     
-    {% block main %}
+  </nav>
+  {% block main %}
 
-    {% endblock %}
-  </main>
+  {% endblock %}
 
   <footer>
     <a href="https://www.dvrpc.org/">
