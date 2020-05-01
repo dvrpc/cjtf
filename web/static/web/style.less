@@ -273,15 +273,16 @@ table {
     grid-area: header;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: 3fr auto auto;
+    grid-template-columns: auto auto;
     grid-template-areas:
-        "logo search nav";
+        "search nav"
+        "logo logo";
     .cjtf_logo {
       grid-area: logo;
     }
     .search {
       grid-area: search;
-      justify-self: end;
+      justify-self: start;
     }
     
     // hide the DVPRC and NJTPA logs at the top

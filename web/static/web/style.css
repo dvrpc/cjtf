@@ -220,15 +220,15 @@ table td {
     grid-area: header;
     display: grid;
     grid-gap: 10px;
-    grid-template-columns: 3fr auto auto;
-    grid-template-areas: "logo search nav";
+    grid-template-columns: auto auto;
+    grid-template-areas: "search nav" "logo logo";
   }
   header .cjtf_logo {
     grid-area: logo;
   }
   header .search {
     grid-area: search;
-    justify-self: end;
+    justify-self: start;
   }
   header .logos {
     display: none;
