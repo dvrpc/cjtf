@@ -14,10 +14,8 @@
 <body>
 
   <header>
-    <div><a href="/"><img src="{% static 'web/images/logo_header.png' %}"></a></div>
-    <div class="search">
-        {% include 'web/search_form.html' %}      
-    </div>
+    <div class="cjtf_logo"><a href="/"><img src="{% static 'web/images/logo_header.png' %}"></a></div>
+    <div class="search">{% include 'web/search_form.html' %}</div>
     <div class="logos" style="text-align:right">
         <a href="https://www.dvrpc.org/">
           <img 
@@ -28,9 +26,10 @@
           <img src="{% static 'web/images/njtpa_small.png' %}">
         </a>
     </div>
-  </header>  
   <nav>
+    <button class="opener">&#9776;</button>
     <ul>
+      <li><button class="closer">&#215;</button></li>
       <li><a href="{% url 'web:about' %}">About</a></li>
       <li><a href="{% url 'web:membership' %}">Membership</a></li>
       <li><a href="{% url 'web:events_meetings' %}">Events & Meetings</a></li>
@@ -42,7 +41,8 @@
       </li>
       <li><a href="{% url 'web:contact' %}">Contact</a></li>
     </ul>
-
+  </nav>
+  </header>
     {% if request.resolver_match.url_name != 'index' %}
       <div id="breadcrumbs">
         {% if request.resolver_match.url_name == 'technical_resources' or request.resolver_match.url_name == 'funding_resources' %}
@@ -57,7 +57,6 @@
       </div>
     {% endif %} 
     
-  </nav>
   {% block main %}
 
   {% endblock %}
@@ -68,6 +67,17 @@
     <a href="https://www.njtpa.org">
       <img src="{% static 'web/images/njtpa_tiny.png' %}"></a>
   </footer>
-
 </body>
+<script>
+  const openerButton = document.querySelector('.opener');
+  const closerButton = document.querySelector('.closer'); 
+
+  function toggleMenu() {
+    ulItem = document.querySelector('nav > ul');
+    ulItem.classList.toggle('show');
+  }
+
+  openerButton.addEventListener('click', toggleMenu);
+  closerButton.addEventListener('click', toggleMenu);
+</script>
 </html>
