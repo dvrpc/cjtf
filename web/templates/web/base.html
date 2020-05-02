@@ -26,37 +26,36 @@
           <img src="{% static 'web/images/njtpa_small.png' %}">
         </a>
     </div>
-  <nav>
-    <button class="opener">&#9776;</button>
-    <ul>
-      <li><button class="closer">&#215;</button></li>
-      <li><a href="{% url 'web:about' %}">About</a></li>
-      <li><a href="{% url 'web:membership' %}">Membership</a></li>
-      <li><a href="{% url 'web:events_meetings' %}">Events & Meetings</a></li>
-      <li><a href="{% url 'web:resources' %}">Resources</a>
-        <ul>
-          <li><a href="{% url 'web:technical_resources' %}">Technical Resources</a></li>
-          <li><a href="{% url 'web:funding_resources' %}">Funding Resources</a></li>
-        </ul>
-      </li>
-      <li><a href="{% url 'web:contact' %}">Contact</a></li>
-    </ul>
-  </nav>
-  </header>
-    {% if request.resolver_match.url_name != 'index' %}
-      <div id="breadcrumbs">
-        {% if request.resolver_match.url_name == 'technical_resources' or request.resolver_match.url_name == 'funding_resources' %}
-          <a href="{% url 'web:index' %}">Home</a> &rsaquo;
-          <a href="{% url 'web:resources' %}">Resources</a> &rsaquo; {{ title }} 
-        {% elif request.resolver_match.url_name == 'event_detail' %}
-          <a href="{% url 'web:index' %}">Home</a> &rsaquo;
-          <a href="{% url 'web:events' %}">Events & Meetings</a> &rsaquo; {{ title }} 
-        {% else %}
-          <a href="{% url 'web:index' %}">Home</a> &rsaquo; {{title}}
-        {% endif %}
-      </div>
-    {% endif %} 
-    
+    <nav>
+      <button class="opener">&#9776;</button>
+      <ul>
+        <li><button class="closer">&#215;</button></li>
+        <li><a href="{% url 'web:about' %}">About</a></li>
+        <li><a href="{% url 'web:membership' %}">Membership</a></li>
+        <li><a href="{% url 'web:events_meetings' %}">Events & Meetings</a></li>
+        <li><a href="{% url 'web:resources' %}">Resources</a>
+          <ul>
+            <li><a href="{% url 'web:technical_resources' %}">Technical Resources</a></li>
+            <li><a href="{% url 'web:funding_resources' %}">Funding Resources</a></li>
+          </ul>
+        </li>
+        <li><a href="{% url 'web:contact' %}">Contact</a></li>
+      </ul>
+    </nav>
+  {% if request.resolver_match.url_name != 'index' %}
+    <div id="breadcrumbs">
+      {% if request.resolver_match.url_name == 'technical_resources' or request.resolver_match.url_name == 'funding_resources' %}
+        <a href="{% url 'web:index' %}">Home</a> &rsaquo;
+        <a href="{% url 'web:resources' %}">Resources</a> &rsaquo; {{ title }} 
+      {% elif request.resolver_match.url_name == 'event_detail' %}
+        <a href="{% url 'web:index' %}">Home</a> &rsaquo;
+        <a href="{% url 'web:events' %}">Events & Meetings</a> &rsaquo; {{ title }} 
+      {% else %}
+        <a href="{% url 'web:index' %}">Home</a> &rsaquo; {{title}}
+      {% endif %}
+    </div>
+  {% endif %} 
+  </header>  
   {% block main %}
 
   {% endblock %}

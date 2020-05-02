@@ -2,16 +2,14 @@
 @medium_blue: #16669b;
 @light_blue: #1b75bc;
 @orange: #f27b38;
-@dark_green: #006838;
 @light_green: #8db23f;
 @dark_gray: #474747;
-@light_gray: #757575;
 
 @table_border_color: @dark_blue;
 
 body {
   margin: 0 auto;
-  padding: 0 50px 0 50px;
+  padding: 25px 50px 25px 50px;
   max-width: 1100px;
   background-color: #FFF8F0; 
   font-family: 'Roboto', sans-serif;
@@ -19,22 +17,20 @@ body {
   display: grid;
   grid-template-areas:
     "header"
-    "nav"
     "main"
     "footer";
 }
 
-/* #header is container for everything above main_content */
 header {
   grid-area: header;
-  margin-top: 25px;
   display: grid;
-  grid-gap: 10px;
+  grid-gap: 5px;
   grid-template-columns: 3fr 1fr 1fr;
   grid-template-areas:
     "cjtf_logo search logos"
     "cjtf_logo . ."
-    "nav nav nav";
+    "nav nav nav"
+    "breadcrumbs breadcrumbs breadcrumbs";
 
   .search {
     justify-self: center;
@@ -46,8 +42,9 @@ header {
 
 nav {
   grid-area: nav;
-  margin: 0;
-  
+  padding-bottom: 5px; 
+
+  /* this hides the buttons that close and open the menu in responsive mode */
   button {
     display: none;
   }
@@ -93,6 +90,7 @@ nav {
 } 
 
 #breadcrumbs {
+  grid-area: breadcrumbs;
   background-color: @medium_blue;
   padding: 5px;
   box-shadow: 5px 5px 8px gray;
@@ -176,9 +174,8 @@ main {
 footer {
   grid-area: footer;
   text-align: center;
-  margin-top: 50px;
-  margin-bottom: 0;
-  height: 100px;
+  padding-top: 50px;
+  padding-bottom: 25px;
 }
 
 hr {
@@ -266,23 +263,31 @@ table {
 @media screen and (max-width: 768px) { 
   // change header grid to just two columns
   body {
-    padding: 0 25px 0 25px;
+    padding: 10px 20px 10px 20px;
+    grid-template-columns: auto auto;
+    grid-template-areas:
+        "header header"
+        "main main"
+        "footer footer"
   }
   
   header {
     grid-area: header;
     display: grid;
-    grid-gap: 10px;
+    grid-gap: 5px;
     grid-template-columns: auto auto;
     grid-template-areas:
         "search nav"
         "logo logo";
+
     .cjtf_logo {
       grid-area: logo;
     }
     .search {
       grid-area: search;
       justify-self: start;
+      padding-top: 8px;
+      padding-bottom: 20px;
     }
     
     // hide the DVPRC and NJTPA logs at the top
@@ -294,22 +299,13 @@ table {
   nav {
     grid-area: nav;
     justify-self: end;
+    padding-top: 0;
     
     .opener, .closer {
       display: block;
       border: none;
       font-size: 2rem;
       background: transparent;
-      padding: 0;
-      margin: 0;
-
-      &.opener {
-        margin-top: -10px;
-      }
-
-      &.closer {
-        margin-top: 10px;
-      }
     }
 
     ul {
@@ -325,6 +321,7 @@ table {
       font-size: 1rem;
       transition: all 400ms;
       padding-bottom: 5px;
+      padding-top: 8px;
       white-space: nowrap;
       background-color: @medium_blue;
       border: 1px solid @dark_gray;
@@ -334,7 +331,7 @@ table {
       }
       
       li {
-        margin-right: 5px;
+        margin-right: 15px;
         margin-left: 5px;
         
         // hide the submenu for resources
@@ -358,6 +355,9 @@ table {
     } 
   }
 
+  #breadcrumbs {
+    display: none;
+  }
 
   // make the two columns stack on top of each other instead of next to each other
   main { 
