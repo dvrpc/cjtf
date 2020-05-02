@@ -247,6 +247,7 @@ table td {
     border: none;
     font-size: 2rem;
     background: transparent;
+    padding-right: 0px;
   }
   nav ul {
     display: grid;
