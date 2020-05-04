@@ -93,6 +93,12 @@ main.home {
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "mission mission" "col1 col2";
 }
+main.home .col1 p {
+  font-weight: bold;
+}
+main.home .col1 ul {
+  margin-bottom: 2rem;
+}
 main.default {
   display: grid;
   grid-gap: 20px;
@@ -119,12 +125,15 @@ main .mission .staccato {
 }
 main .col1 {
   grid-area: col1;
-  padding: 0 10px 10px 10px;
+  padding: 0 20px 10px 20px;
   background-color: #f27b38;
+}
+main .col1 p {
+  margin-bottom: 1rem;
 }
 main .col2 {
   grid-area: col2;
-  padding: 0 10px 10px 10px;
+  padding: 0 20px 10px 20px;
   background-color: hsl(79, 48%, 47%);
 }
 footer {

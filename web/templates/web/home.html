@@ -10,19 +10,19 @@
 
     <div class="col1 shadow">
       <h2>Updates</h2>
-      <ul>
+      <br>
         {% if next_meeting %}
-          <li>Next regular meeting of the Forum:
+          <p>Next regular meeting of the Forum
             {% if next_meeting.url %}
               <a href="{{ next_meeting.url }}">{{ next_meeting.date }}</a>
             {% else %}
               {{ next_meeting.date }}
             {% endif %}
-          </li>
+          </p>
         {% endif %}
-
+        
         {% if meetings_updated %}
-          <li>Updated meeting materials:
+          <p>Updated meeting materials
             <ul>
               {% for meeting in meetings_updated %}
                 <li>
@@ -38,54 +38,55 @@
                 </li>
               {% endfor %}
             </ul>
-          </li>
+          </p>
         {% endif %}
 
         {% if tech_resources %}
-          <li>Recently published:
+          <p>Recently published
             <ul>
               {% for resource in tech_resources %}
                 <li>{{ resource.publication_date }}:
                   <a href="{{ resource.url }}">{{ resource.name }}</a></li>
               {% endfor %}    
             </ul>
-          </li>
+          </p>
         {% endif %}
 
         {% if funding_resources %}
-          <li>Upcoming funding deadlines:
+          <p>Upcoming funding deadlines
             <ul>
               {% for resource in funding_resources %}
                 <li>{{resource.due_date}}: <a href="{{ resource.url }}">{{ resource.name }}</a></li>
               {% endfor %}  
             </ul>
-          </li>
+          </p>
         {% endif %}
 
         {% if upcoming_events %}
-          <li>Upcoming events:
+          <p>Upcoming events
             <ul>
               {% for event in upcoming_events %}
                 <li>{{event.date}}: <a href="{{ event.url }}">{{ event.title }}</a></li>
               {% endfor %}
             </ul>
-          </li>
+          </p>
         {% endif %}
-
-      </ul>
     </div>
     <div class="col2 shadow">
-      <h2>News</h2>
+      <h2>Latest News</h2>
+      <br>
       <a 
         class="twitter-timeline" 
         href="https://twitter.com/DVRPC?ref_src=twsrc%5Etfw"
-        data-chrome="transparent noborders nofooter noheader"
-        data-tweet-limit="5"
+        data-chrome="transparent noborders noheader nofooter"
+        data-tweet-limit="1"
         data-aria-polite="assertive" 
         data-dnt="true"
         data-theme="dark">
       </a> 
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+      <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      <p class="center">Follow <a href="https://twitter.com/dvrpc">DVRPC</a> and 
+      <a href="https://twitter.com/njtpa">NJTPA</a> on Twitter for more.</p>
     </div>
   </main>
 {% endblock %}
