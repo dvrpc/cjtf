@@ -125,7 +125,7 @@ main .col1 {
 main .col2 {
   grid-area: col2;
   padding: 0 10px 10px 10px;
-  background-color: #8db23f;
+  background-color: hsl(79, 48%, 47%);
 }
 footer {
   grid-area: footer;
