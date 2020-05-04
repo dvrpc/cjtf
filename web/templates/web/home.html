@@ -2,7 +2,7 @@
 
 {% block main %}
   <main class="home">
-    <div class="mission shadow medium_blue">
+    <div class="mission">
       <div id="heroimage">TK</div>
       <p><span class="staccato">Identify. Discuss. Coordinate. Research. Assist. Educate.</span><br>
       We are the Central Jersey Transportation Forum.</p>
@@ -12,7 +12,7 @@
       <h2>Updates</h2>
       <br>
         {% if next_meeting %}
-          <p>Next regular meeting of the Forum
+          <p>Next regular meeting of the Forum:
             {% if next_meeting.url %}
               <a href="{{ next_meeting.url }}">{{ next_meeting.date }}</a>
             {% else %}

@@ -1,19 +1,43 @@
+:root {
+  --dark_blue: #193091;
+  --medium_blue: #16669b;
+  --light_blue: #1b75bc;
+  --orange: #f27b38;
+  --light_green: #8db23f;
+  --dark_gray: #474747;
+  --table_border_color: var(--dark_blue);
+  --background: #FFF8F0;
+}
+.dark_blue {
+  background-color: var(--dark_blue);
+}
+.medium_blue {
+  background-color: var(--medium_blue);
+}
+.light_blue {
+  background-color: var(--light_blue);
+}
+.orange_text {
+  color: var(--orange);
+}
 body {
   margin: 0 auto;
-  padding: 25px 50px 25px 50px;
-  max-width: 1100px;
-  background-color: #FFF8F0;
+  padding: 25px 0px 25px 0px;
+  background-color: var(--background);
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   display: grid;
-  grid-template-areas: "header" "main" "footer";
+  grid-template-areas: "header" "breadcrumbs" "main" "footer";
 }
 header {
+  margin-left: 80px;
+  margin-right: 80px;
   grid-area: header;
   display: grid;
   grid-gap: 5px;
   grid-template-columns: 3fr 1fr 1fr;
-  grid-template-areas: "cjtf_logo search logos" "cjtf_logo . ." "nav nav nav" "breadcrumbs breadcrumbs breadcrumbs";
+  grid-template-areas: "cjtf_logo search logos" "cjtf_logo . ." "nav nav nav";
+  /*"breadcrumbs breadcrumbs breadcrumbs";*/
 }
 header .search {
   justify-self: center;
@@ -57,24 +81,25 @@ nav ul li ul {
 }
 nav a {
   text-decoration: none;
-  color: #474747;
+  color: var(--medium_blue);
 }
 nav a:hover {
-  color: #16669b;
+  color: var(--orange);
 }
 #breadcrumbs {
   grid-area: breadcrumbs;
-  background-color: #16669b;
+  background-color: var(--medium_blue);
   padding: 5px;
   box-shadow: 5px 5px 8px gray;
   color: white;
+  /*margin-bottom: 20px;*/
 }
 #breadcrumbs a {
   text-decoration: none;
   color: white;
 }
 #breadcrumbs a:hover {
-  color: #f27b38;
+  color: var(--orange);
 }
 main {
   grid-area: main;
@@ -82,7 +107,7 @@ main {
 }
 main a {
   text-decoration: none;
-  color: #16669b;
+  color: var(--medium_blue);
 }
 main a:hover {
   color: white;
@@ -106,35 +131,32 @@ main.default {
   grid-template-areas: "col1 col2";
 }
 main.full {
-  padding: 5px 10px;
-  background-color: #f27b38;
-}
-main.full .content {
-  max-width: 550px;
-  margin: 0 auto;
+  padding: 20px 20px 10px 80px;
+  background-color: var(--orange);
 }
 main .mission {
+  padding: 20px 20px 10px 80px;
+  padding-left: 80px;
   grid-area: mission;
   font-size: 1.5rem;
   letter-spacing: 0.1rem;
-  padding: 10px;
-  margin-bottom: -20px;
+  background: linear-gradient(90deg, var(--medium_blue), 45%, var(--background));
 }
 main .mission .staccato {
   word-spacing: 0.4rem;
 }
 main .col1 {
   grid-area: col1;
-  padding: 0 20px 10px 20px;
-  background-color: #f27b38;
+  padding: 0 20px 10px 80px;
+  background-color: var(--orange);
 }
 main .col1 p {
   margin-bottom: 1rem;
 }
 main .col2 {
   grid-area: col2;
-  padding: 0 20px 10px 20px;
-  background-color: hsl(79, 48%, 47%);
+  padding: 0 20px 10px 80px;
+  background-color: var(--light_green);
 }
 footer {
   grid-area: footer;
@@ -154,7 +176,7 @@ h1 {
 h2 {
   font-size: 1.7rem;
   margin-bottom: 12px;
-  text-align: center;
+  border-bottom: 1px solid white;
 }
 h3 {
   font-size: 1.5rem;
@@ -166,17 +188,17 @@ h4 {
   margin-bottom: 10px;
 }
 table {
-  border: 2px solid #193091;
+  border: 2px solid var(--table_border_color);
   border-collapse: collapse;
   margin: 0 auto;
 }
 table th {
   text-align: left;
-  border-bottom: 2px solid #193091;
-  background-color: #1b75bc;
+  border-bottom: 2px solid var(--dark_blue);
+  background-color: var(--light_blue);
 }
 table tr {
-  border-bottom: 1px solid #193091;
+  border-bottom: 1px solid var(--table_border_color);
 }
 table th,
 table td {
@@ -193,15 +215,6 @@ table td {
 }
 .center {
   text-align: center;
-}
-.dark_blue {
-  background-color: #193091;
-}
-.medium_blue {
-  background-color: #16669b;
-}
-.light_blue {
-  background-color: #1b75bc;
 }
 .download:after {
   content: "\2B73";
@@ -222,11 +235,14 @@ table td {
 /* Responsive layout */
 @media screen and (max-width: 768px) {
   body {
-    padding: 10px 20px 10px 20px;
+    padding: 0px;
+    margin: 0px;
     grid-template-columns: auto auto;
     grid-template-areas: "header header" "main main" "footer footer";
   }
   header {
+    margin-left: 20px;
+    margin-right: 20px;
     grid-area: header;
     display: grid;
     grid-gap: 5px;
@@ -273,8 +289,8 @@ table td {
     padding-bottom: 5px;
     padding-top: 8px;
     white-space: nowrap;
-    background-color: #16669b;
-    border: 1px solid #474747;
+    background-color: var(--medium_blue);
+    border: 1px solid var(--dark_gray);
   }
   nav ul.show {
     width: 225px;
@@ -294,7 +310,7 @@ table td {
     color: white;
   }
   nav ul a:hover {
-    color: #f27b38;
+    color: var(--orange);
   }
   #breadcrumbs {
     display: none;
@@ -307,8 +323,14 @@ table td {
     grid-template-columns: 1fr;
     grid-template-areas: "col1" "col2";
   }
-  .mission {
-    margin-bottom: 0;
+  main .col1,
+  main .col2 {
+    padding: 0 20px 10px 20px;
+  }
+  main .mission {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 20px;
   }
   /* an alternative way to go for a responsive table, instead of using a horizontal scroll bar */
   .responsive_table {
@@ -328,7 +350,7 @@ table td {
   }
   .responsive_table td:last-child {
     padding-bottom: 0.5em;
-    border-bottom: 1px solid #193091;
+    border-bottom: 1px solid var(--table_border_color);
   }
   .responsive_table td:before {
     content: attr(data-th) ": ";

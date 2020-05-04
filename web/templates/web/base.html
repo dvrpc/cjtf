@@ -30,18 +30,48 @@
       <button class="opener">&#9776;</button>
       <ul>
         <li><button class="closer">&#215;</button></li>
-        <li><a href="{% url 'web:about' %}">About</a></li>
-        <li><a href="{% url 'web:membership' %}">Membership</a></li>
-        <li><a href="{% url 'web:events_meetings' %}">Events & Meetings</a></li>
-        <li><a href="{% url 'web:resources' %}">Resources</a>
+        <li>
+          {% if request.resolver_match.url_name != 'about' %}
+            <a href="{% url 'web:about' %}">About</a>
+          {% else %}
+            <span class="orange_text">About</span>
+          {% endif %}
+        </li>
+        <li>
+          {% if request.resolver_match.url_name != 'membership' %}
+            <a href="{% url 'web:membership' %}">Membership</a>
+          {% else %}
+            <span class="orange_text">Membership</span>
+          {% endif %}
+        </li>
+        <li>
+          {% if request.resolver_match.url_name != 'events_meetings' %}
+            <a href="{% url 'web:events_meetings' %}">Events & Meetings</a>
+          {% else %}
+            <span class="orange_text">Events & Meetings</span>
+          {% endif %}
+        </li>
+        <li>
+          {% if request.resolver_match.url_name != 'resources' %}
+            <a href="{% url 'web:resources' %}">Resources</a>
+          {% else %}
+            <span class="orange_text">Resources</span>
+          {% endif %}
           <ul>
             <li><a href="{% url 'web:technical_resources' %}">Technical Resources</a></li>
             <li><a href="{% url 'web:funding_resources' %}">Funding Resources</a></li>
           </ul>
         </li>
-        <li><a href="{% url 'web:contact' %}">Contact</a></li>
+        <li>
+          {% if request.resolver_match.url_name != 'contact' %}
+            <a href="{% url 'web:contact' %}">Contact</a>
+          {% else %}
+            <span class="orange_text">Contact</span>
+          {% endif %}
       </ul>
     </nav>
+  </header>
+  {% comment %}
   {% if request.resolver_match.url_name != 'index' %}
     <div id="breadcrumbs">
       {% if request.resolver_match.url_name == 'technical_resources' or request.resolver_match.url_name == 'funding_resources' %}
@@ -55,7 +85,7 @@
       {% endif %}
     </div>
   {% endif %} 
-  </header>  
+  {% endcomment %}
   {% block main %}
 
   {% endblock %}

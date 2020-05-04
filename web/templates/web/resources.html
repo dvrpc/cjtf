@@ -1,99 +1,101 @@
 {% extends "web/base.html" %}
 
 {% block main %}
-  <main class="full">
-    {% if request.resolver_match.url_name == 'resources' %}
-      <h2>{{ page.title|safe }}</h2>
-      <div class="content">
+  <main class="default">
+    <div class="col1 shadow">
+      {% if request.resolver_match.url_name == 'resources' %}
+        <h2>{{ page.title|safe }}</h2>
         {{ page.main_content|safe }}
-        <h3><a href="{% url 'web:technical_resources' %}">Technical Resources</a></h3>
-        <div style="margin: 0 auto; max-width: 15rem"> 
-          <ul style="line-height: 1.5rem">
-            <li><a href="{% url 'web:technical_resources' %}?category=regional_plans">Regional Plans</a></li>
-            <li><a href="{% url 'web:technical_resources' %}?category=municipal_tools">Municipal Tools</a></li>
-            <li><a href="{% url 'web:technical_resources' %}?category=research_and_reports">Research and Reports</a></li>
-          </ul>
-        </div>
-        <h3><a href="{% url 'web:funding_resources' %}">Funding Resources</a></h3>
-        <br>
-      </div>
-    {% elif request.resolver_match.url_name == 'technical_resources' %}
-      <h2>
-      Technical Resources : 
-      {% if not category %}
-        All
-      {% elif category == 'regional_plans' %}
-        Regional Plans
-      {% elif category == 'municipal_tools' %}
-        Municipal Tools 
-      {% elif category == 'research_and_reports' %}
-        Research and Reports 
-      {% endif %}
-      </h2>
+      {% elif request.resolver_match.url_name == 'technical_resources' %}
+        <h2>
+        Technical Resources : 
+        {% if not category %}
+          All
+        {% elif category == 'regional_plans' %}
+          Regional Plans
+        {% elif category == 'municipal_tools' %}
+          Municipal Tools 
+        {% elif category == 'research_and_reports' %}
+          Research and Reports 
+        {% endif %}
+        </h2>
         <p class="center">
           <a href="{% url 'web:technical_resources' %}">All</a> |           
           <a href="{% url 'web:technical_resources' %}?category=regional_plans">Regional Plans</a> | 
           <a href="{% url 'web:technical_resources' %}?category=municipal_tools">Municipal Tools</a> | 
           <a href="{% url 'web:technical_resources' %}?category=research_and_reports">Research and Reports</a>
         </p>
-      {% if resources %}
-        <div style="margin:15px">
-          <table class="responsive_table">
-            <tr>
-              <th>Product Name</th>
-              <th>Publication Date</th>
-              <th>Source</th>
-              <th>Summary</th>
-              <th>Category</th>
-            </tr>
-            {% for resource in resources %}
+        {% if resources %}
+          <div style="margin:15px">
+            <table class="responsive_table">
               <tr>
-                <td data-th="Product Name"><a href="{{ resource.url }}">{{resource.name}}</a></td>
-                <td data-th="Publication Date">{{resource.publication_date}}</td>
-                <td data-th="Source">{{ resource.source }}</td>
-                <td data-th="Summary">{{ resource.summary }}</td>
-                <td data-th="Category">{{ resource.get_category_display }}</td>
+                <th>Product Name</th>
+                <th>Publication Date</th>
+                <th>Source</th>
+                <th>Summary</th>
+                <th>Category</th>
               </tr>
-            {% endfor %}
-          </table>
-        </div>
-      {% else %}
-        <p class="center">There are no 
-          {% if not category %}
-            technical resources 
-          {% elif category == 'regional_plans' %}
-            regional plans
-          {% elif category == 'municipal_tools' %}
-            municipal tools 
-          {% elif category == 'research_and_reports' %}
-            research and reports 
-          {% endif %}
-        available at this time.</p>
-      {% endif %}
-    {% elif request.resolver_match.url_name == 'funding_resources' %}
-      <h2>Funding Resources</h2>
-      {% if resources %}
-        <div style="margin:15px">
-          <table class="responsive_table">
-            <tr>
-              <th>Program Name</th>
-              <th>Due Date</th>
-              <th>Source</th>
-              <th>Description<th>
-            </tr>
-            {% for resource in resources %}
+              {% for resource in resources %}
+                <tr>
+                  <td data-th="Product Name"><a href="{{ resource.url }}">{{resource.name}}</a></td>
+                  <td data-th="Publication Date">{{resource.publication_date}}</td>
+                  <td data-th="Source">{{ resource.source }}</td>
+                  <td data-th="Summary">{{ resource.summary }}</td>
+                  <td data-th="Category">{{ resource.get_category_display }}</td>
+                </tr>
+              {% endfor %}
+            </table>
+          </div>
+        {% else %}
+          <p class="center">There are no 
+            {% if not category %}
+              technical resources 
+            {% elif category == 'regional_plans' %}
+              regional plans
+            {% elif category == 'municipal_tools' %}
+              municipal tools 
+            {% elif category == 'research_and_reports' %}
+              research and reports 
+            {% endif %}
+          available at this time.</p>
+        {% endif %}
+      {% elif request.resolver_match.url_name == 'funding_resources' %}
+        <h2>Funding Resources</h2>
+        {% if resources %}
+          <div style="margin:15px">
+            <table class="responsive_table">
               <tr>
-                <td data-th="Program Name"><a href="{{ resource.url }}">{{resource.name}}</a></td>
-                <td data-th="Due Date">{{resource.due_date}}</td>
-                <td data-th="Source">{{ resource.source_name }}</td>
-                <td data-th="Description">{{ resource.description }}</td>
+                <th>Program Name</th>
+                <th>Due Date</th>
+                <th>Source</th>
+                <th>Description<th>
               </tr>
-            {% endfor %}
-          </table>
-        </div>
-      {% else %}
-        <p class="center">There are no funding resources available at this time.</p>
+              {% for resource in resources %}
+                <tr>
+                  <td data-th="Program Name"><a href="{{ resource.url }}">{{resource.name}}</a></td>
+                  <td data-th="Due Date">{{resource.due_date}}</td>
+                  <td data-th="Source">{{ resource.source_name }}</td>
+                  <td data-th="Description">{{ resource.description }}</td>
+                </tr>
+              {% endfor %}
+            </table>
+          </div>
+        {% else %}
+          <p class="center">There are no funding resources available at this time.</p>
+        {% endif %}
       {% endif %}
-    {% endif %}
+    </div>
+    <div class="col2 shadow">
+      <h3><a href="{% url 'web:technical_resources' %}">Technical Resources</a></h3>
+      <div style="margin: 0 auto; max-width: 15rem"> 
+        <ul style="line-height: 1.5rem">
+          <li><a href="{% url 'web:technical_resources' %}?category=regional_plans">Regional Plans</a></li>
+          <li><a href="{% url 'web:technical_resources' %}?category=municipal_tools">Municipal Tools</a></li>
+          <li><a href="{% url 'web:technical_resources' %}?category=research_and_reports">Research and Reports</a></li>
+        </ul>
+      </div>
+      <h3><a href="{% url 'web:funding_resources' %}">Funding Resources</a></h3>
+      <br>
+    </div>
   </main>
 {% endblock %}
