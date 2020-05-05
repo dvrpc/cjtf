@@ -135,15 +135,11 @@ main.home a {
 main.home .col1 {
   background-color: var(--orange);
 }
-main.home .col1 p {
-  font-weight: bold;
-}
 main.home .col1 ul {
   margin-bottom: 2rem;
 }
 main.home .col2 {
   background-color: var(--light_green);
-  padding: 0 20px 10px 80px;
 }
 main.default {
   background-color: var(--medium_blue);
@@ -169,7 +165,7 @@ main .col1 {
 }
 main .col2 {
   grid-area: col2;
-  padding: 0 20px 10px 20px;
+  padding: 0 20px 10px 80px;
 }
 footer {
   display: none;
