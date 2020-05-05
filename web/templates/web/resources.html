@@ -26,28 +26,26 @@
           <a href="{% url 'web:technical_resources' %}?category=research_and_reports">Research and Reports</a>
         </p>
         {% if resources %}
-          <div style="margin:15px">
-            <table class="responsive_table">
+          <table class="responsive_table" align="left">
+            <tr>
+              <th>Product Name</th>
+              <th>Publication Date</th>
+              <th>Source</th>
+              <th>Summary</th>
+              <th>Category</th>
+            </tr>
+            {% for resource in resources %}
               <tr>
-                <th>Product Name</th>
-                <th>Publication Date</th>
-                <th>Source</th>
-                <th>Summary</th>
-                <th>Category</th>
+                <td data-th="Product Name"><a href="{{ resource.url }}">{{resource.name}}</a></td>
+                <td data-th="Publication Date">{{resource.publication_date}}</td>
+                <td data-th="Source">{{ resource.source }}</td>
+                <td data-th="Summary">{{ resource.summary }}</td>
+                <td data-th="Category">{{ resource.get_category_display }}</td>
               </tr>
-              {% for resource in resources %}
-                <tr>
-                  <td data-th="Product Name"><a href="{{ resource.url }}">{{resource.name}}</a></td>
-                  <td data-th="Publication Date">{{resource.publication_date}}</td>
-                  <td data-th="Source">{{ resource.source }}</td>
-                  <td data-th="Summary">{{ resource.summary }}</td>
-                  <td data-th="Category">{{ resource.get_category_display }}</td>
-                </tr>
-              {% endfor %}
-            </table>
-          </div>
+            {% endfor %}
+          </table>
         {% else %}
-          <p class="center">There are no 
+          <p>There are no 
             {% if not category %}
               technical resources 
             {% elif category == 'regional_plans' %}
@@ -62,26 +60,24 @@
       {% elif request.resolver_match.url_name == 'funding_resources' %}
         <h2>Funding Resources</h2>
         {% if resources %}
-          <div style="margin:15px">
-            <table class="responsive_table">
+          <table class="responsive_table" align="left" style="margin-top:15px">
+            <tr>
+              <th>Program Name</th>
+              <th>Due Date</th>
+              <th>Source</th>
+              <th>Description<th>
+            </tr>
+            {% for resource in resources %}
               <tr>
-                <th>Program Name</th>
-                <th>Due Date</th>
-                <th>Source</th>
-                <th>Description<th>
+                <td data-th="Program Name"><a href="{{ resource.url }}">{{resource.name}}</a></td>
+                <td data-th="Due Date">{{resource.due_date}}</td>
+                <td data-th="Source">{{ resource.source_name }}</td>
+                <td data-th="Description">{{ resource.description }}</td>
               </tr>
-              {% for resource in resources %}
-                <tr>
-                  <td data-th="Program Name"><a href="{{ resource.url }}">{{resource.name}}</a></td>
-                  <td data-th="Due Date">{{resource.due_date}}</td>
-                  <td data-th="Source">{{ resource.source_name }}</td>
-                  <td data-th="Description">{{ resource.description }}</td>
-                </tr>
-              {% endfor %}
-            </table>
-          </div>
+            {% endfor %}
+          </table>
         {% else %}
-          <p class="center">There are no funding resources available at this time.</p>
+          <p>There are no funding resources available at this time.</p>
         {% endif %}
       {% endif %}
     </div>
