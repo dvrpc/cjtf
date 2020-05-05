@@ -1,76 +1,78 @@
 {% extends "web/base.html" %}
 
 {% block main %}
-  <main class="full shadow">
-    <div class="content"> 
-    {% if not search_attempt %} 
-      <h2>Search</h2>
-      {% if not search_term %}
-        <div class="center">
-          {% include 'web/search_form.html' %}      
-        </div>
-        <br>
-      {% endif %} 
-
-    {% else %}
-      <h2>Search Results</h2>
-      {% if results %}
-        {% if results.pages %}
-          <p class="bold center">Pages</p>
-          <ul>
-          {% for page in results.pages %}
-            <li><a href="{% url 'web:'|add:page.internal_name %}">{{page}}</a></li>
-          {% endfor %}
-          </ul>
+  <main class="default">
+    <div class="col1"> 
+      {% if not search_attempt %} 
+        <h2>Search</h2>
+        {% if not search_term %}
+          <div>
+            {% include 'web/search_form.html' %}      
+          </div>
           <br>
-        {% endif %}
-        {% if results.events %}
-          <p class="bold center">Events</p> 
-          <ul> 
-          {% for event in results.events %}
-            <li>
-            {% if event.url %}
-              <a href="{{ event.url }}">{{ event.title }}</a>:
-            {% else %}
-              {{ event.title }}:
-            {% endif %}
-              {{event.date}}
-            </li>
-          {% endfor %}
-          </ul>
-          <br>
-        {% endif %}
-        {% if results.tech_resources %}
-          <p class="bold center">Technical Resources</p>
-          <ul> 
-          {% for resource in results.tech_resources %}
-              <li><a href="{{ resource.url }}">{{ resource.name }}</a>:
-              published {{ resource.publication_date }}, Source: {{ resource.source }}</li>
-          {% endfor %}
-          </ul>
-          <br>
-        {% endif %}
-        {% if results.funding_resources %}
-          <p class="bold center">Funding Resources</p>
-          <ul>
-          {% for resource in results.funding_resources %}
-            <li>
-              <a href="{{ resource.url }}">{{ resource.name }}</a>:
-              due {{ resource.due_date }}, Source: {{ resource.source_name }}
-            </li>
-          {% endfor %}
-          </ul>
-          <br>
-        {% endif %}
+        {% endif %} 
 
       {% else %}
-        <p class="center">No results found for your search.</p>
-        <div class="center">
-          {% include 'web/search_form.html' %}
-        </div>
-        <br>
+        <h2>Search Results</h2>
+        {% if results %}
+          {% if results.pages %}
+            <p class="bold">Pages</p>
+            <ul>
+            {% for page in results.pages %}
+              <li><a href="{% url 'web:'|add:page.internal_name %}">{{page}}</a></li>
+            {% endfor %}
+            </ul>
+            <br>
+          {% endif %}
+          {% if results.events %}
+            <p class="bold">Events</p> 
+            <ul> 
+            {% for event in results.events %}
+              <li>
+              {% if event.url %}
+                <a href="{{ event.url }}">{{ event.title }}</a>:
+              {% else %}
+                {{ event.title }}:
+              {% endif %}
+                {{event.date}}
+              </li>
+            {% endfor %}
+            </ul>
+            <br>
+          {% endif %}
+          {% if results.tech_resources %}
+            <p class="bold">Technical Resources</p>
+            <ul> 
+            {% for resource in results.tech_resources %}
+                <li><a href="{{ resource.url }}">{{ resource.name }}</a>:
+                published {{ resource.publication_date }}, Source: {{ resource.source }}</li>
+            {% endfor %}
+            </ul>
+            <br>
+          {% endif %}
+          {% if results.funding_resources %}
+            <p class="bold">Funding Resources</p>
+            <ul>
+            {% for resource in results.funding_resources %}
+              <li>
+                <a href="{{ resource.url }}">{{ resource.name }}</a>:
+                due {{ resource.due_date }}, Source: {{ resource.source_name }}
+              </li>
+            {% endfor %}
+            </ul>
+            <br>
+          {% endif %}
+
+        {% else %}
+          <p>No results found for your search.</p>
+          <div>
+            {% include 'web/search_form.html' %}
+          </div>
+          <br>
+        {% endif %}
       {% endif %}
-    {% endif %}
+    </div>
+    <div class="col2">
     </div>
   </main>
 {% endblock %}

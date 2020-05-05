@@ -18,7 +18,7 @@
         <h3>Upcoming Forum Meetings</h3>
         {% if upcoming_meetings %}
           {% for meeting in upcoming_meetings %}
-            <p class="center">
+            <p>
               {% if meeting.url %}
                 <a href="{{ meeting.url }}">{{ meeting.date }}</a>
               {% else %}
@@ -92,70 +92,8 @@
         <div id="map">
           This text is hard-coded into the template in a div named "map". Marc's webmap will go here.
         </div>
-
-      {# Search #}
-      {% elif request.resolver_match.url_name == 'search' %}
-        {% if not search_term %}
-          {% include 'web/search_form.html' %}      
-        {% endif %} 
-
-        {% if search_attempt %}
-          <h3>Results</h3>
-          {% if results %}
-            {% if results.pages %}
-              <p class="bold center">Pages</p>
-              <ul>
-              {% for page in results.pages %}
-                <li><a href="{% url 'web:'|add:page.internal_name %}">{{page}}</a></li>
-              {% endfor %}
-              </ul>
-              <br>
-            {% endif %}
-            {% if results.events %}
-              <p class="bold center">Events</p> 
-              <ul> 
-              {% for event in results.events %}
-                <li>
-                {% if event.url %}
-                  <a href="{{ event.url }}">{{ event.title }}</a>
-                {% else %}
-                  {{ event.title }}
-                {% endif %}
-                - {{event.date}}
-                </li>
-              {% endfor %}
-              </ul>
-              <br>
-            {% endif %}
-            {% if results.tech_resources %}
-              <p class="bold center">Technical Resources</p>
-              <ul> 
-              {% for resource in results.tech_resources %}
-                  <li><a href="{{ resource.url }}">{{ resource.name }}</a>
-                  - published {{ resource.publication_date }}, Source: {{ resource.source }}</li>
-              {% endfor %}
-              </ul>
-              <br>
-            {% endif %}
-            {% if results.funding_resources %}
-              <p class="bold center">Funding Resources</p>
-              <ul>
-              {% for resource in results.funding_resources %}
-                <li>
-                  <a href="{{ resource.url }}">{{ resource.name }}</a>
-                  - due {{ resource.due_date }}, Source: {{ resource.source_name }}
-                </li>
-              {% endfor %}
-              </ul>
-              <br>
-            {% endif %}
-
-          {% else %}
-            <p>No results found for your search.</p>
-          {% endif %}
-        {% endif %}
       {% endif %}
-
+      
     </div>
     <div class="col2">
       {% if page.sidebar %}
