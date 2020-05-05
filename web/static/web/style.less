@@ -9,7 +9,7 @@
   --dark_gray: hsl(0, 0%, 30%);
   --light_gray: hsl(0, 0%, 60%);
   --table_border_color: var(--light_gray);
-  --background: #FFF8F0; 
+  --background_color: #FFF8F0; 
 }
 
 .dark_blue { background-color: var(--dark_blue); }
@@ -19,7 +19,7 @@
 body {
   margin: 0 auto;
   padding: 25px 0px 0px 0px;
-  background-color: var(--background);
+  background-color: var(--background_color);
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   height: 100vh;
@@ -196,7 +196,7 @@ main {
     grid-area: mission;
     font-size: 1.5rem;
     letter-spacing: .1rem;
-    background: linear-gradient(90deg, var(--medium_blue), 45%, var(--background));
+    background: linear-gradient(90deg, var(--medium_blue), 45%, var(--background_color));
     
     .staccato {
       word-spacing: .4rem;
@@ -411,7 +411,9 @@ table {
     .col1, .col2 {
       padding: 0 20px 10px 20px;
     } 
-  
+    .col2 {
+      border-top: 3px solid var(--background_color);
+    }
     .mission {
       margin-left: 0px;
       margin-right: 0px;
