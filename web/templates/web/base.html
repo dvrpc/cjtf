@@ -30,44 +30,43 @@
       <button class="opener">&#9776;</button>
       <ul>
         <li><button class="closer">&#215;</button></li>
-        <li>
-          {% if request.resolver_match.url_name != 'about' %}
-            <a href="{% url 'web:about' %}">About</a>
-          {% else %}
-            <span class="orange_text">About</span>
+        <li><a href="{% url 'web:about' %}"
+          {% if request.resolver_match.url_name == 'about' %}
+            class="active" 
           {% endif %}
+          >About</a>
         </li>
         <li>
-          {% if request.resolver_match.url_name != 'membership' %}
-            <a href="{% url 'web:membership' %}">Membership</a>
-          {% else %}
-            <span class="orange_text">Membership</span>
+          <a href="{% url 'web:membership' %}"
+          {% if request.resolver_match.url_name == 'membership' %}
+            class="active"
           {% endif %}
+          >Membership</a>
         </li>
         <li>
-          {% if request.resolver_match.url_name != 'events_meetings' %}
-            <a href="{% url 'web:events_meetings' %}">Events & Meetings</a>
-          {% else %}
-            <span class="orange_text">Events & Meetings</span>
+          <a href="{% url 'web:events_meetings' %}"
+          {% if request.resolver_match.url_name == 'events_meetings' %}
+            class="active"
           {% endif %}
+          >Events & Meetings</a>
         </li>
         <li>
-          {% if request.resolver_match.url_name != 'resources' %}
-            <a href="{% url 'web:resources' %}">Resources</a>
-          {% else %}
-            <span class="orange_text">Resources</span>
+          <a href="{% url 'web:resources' %}"
+          {% if 'resources' in request.resolver_match.url_name %}
+            class="active"
           {% endif %}
+          >Resources</a>
           <ul>
             <li><a href="{% url 'web:technical_resources' %}">Technical Resources</a></li>
             <li><a href="{% url 'web:funding_resources' %}">Funding Resources</a></li>
           </ul>
         </li>
         <li>
-          {% if request.resolver_match.url_name != 'contact' %}
-            <a href="{% url 'web:contact' %}">Contact</a>
-          {% else %}
-            <span class="orange_text">Contact</span>
+          <a href="{% url 'web:contact' %}"
+          {% if request.resolver_match.url_name == 'contact' %}
+            class="active"
           {% endif %}
+          >Contact</a>
       </ul>
     </nav>
   </header>

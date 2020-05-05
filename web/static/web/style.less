@@ -1,29 +1,32 @@
 :root {    
   --dark_blue: #193091;
-  --medium_blue: #16669b;
+  //--medium_blue: hsl(204, 75%, 35%);
+  --medium_blue: hsl(201, 72%, 30%);
+  --medium_blue_shadow: hsla(201, 72%, 30%, 0.3);
   --light_blue: #1b75bc;
   --orange: #f27b38;
   --light_green: #8db23f;
-  --dark_gray: #474747;
-  --table_border_color: var(--dark_blue);
+  --dark_gray: hsl(0, 0%, 30%);
+  --light_gray: hsl(0, 0%, 60%);
+  --table_border_color: var(--light_gray);
   --background: #FFF8F0; 
 }
 
 .dark_blue { background-color: var(--dark_blue); }
 .medium_blue { background-color: var(--medium_blue); }
 .light_blue { background-color: var(--light_blue); }
-.orange_text { color: var(--orange); }
 
 body {
   margin: 0 auto;
-  padding: 25px 0px 25px 0px;
+  padding: 25px 0px 0px 0px;
   background-color: var(--background);
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
+  height: 100vh;
   display: grid;
+  grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "header"
-    "breadcrumbs"
     "main"
     "footer";
 }
@@ -31,6 +34,7 @@ body {
 header {
   margin-left: 80px;
   margin-right: 80px;
+  padding-bottom: 25px; 
   grid-area: header;
   display: grid;
   grid-gap: 5px;
@@ -95,6 +99,14 @@ nav {
     &:hover {
       color: var(--orange);
     }
+  
+    &.active { 
+      color: var(--orange);
+    
+      &:hover {
+        color: var(--medium_blue);
+      }
+    }
   }
 } 
 
@@ -122,7 +134,7 @@ main {
 
   a {
     text-decoration: none;
-    color: var(--medium_blue);
+    color: var(--orange);
 
     &:hover {
       color: white;
@@ -130,14 +142,21 @@ main {
   }
 
   &.home {
+    background-color: transparent;    
     display: grid;
     grid-gap: 20px;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       "mission mission"
       "col1 col2";
+    margin-bottom: 20px;
 
+    a {
+      text-decoration: none;
+      color: var(--medium_blue);
+    }
     .col1 { 
+      background-color: var(--orange);
       p {
         font-weight: bold;
       }
@@ -145,26 +164,31 @@ main {
         margin-bottom: 2rem;
       }
     }
+    .col2 {
+      background-color: var(--light_green);
+      padding: 0 20px 10px 80px;
+    }
   }
   
   &.default {
+    background-color: var(--medium_blue);
+    box-shadow: 0px -5px 25px 25px var(--medium_blue_shadow);
     display: grid;
-    grid-gap: 20px;
     grid-template-columns: 2fr 1fr;
     grid-template-areas:
-      "col1 col2"
+      "col1 col2";
   }
 
-  &.full {
-    //padding: 5px 10px;
-    padding: 20px 20px 10px 80px;
-    background-color: var(--orange);
-  
-    .content {
-      //max-width: 550px;
-      //margin: 0 auto;
-    }
-  }
+  // &.full {
+  //   //padding: 5px 10px;
+  //   padding: 20px 20px 10px 80px;
+  //   background-color: var(--orange);
+  // 
+  //   .content {
+  //     //max-width: 550px;
+  //     //margin: 0 auto;
+  //   }
+  // }
 
   .mission {
     padding: 20px 20px 10px 80px;
@@ -173,6 +197,7 @@ main {
     font-size: 1.5rem;
     letter-spacing: .1rem;
     background: linear-gradient(90deg, var(--medium_blue), 45%, var(--background));
+    
     .staccato {
       word-spacing: .4rem;
     }
@@ -181,25 +206,16 @@ main {
   .col1 {
     grid-area: col1;
     padding: 0 20px 10px 80px;
-    background-color: var(--orange);
-    
-    p {
-      margin-bottom: 1rem;
-    }
   }
   
   .col2 {
     grid-area: col2;
-    padding: 0 20px 10px 80px;
-    background-color: var(--light_green);
+    padding: 0 20px 10px 20px;
   }
 }
 
 footer {
-  grid-area: footer;
-  text-align: center;
-  padding-top: 50px;
-  padding-bottom: 25px;
+  display: none;
 }
 
 hr {
@@ -209,8 +225,6 @@ hr {
 
 h1 {
   font-size: 2rem;
-  margin-bottom: 12px;
-  text-align: center;
 }
 
 h2 {
@@ -222,7 +236,6 @@ h2 {
 h3 {
   font-size: 1.5rem;
   margin-bottom: 12px;
-  text-align: center;
 }
 
 h4 {
@@ -237,7 +250,7 @@ table {
 
   th {
     text-align: left;
-    border-bottom: 2px solid var(--dark_blue);
+    //border-bottom: 2px solid var(--table_border_color);
     background-color: var(--light_blue);
   }
 
@@ -250,10 +263,6 @@ table {
   }
 }
 
-.shadow {
-  box-shadow: 5px 5px 8px gray;
-}
-
 .bold { font-weight: bold; }
 .italic { font-style: italic; }
 .center { text-align: center; }
@@ -264,10 +273,9 @@ table {
   color: white;
 }
 
-
 .past_meetings {
   border-collapse: collapse;
-  overflow-x: auto;
+  //overflow-x: auto;
   border: none;
 
   tr {
@@ -409,12 +417,20 @@ table {
       margin-right: 0px;
       padding: 20px;
     }
-  } 
+  }
+  
+  footer {
+    display: block;
+    grid-area: footer;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 25px;
+  }
 
   /* an alternative way to go for a responsive table, instead of using a horizontal scroll bar */
   // make the table tds stack, remove the heading
   .responsive_table {
-    margin:0px auto;
+    //margin:0px auto;
     // width:500px;
   }
   

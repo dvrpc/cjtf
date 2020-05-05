@@ -2,7 +2,7 @@
 
 {% block main %}
   <main class="default">
-    <div class="col1 shadow">
+    <div class="col1">
       {% if request.resolver_match.url_name == 'resources' %}
         <h2>{{ page.title|safe }}</h2>
         {{ page.main_content|safe }}
@@ -19,7 +19,7 @@
           Research and Reports 
         {% endif %}
         </h2>
-        <p class="center">
+        <p>
           <a href="{% url 'web:technical_resources' %}">All</a> |           
           <a href="{% url 'web:technical_resources' %}?category=regional_plans">Regional Plans</a> | 
           <a href="{% url 'web:technical_resources' %}?category=municipal_tools">Municipal Tools</a> | 
@@ -85,17 +85,14 @@
         {% endif %}
       {% endif %}
     </div>
-    <div class="col2 shadow">
+    <div class="col2">
       <h3><a href="{% url 'web:technical_resources' %}">Technical Resources</a></h3>
-      <div style="margin: 0 auto; max-width: 15rem"> 
-        <ul style="line-height: 1.5rem">
-          <li><a href="{% url 'web:technical_resources' %}?category=regional_plans">Regional Plans</a></li>
-          <li><a href="{% url 'web:technical_resources' %}?category=municipal_tools">Municipal Tools</a></li>
-          <li><a href="{% url 'web:technical_resources' %}?category=research_and_reports">Research and Reports</a></li>
-        </ul>
-      </div>
+      <ul style="line-height: 1.5rem">
+        <li><a href="{% url 'web:technical_resources' %}?category=regional_plans">Regional Plans</a></li>
+        <li><a href="{% url 'web:technical_resources' %}?category=municipal_tools">Municipal Tools</a></li>
+        <li><a href="{% url 'web:technical_resources' %}?category=research_and_reports">Research and Reports</a></li>
+      </ul>
       <h3><a href="{% url 'web:funding_resources' %}">Funding Resources</a></h3>
-      <br>
     </div>
   </main>
 {% endblock %}
