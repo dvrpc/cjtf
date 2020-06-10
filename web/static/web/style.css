@@ -211,7 +211,7 @@ table td {
   text-align: center;
 }
 .download:after {
-  content: "\2B73";
+  content: "2B73";
   padding-left: 2px;
   color: white;
 }
