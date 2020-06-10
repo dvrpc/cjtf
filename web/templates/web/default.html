@@ -53,6 +53,17 @@
             <br>
           {% endfor %}
         {% endif %}
+
+      {# Membership #}
+      {% elif request.resolver_match.url_name == 'membership' %}
+        <div id="map">
+          This text is hard-coded into the template in a div named "map". Marc's webmap will go here.
+        </div>
+      {% endif %}
+      
+    </div>
+    <div class="col2"> 
+      {% if request.resolver_match.url_name == 'events_meetings' %}
         <h3>Past Forum Meetings</h3>
         {% if past_meetings %}
           <table class="past_meetings" align="left">
@@ -69,7 +80,7 @@
                 </td>
                 <td>
                   {% if meeting.minutes %}
-                    <a href="{{ meeting.minutes.url }}" class="download">Minutes/Highlights</a>
+                    <a href="{{ meeting.minutes.url }}" class="download">Minutes</a>
                   {% else %}
                     &nbsp;
                   {% endif %}
@@ -77,7 +88,7 @@
                 <td>
                   {% if meeting.presentation_materials %}
                     <a href="{{ meeting.presentation_materials.url }}" class="download">
-                    Presentations/Materials</a>
+                    Materials</a>
                   {% else %}
                     &nbsp;
                   {% endif %}
@@ -86,19 +97,11 @@
             {% endfor %}
           </table>
         {% endif %}
-
-      {# Membership #}
-      {% elif request.resolver_match.url_name == 'membership' %}
-        <div id="map">
-          This text is hard-coded into the template in a div named "map". Marc's webmap will go here.
-        </div>
+      {% else %}
+        {% if page.sidebar %}
+          {{ page.sidebar|safe }}
+        {% endif %}    
       {% endif %}
-      
-    </div>
-    <div class="col2">
-      {% if page.sidebar %}
-        {{ page.sidebar|safe }}
-      {% endif %}    
     </div>
   </main>
 {% endblock %}
