@@ -11,6 +11,12 @@
     <div class="col1">
       <h2>Updated Materials</h2>
       <br>
+        {# comment #}
+        <p>This is normal text <span style="color:hsl(201, 72%, 30%);">This is the current link color</span></p>
+        <p>This is normal text <span class="color1">1 Testing a darker blue color</span></p>
+        <p>This is normal text <span class="color2">2 Testing a still darker blue color</span></p>
+        <p>This is normal text <span class="color3">3 Testing same color with outline</span></p>
+        {# endcomment#}
         {% if next_meeting %}
           <p>Next regular meeting of the Forum:
             {% if next_meeting.url %}

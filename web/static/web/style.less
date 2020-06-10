@@ -1,24 +1,41 @@
 :root {    
-  --dark_blue: #193091;
-  --medium_blue: hsl(201, 72%, 30%);
-  --medium_blue_shadow: hsla(201, 72%, 30%, 0.3);
-  --light_blue: #1b75bc;
-  --orange: #f27b38;
-  --light_green: #8db23f;
-  --dark_gray: hsl(0, 0%, 30%);
-  --light_gray: hsl(0, 0%, 60%);
-  --table_border_color: var(--light_gray);
-  --background_color: #FFF8F0; 
+  --dark-blue: hsl(229, 71%, 33%);
+  --medium-blue: hsl(201, 72%, 30%);
+  --medium-blue-shadow: hsla(201, 72%, 30%, 0.3);
+  --light-blue: hsl(206, 75%, 42%);
+  --orange: hsl(22, 88%, 58%);
+  --green: hsl(79, 48%, 47%);
+  --dark-gray: hsl(0, 0%, 30%);
+  --light-gray: hsl(0, 0%, 60%);
+  --table_border_color: var(--light-gray);
+  --background: hsl(32, 100%, 97%); 
 }
 
-.dark_blue { background-color: var(--dark_blue); }
-.medium_blue { background-color: var(--medium_blue); }
-.light_blue { background-color: var(--light_blue); }
+// temporary to choose different color for links on home/updated materials
+.color1 {
+  color: hsla(201, 85%, 20%);
+}
+.color2 {
+  color: hsla(201, 72%, 15%);
+}
+.color3 {
+  color: var(--medium-blue);
+    text-shadow:
+   -1px -1px 0 #FFF,
+    1px -1px 0 #FFF,
+    -1px 1px 0 #FFF,
+     1px 1px 0 #FFF;
+}
+//end temp section
+
+.dark-blue { background-color: var(--dark-blue); }
+.medium-blue { background-color: var(--medium-blue); }
+.light-blue { background-color: var(--light-blue); }
 
 body {
   margin: 0 auto;
   padding: 25px 0px 0px 0px;
-  background-color: var(--background_color);
+  background-color: var(--background);
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   height: 100vh;
@@ -92,7 +109,7 @@ nav {
 
   a {
     text-decoration: none;
-    color: var(--medium_blue);
+    color: var(--medium-blue);
     
     &:hover {
       color: var(--orange);
@@ -102,7 +119,7 @@ nav {
       color: var(--orange);
     
       &:hover {
-        color: var(--medium_blue);
+        color: var(--medium-blue);
       }
     }
   }
@@ -133,7 +150,7 @@ main {
 
     a {
       text-decoration: none;
-      color: var(--medium_blue);
+      color: var(--light-blue);
     }
     .col1 { 
       background-color: var(--orange);
@@ -144,13 +161,13 @@ main {
       }
     }
     .col2 {
-      background-color: var(--light_green);
+      background-color: var(--green);
     }
   }
   
   &.default {
-    background-color: var(--medium_blue);
-    box-shadow: 0px -5px 25px 25px var(--medium_blue_shadow);
+    background-color: var(--medium-blue);
+    box-shadow: 0px -5px 25px 25px var(--medium-blue-shadow);
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-areas:
@@ -163,7 +180,7 @@ main {
     grid-area: mission;
     font-size: 1.5rem;
     letter-spacing: .1rem;
-    background: linear-gradient(90deg, var(--medium_blue), 45%, var(--background_color));
+    background: linear-gradient(90deg, var(--medium-blue), 45%, var(--background));
     
     .staccato {
       word-spacing: .4rem;
@@ -217,7 +234,7 @@ table {
 
   th {
     text-align: left;
-    background-color: var(--light_blue);
+    background-color: var(--light-blue);
   }
 
   tr {
@@ -320,8 +337,8 @@ table {
       padding-bottom: 5px;
       padding-top: 8px;
       white-space: nowrap;
-      background-color: var(--medium_blue);
-      border: 1px solid var(--dark_gray);
+      background-color: var(--medium-blue);
+      border: 1px solid var(--dark-gray);
         
       &.show {
         width: 225px;
@@ -373,7 +390,7 @@ table {
       padding: 0 20px 10px 20px;
     } 
     .col2 {
-      border-top: 3px solid var(--background_color);
+      border-top: 3px solid var(--background);
     }
     .mission {
       margin-left: 0px;
