@@ -134,6 +134,7 @@ main.home a {
 }
 main.home .col1 {
   background-color: var(--orange);
+  font-size: 18px;
 }
 main.home .col1 ul {
   margin-bottom: 2rem;
