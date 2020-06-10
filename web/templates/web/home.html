@@ -9,7 +9,7 @@
     </div>
 
     <div class="col1">
-      <h2>Updates</h2>
+      <h2>Updated Materials</h2>
       <br>
         {% if next_meeting %}
           <p>Next regular meeting of the Forum:
@@ -21,6 +21,26 @@
           </p>
         {% endif %}
         
+        {% if funding_resources %}
+          <p>Upcoming funding deadlines
+            <ul>
+              {% for resource in funding_resources %}
+                <li>{{resource.due_date}}: <a href="{{ resource.url }}">{{ resource.name }}</a></li>
+              {% endfor %}  
+            </ul>
+          </p>
+        {% endif %}
+        
+        {% if upcoming_events %}
+          <p>Upcoming events
+            <ul>
+              {% for event in upcoming_events %}
+                <li>{{event.date}}: <a href="{{ event.url }}">{{ event.title }}</a></li>
+              {% endfor %}
+            </ul>
+          </p>
+        {% endif %}
+
         {% if meetings_updated %}
           <p>Updated meeting materials
             <ul>
@@ -52,25 +72,6 @@
           </p>
         {% endif %}
 
-        {% if funding_resources %}
-          <p>Upcoming funding deadlines
-            <ul>
-              {% for resource in funding_resources %}
-                <li>{{resource.due_date}}: <a href="{{ resource.url }}">{{ resource.name }}</a></li>
-              {% endfor %}  
-            </ul>
-          </p>
-        {% endif %}
-
-        {% if upcoming_events %}
-          <p>Upcoming events
-            <ul>
-              {% for event in upcoming_events %}
-                <li>{{event.date}}: <a href="{{ event.url }}">{{ event.title }}</a></li>
-              {% endfor %}
-            </ul>
-          </p>
-        {% endif %}
     </div>
     <div class="col2">
       <h2>News</h2>
