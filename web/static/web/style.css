@@ -39,7 +39,6 @@ header {
   grid-gap: 5px;
   grid-template-columns: 3fr 1fr 1fr;
   grid-template-areas: "cjtf_logo search logos" "cjtf_logo . ." "nav nav nav";
-  /*"breadcrumbs breadcrumbs breadcrumbs";*/
 }
 header .search {
   justify-self: center;
@@ -93,21 +92,6 @@ nav a.active {
 }
 nav a.active:hover {
   color: var(--medium_blue);
-}
-#breadcrumbs {
-  grid-area: breadcrumbs;
-  background-color: var(--medium_blue);
-  padding: 5px;
-  box-shadow: 5px 5px 8px gray;
-  color: white;
-  /*margin-bottom: 20px;*/
-}
-#breadcrumbs a {
-  text-decoration: none;
-  color: white;
-}
-#breadcrumbs a:hover {
-  color: var(--orange);
 }
 main {
   grid-area: main;
@@ -310,9 +294,6 @@ table td {
   }
   nav ul a:hover {
     color: var(--orange);
-  }
-  #breadcrumbs {
-    display: none;
   }
   main.home {
     grid-template-columns: 1fr;
