@@ -27,9 +27,12 @@ def index(request):
 
     upcoming_events = Event.objects.filter(date__gte=datetime.datetime.now()).order_by("date")[0:3]
 
-    tech_resources = TechnicalResource.objects.filter(publication_date__gte=six_weeks_ago).order_by(
-        "publication_date"
-    )[0:3]
+    # exclude tech resources without pdf and without url, because what's the use of including it?
+    tech_resources = (
+        TechnicalResource.objects.exclude(url__isnull=True)
+        .exclude(pdf__isnull=True)
+        .order_by("publication_date")[0:3]
+    )
 
     funding_resources = FundingResource.objects.filter(
         due_date__gte=datetime.date.today()
@@ -125,9 +128,11 @@ def technical_resources(request):
     category = request.GET.get("category", "")
 
     if category in ["regional_plans", "municipal_tools", "research_and_reports"]:
-        technical_resources = TechnicalResource.objects.filter(category=category)
+        technical_resources = TechnicalResource.objects.filter(category=category).order_by(
+            "publication_date"
+        )
     else:
-        technical_resources = TechnicalResource.objects.all()
+        technical_resources = TechnicalResource.objects.order_by("publication_date").all()
 
     # get and send the page so we can include the same sidebar across all resources pages
     page = get_object_or_404(Page, internal_name="resources")
@@ -158,6 +163,16 @@ def funding_resources(request):
         "page": page,
     }
     return render(request, "web/resources.html", context)
+
+
+def partner_orgs(request):
+    page = get_object_or_404(Page, internal_name="partner_orgs")
+
+    context = {
+        "title": page.title,
+        "page": page,
+    }
+    return render(request, "web/default.html", context)
 
 
 def contact(request):
