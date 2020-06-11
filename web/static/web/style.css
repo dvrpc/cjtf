@@ -1,24 +1,24 @@
 :root {
-  --dark-blue: hsl(229, 71%, 33%);
-  --medium-blue: hsl(201, 72%, 30%);
-  --medium-blue-shadow: hsla(201, 72%, 30%, 0.3);
-  --light-blue: hsl(206, 75%, 42%);
-  --orange: hsl(22, 88%, 58%);
-  --green: hsl(79, 48%, 47%);
-  --dark-gray: hsl(0, 0%, 30%);
-  --light-gray: hsl(0, 0%, 60%);
+  --dark-blue: #182e90;
+  --medium-blue: #155d84;
+  --medium-blue-shadow: rgba(21, 93, 132, 0.3);
+  --light-blue: #1b76bb;
+  --orange: #f27b36;
+  --green: #8db13e;
+  --dark-gray: #4d4d4d;
+  --light-gray: #999999;
   --table_border_color: var(--light-gray);
-  --background: hsl(32, 100%, 97%);
+  --background: #fff8f0;
 }
 .color1 {
-  color: hsl(201, 85%, 20%);
+  color: #08405e;
 }
 .color2 {
-  color: hsl(201, 72%, 15%);
+  color: #0b2f42;
 }
 .color3 {
   color: var(--medium-blue);
-  text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF;
+  text-shadow: -1px -1px 0 #ffffff, 1px -1px 0 #ffffff, -1px 1px 0 #ffffff, 1px 1px 0 #ffffff;
 }
 .dark-blue {
   background-color: var(--dark-blue);
@@ -78,7 +78,7 @@ nav ul li {
 }
 nav ul li:hover > ul {
   visibility: visible;
-  opacity: 0.9;
+  opacity: .9;
   display: block;
 }
 nav ul li ul {
@@ -86,7 +86,7 @@ nav ul li ul {
   visibility: hidden;
   min-width: 13rem;
   position: absolute;
-  padding: 1rem 0.5rem 0.5rem 0.5rem;
+  padding: 1rem .5rem .5rem .5rem;
   left: 0;
   display: none;
 }
@@ -148,11 +148,11 @@ main .mission {
   padding-left: 80px;
   grid-area: mission;
   font-size: 1.5rem;
-  letter-spacing: 0.1rem;
+  letter-spacing: .1rem;
   background: linear-gradient(90deg, var(--medium-blue), 45%, var(--background));
 }
 main .mission .staccato {
-  word-spacing: 0.4rem;
+  word-spacing: .4rem;
 }
 main .col1 {
   grid-area: col1;
@@ -211,9 +211,9 @@ table td {
   text-align: center;
 }
 .download:after {
-  content: "⭳";
+  content: "\2193";
   padding-left: 1px;
-  color: white;
+  color: #d9d9d9;
 }
 .past_meetings {
   border-collapse: collapse;
@@ -333,7 +333,7 @@ table td {
     padding-bottom: 25px;
   }
   .past_meetings {
-    font-size: 0.9rem;
+    font-size: .8rem;
   }
   /* an alternative way to go for a responsive table, instead of using a horizontal scroll bar */
   .responsive_table th {
@@ -346,10 +346,10 @@ table td {
     border: none;
   }
   .responsive_table td:first-child {
-    padding-top: 0.5em;
+    padding-top: .5em;
   }
   .responsive_table td:last-child {
-    padding-bottom: 0.5em;
+    padding-bottom: .5em;
     border-bottom: 1px solid var(--table_border_color);
   }
   .responsive_table td:before {
