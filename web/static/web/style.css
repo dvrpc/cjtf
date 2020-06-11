@@ -194,6 +194,7 @@ table {
   border: 2px solid var(--table-border-color);
   border-collapse: collapse;
   margin: 0 auto;
+  align: left;
 }
 table th {
   text-align: left;
@@ -364,26 +365,21 @@ table td {
   .past_meetings {
     font-size: 0.8rem;
   }
-  /* an alternative way to go for a responsive table, instead of using a horizontal scroll bar */
+  .responsive_table td {
+    display: block;
+  }
+  .responsive_table tr:nth-child(2) {
+    border-top: 2px solid var(--table-border-color);
+  }
+  .responsive_table td:first-child {
+    padding-top: 15px;
+  }
   .responsive_table th {
     display: none;
   }
-  .responsive_table td {
-    display: block;
-  }
-  .responsive_table td {
-    border: none;
-  }
-  .responsive_table td:first-child {
-    padding-top: 0.5em;
-  }
-  .responsive_table td:last-child {
-    padding-bottom: 0.5em;
-    border-bottom: 1px solid var(--table-border-color);
-  }
   .responsive_table td:before {
     content: attr(data-th) ": ";
-    display: block;
+    display: inline;
     font-weight: bold;
   }
 }

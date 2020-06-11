@@ -66,12 +66,12 @@
       {% elif request.resolver_match.url_name == 'funding_resources' %}
         <h2>Funding Resources</h2>
         {% if resources %}
-          <table class="responsive_table" align="left" style="margin-top:15px">
+          <table class="responsive_table">
             <tr>
               <th>Program Name</th>
               <th>Due Date</th>
               <th>Source</th>
-              <th>Description<th>
+              <th>Description</th>
             </tr>
             {% for resource in resources %}
               <tr>
