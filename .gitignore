@@ -3,5 +3,4 @@ db.sqlite3
 __pycache__
 /files/
 /static/
-/web/migrations/
 /ve/
