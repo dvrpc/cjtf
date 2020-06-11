@@ -333,6 +333,9 @@ table td {
   nav ul a:hover {
     color: var(--orange);
   }
+  nav ul a.active:hover {
+    color: white;
+  }
   main.home {
     grid-template-columns: 1fr;
     grid-template-areas: "mission" "col1" "col2";
