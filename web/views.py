@@ -165,6 +165,16 @@ def funding_resources(request):
     return render(request, "web/resources.html", context)
 
 
+def partner_orgs(request):
+    page = get_object_or_404(Page, internal_name="partner_orgs")
+
+    context = {
+        "title": page.title,
+        "page": page,
+    }
+    return render(request, "web/default.html", context)
+
+
 def contact(request):
     page = get_object_or_404(Page, internal_name="contact")
     context = {

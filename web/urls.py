@@ -12,6 +12,7 @@ urlpatterns = [
     path("resources", views.resources, name="resources"),
     path("resources/technical", views.technical_resources, name="technical_resources"),
     path("resources/funding", views.funding_resources, name="funding_resources"),
+    path("resources/partner-orgs", views.partner_orgs, name="partner_orgs"),
     path("contact", views.contact, name="contact"),
     path("search", views.search, name="search"),
 ]

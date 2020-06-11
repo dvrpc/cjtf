@@ -84,7 +84,7 @@ nav ul li:hover > ul {
 nav ul li ul {
   background-color: #FFF8F0;
   visibility: hidden;
-  min-width: 13rem;
+  min-width: 15rem;
   position: absolute;
   padding: 1rem 0.5rem 0.5rem 0.5rem;
   left: 0;
