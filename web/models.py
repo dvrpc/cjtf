@@ -94,7 +94,7 @@ class TechnicalResource(models.Model):
         ("research_and_reports", "Research and Reports"),
     ]
     name = models.CharField(max_length=200)
-    url = models.URLField(help_text="Include http://")
+    url = models.URLField(blank=True, null=True, help_text="Be sure to include http:// or https://")
     summary = models.TextField(blank=True, null=True)
     publication_date = models.DateField()
     source = models.CharField(max_length=100)

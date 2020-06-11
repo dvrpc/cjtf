@@ -7,7 +7,7 @@
   --green: hsl(79, 48%, 47%);
   --dark-gray: hsl(0, 0%, 30%);
   --light-gray: hsl(0, 0%, 60%);
-  --table_border_color: var(--light-gray);
+  --table-border-color: var(--light-gray);
   --background: hsl(32, 100%, 97%); 
 }
 
@@ -196,6 +196,11 @@ main {
     grid-area: col2;
     padding: 0 20px 10px 80px;
   }
+  
+  .full {
+    grid-area: span 1 / span 2;
+    padding: 0 20px 10px 80px;
+  }
 }
 
 footer {
@@ -228,7 +233,7 @@ h4 {
 }
 
 table {
-  border: 2px solid var(--table_border_color);
+  border: 2px solid var(--table-border-color);
   border-collapse: collapse;
   margin: 0 auto; 
 
@@ -238,7 +243,7 @@ table {
   }
 
   tr {
-    border-bottom: 1px solid var(--table_border_color);
+    border-bottom: 1px solid var(--table-border-color);
   }
 
   th, td {
@@ -433,7 +438,7 @@ table {
   
   .responsive_table td:last-child {
     padding-bottom: .5em;
-    border-bottom: 1px solid var(--table_border_color);
+    border-bottom: 1px solid var(--table-border-color);
   }
   .responsive_table td:before {
     content: attr(data-th) ": ";
