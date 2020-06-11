@@ -4,6 +4,7 @@
   --medium-blue-shadow: hsla(201, 72%, 30%, 0.3);
   --light-blue: hsl(206, 75%, 42%);
   --orange: hsl(22, 88%, 58%);
+  --dark-orange: hsl(22, 95%, 40%);
   --green: hsl(79, 48%, 47%);
   --dark-gray: hsl(0, 0%, 30%);
   --light-gray: hsl(0, 0%, 60%);
@@ -229,6 +230,29 @@ table td {
 .past_meetings tr:last-child {
   border-bottom: none;
 }
+.events {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: auto;
+}
+.event {
+  min-width: 200px;
+  background-color: hsla(0, 0%, 90%, 0.8);
+  padding: 20px;
+  color: var(--dark-gray);
+}
+.event p:last-of-type {
+  margin-bottom: 0px;
+}
+.event_title {
+  margin-top: 0px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--dark-orange);
+}
+.event_title a {
+  color: var(--dark-orange);
+}
 /* Responsive layout */
 @media screen and (max-width: 768px) {
   body {
@@ -320,9 +344,6 @@ table td {
   main .col1,
   main .col2 {
     padding: 0 20px 10px 20px;
-  }
-  main .col2 {
-    border-top: 3px solid var(--background);
   }
   main .mission {
     margin-left: 0px;

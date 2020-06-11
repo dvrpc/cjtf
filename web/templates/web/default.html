@@ -36,26 +36,31 @@
         {% if upcoming_events %}
           <br>
           <h3>Upcoming Events</h3> 
-          {% for event in upcoming_events %}
-            <p class="bold">{{ event.start_date }}
-            {% if event.end_date %}
-              - {{ event.end_date }}
-            {% endif %}
-            </p> 
-              {% if event.url %}
-                <a href="{{event.url}}">{{event.title}}</a>
-              {% else %}
-                {{ event.title }}
-              {% endif %}
-            </p>
-            {% if event.location %}
-            <p>{{ event.location|safe }}</p>
-            {% endif %}
-            {% if event.description %}
-              <p>{{ event.description|safe }}</p>
-            {% endif %}
-            <br>
-          {% endfor %}
+          <div class="events">
+            {% for event in upcoming_events %}
+              <div class="event">
+                <p class="event_title">
+                  {% if event.url %}
+                    <a href="{{event.url}}">{{event.title}}</a>
+                  {% else %}
+                    {{ event.title }}
+                  {% endif %}
+                </p>
+                <p> 
+                  {{ event.start_date }}
+                  {% if event.end_date %}
+                    - {{ event.end_date }}
+                  {% endif %}
+                </p>
+                {% if event.location %}
+                  {{ event.location|safe }}
+                {% endif %}
+                {% if event.description %}
+                  {{ event.description|safe }}
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
         {% endif %}
 
       {# Membership #}
