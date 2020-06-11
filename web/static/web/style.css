@@ -342,7 +342,8 @@ table td {
     grid-template-areas: "col1" "col2";
   }
   main .col1,
-  main .col2 {
+  main .col2,
+  main .full {
     padding: 0 20px 10px 20px;
   }
   main .mission {
