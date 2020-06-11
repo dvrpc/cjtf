@@ -121,7 +121,6 @@ main.home {
   grid-gap: 20px;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "mission mission" "col1 col2";
-  margin-bottom: 20px;
 }
 main.home a {
   text-decoration: none;
@@ -143,6 +142,7 @@ main.default {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-areas: "col1 col2";
+  padding-bottom: 20px;
 }
 main .mission {
   padding: 20px 20px 10px 80px;
