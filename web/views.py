@@ -25,7 +25,9 @@ def index(request):
     except Meeting.DoesNotExist:
         next_meeting = None
 
-    upcoming_events = Event.objects.filter(date__gte=datetime.datetime.now()).order_by("date")[0:3]
+    upcoming_events = Event.objects.filter(
+        Q(start_date__gte=datetime.datetime.now()) | Q(end_date__gte=datetime.datetime.now())
+    ).order_by("start_date")[0:3]
 
     # exclude tech resources without pdf and without url, because what's the use of including it?
     tech_resources = (
@@ -81,7 +83,9 @@ def membership(request):
 
 def events_meetings(request):
     page = get_object_or_404(Page, internal_name="events_meetings")
-    upcoming_events = Event.objects.filter(date__gte=datetime.datetime.now()).order_by("date")
+    upcoming_events = Event.objects.filter(
+        Q(start_date__gte=datetime.datetime.now()) | Q(end_date__gte=datetime.datetime.now())
+    ).order_by("start_date")
     upcoming_meetings = Meeting.objects.filter(date__gte=datetime.datetime.now()).order_by("date")
     past_meetings = Meeting.objects.filter(date__lt=datetime.date.today()).order_by("-date")
 

@@ -42,10 +42,15 @@
         {% endif %}
         
         {% if upcoming_events %}
-          <p>Upcoming events
+          <p>Events
             <ul>
               {% for event in upcoming_events %}
-                <li>{{event.date}}: <a href="{{ event.url }}">{{ event.title }}</a></li>
+                {# only resonse to be so not DRY below is to keep colon next to date #}
+                {% if event.end_date %}
+                  <li>{{event.start_date}} - {{ event.end_date }}: <a href="{{ event.url }}">{{ event.title }}</a></li>
+                {% else %}
+                  <li>{{event.start_date}}: <a href="{{ event.url }}">{{ event.title }}</a></li>
+                {% endif %}
               {% endfor %}
             </ul>
           </p>

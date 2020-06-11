@@ -55,12 +55,13 @@ class Meeting(models.Model):
 
 
 class Event(models.Model):
-    date = models.DateTimeField(
+    start_date = models.DateTimeField(
         help_text=(
             "Date in format m/d/yyyy, m/d/yy, yy-m-d, or yyyy-m-d  and "
             "time in 24 hr format, i.e. 09:00 for 9am or 13:00 for 1pm"
         )
     )
+    end_date = models.DateTimeField(blank=True, null=True)
     title = models.CharField(max_length=100)
     location = RichTextField(null=True, blank=True)
     description = RichTextField(null=True, blank=True)
