@@ -365,21 +365,21 @@ table td {
   .past_meetings {
     font-size: 0.8rem;
   }
-  .responsive_table td {
-    display: block;
-  }
-  .responsive_table tr:nth-child(2) {
-    border-top: 2px solid var(--table-border-color);
-  }
-  .responsive_table td:first-child {
-    padding-top: 15px;
-  }
   .responsive_table th {
     display: none;
+  }
+  .responsive_table td {
+    display: block;
   }
   .responsive_table td:before {
     content: attr(data-th) ": ";
     display: inline;
     font-weight: bold;
+  }
+  .responsive_table td:first-child {
+    padding-top: 15px;
+  }
+  .responsive_table tr:first-child {
+    border-top: 2px solid var(--table-border-color);
   }
 }

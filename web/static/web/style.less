@@ -445,29 +445,29 @@ table {
   }
   
   .responsive_table {
-    // make the table tds stack in column rather than row
-    td {
-      display: block;
-    }
-    
-    // add border at the top (needed for Chrome, which isn't putting overall top border on table)
-    tr:nth-child(2) {
-      border-top: 2px solid var(--table-border-color);
-    }
-
-    // add some space above each record
-    td:first-child {
-      padding-top: 15px;
-    }
-    
-    // hide th; put data-th in each td
+    // hide th because we're putting labels in each record
     th {
       display: none;
     }
-    td:before {
-      content: attr(data-th) ": ";
-      display:inline;
-      font-weight:bold;
+    
+    td {
+      display: block; // make the table tds stack in column rather than row
+      
+      // put data-th in each td
+      &:before {
+        content: attr(data-th) ": ";
+        display:inline;
+        font-weight:bold;
+      }
+
+      &:first-child {
+        padding-top: 15px; // add some space above each record
+      }
+    }
+    
+    // add border at the top (needed for Chrome, which isn't putting overall top border on table)
+    tr:first-child {
+      border-top: 2px solid var(--table-border-color);
     }
   }
 }
