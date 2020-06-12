@@ -231,10 +231,20 @@ table td {
 .past_meetings tr:last-child {
   border-bottom: none;
 }
-.events {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: auto;
+.resources td[data-th="Product Name"] {
+  min-width: 175px;
+}
+.resources td[data-th="Publication Date"] {
+  min-width: 100px;
+}
+.resources td[data-th="Program Name"] {
+  min-width: 200px;
+}
+.resources td[data-th="Due Date"] {
+  min-width: 100px;
+}
+.resources td[data-th="Source"] {
+  min-width: 125px;
 }
 .event {
   min-width: 200px;

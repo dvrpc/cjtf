@@ -9,7 +9,7 @@ class TechnicalResourceTable(tables.Table):
     class Meta:
         model = TechnicalResource
         fields = ("name", "publication_date", "source", "summary", "category")
-        attrs = {"class": "responsive_table"}
+        attrs = {"class": "responsive_table resources"}
 
     # data-th attribute for responsive mode
     name = tables.Column(attrs={"td": {"data-th": "Publication Name"}})
@@ -27,7 +27,7 @@ class FundingResourceTable(tables.Table):
     class Meta:
         model = FundingResource
         fields = ("name", "due_date", "source_name", "description")
-        attrs = {"class": "responsive_table"}
+        attrs = {"class": "responsive_table resources"}
 
     # data-th attribute for responsive mode
     name = tables.Column(attrs={"td": {"data-th": "Program Name"}})

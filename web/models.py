@@ -110,7 +110,7 @@ class FundingResource(models.Model):
     name = models.CharField(max_length=200, verbose_name="Program Name")
     url = models.URLField(help_text="Include http://")
     due_date = models.DateField(blank=True, null=True, verbose_name="Due Date")
-    source_name = models.CharField(max_length=200)
+    source_name = models.CharField(max_length=200, verbose_name="Source")
     description = models.TextField(blank=True, null=True)
     pdf = models.FileField(blank=True)
 

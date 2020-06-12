@@ -253,6 +253,7 @@ table {
   }
 }
 
+
 .bold { font-weight: bold; }
 .italic { font-style: italic; }
 .center { text-align: center; }
@@ -276,10 +277,26 @@ table {
   }
 }
 
-.events {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: auto;
+// set col min-widths for the funding and technical resources tables
+.resources {
+  // technical resources 
+  td[data-th="Product Name"] {
+    min-width: 175px;
+  }
+  td[data-th="Publication Date"] {
+    min-width: 100px;
+  }
+  
+  // funding resources
+  td[data-th="Program Name"] {
+    min-width: 200px;
+  }
+  td[data-th="Due Date"] {
+    min-width: 100px;
+  }
+  td[data-th="Source"] {
+    min-width: 125px;
+  }
 }
 
 .event {
