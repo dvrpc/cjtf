@@ -1,12 +1,13 @@
 import datetime
-from itertools import chain
 
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Q
-from django.shortcuts import get_list_or_404, get_object_or_404, render
-from django.views import generic
+from django.shortcuts import get_object_or_404, render
+
+import django_tables2 as tables
 
 from .models import Meeting, Event, Page, TechnicalResource, FundingResource
+from .tables import TechnicalResourceTable, FundingResourceTable
 
 
 def index(request):
@@ -132,18 +133,19 @@ def technical_resources(request):
     category = request.GET.get("category", "")
 
     if category in ["regional_plans", "municipal_tools", "research_and_reports"]:
-        technical_resources = TechnicalResource.objects.filter(category=category).order_by(
-            "publication_date"
+        technical_resources = TechnicalResourceTable(
+            TechnicalResource.objects.filter(category=category)
         )
     else:
-        technical_resources = TechnicalResource.objects.order_by("publication_date").all()
+        # technical_resources = TechnicalResource.objects.order_by("-publication_date").all()
+        technical_resources = TechnicalResourceTable(TechnicalResource.objects.all())
 
-    # get and send the page so we can include the same sidebar across all resources pages
-    page = get_object_or_404(Page, internal_name="resources")
+    # set default sort for the table and configure it so sorting is enabled
+    technical_resources.order_by = "-publication_date"
+    tables.RequestConfig(request).configure(technical_resources)
 
     context = {
         "title": "Technical Resources",
-        "page": page,
         "resources": technical_resources,
         "category": category,
     }
@@ -154,17 +156,17 @@ def funding_resources(request):
 
     # get all funding resources, excluding those in the past (using .exclude rather than .filter
     # (gte rather than lte) ensures that those without a due date are included)
-    funding_resources = FundingResource.objects.exclude(
-        due_date__lte=datetime.datetime.today()
-    ).order_by("due_date")
+    funding_resources = FundingResourceTable(
+        FundingResource.objects.exclude(due_date__lte=datetime.datetime.today())
+    )
 
-    # get and send the page so we can include the same sidebar across all resources pages
-    page = get_object_or_404(Page, internal_name="resources")
+    # set default sort for the table and configure it so sorting is enabled
+    funding_resources.order_by = "due_date"
+    tables.RequestConfig(request).configure(funding_resources)
 
     context = {
         "title": "Funding Resources",
         "resources": funding_resources,
-        "page": page,
     }
     return render(request, "web/resources.html", context)
 

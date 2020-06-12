@@ -94,10 +94,10 @@ class TechnicalResource(models.Model):
         ("municipal_tools", "Municipal Tools"),
         ("research_and_reports", "Research and Reports"),
     ]
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, verbose_name="Product Name")
     url = models.URLField(blank=True, null=True, help_text="Be sure to include http:// or https://")
     summary = models.TextField(blank=True, null=True)
-    publication_date = models.DateField()
+    publication_date = models.DateField(verbose_name="Publication Date")
     source = models.CharField(max_length=100)
     category = models.CharField(max_length=30, choices=category_choices,)
     pdf = models.FileField(blank=True)
@@ -107,9 +107,9 @@ class TechnicalResource(models.Model):
 
 
 class FundingResource(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, verbose_name="Program Name")
     url = models.URLField(help_text="Include http://")
-    due_date = models.DateField(blank=True, null=True)
+    due_date = models.DateField(blank=True, null=True, verbose_name="Due Date")
     source_name = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     pdf = models.FileField(blank=True)

@@ -1,5 +1,5 @@
 {% extends "web/base.html" %}
-
+{% load render_table from django_tables2 %}
 {% block main %}
   <main class="default">
     <div class="full">
@@ -26,30 +26,7 @@
           <a href="{% url 'web:technical_resources' %}?category=research_and_reports">Research and Reports</a>
         </p>
         {% if resources %}
-          <table class="responsive_table" align="left">
-            <tr>
-              <th>Product Name</th>
-              <th>Publication Date</th>
-              <th>Source</th>
-              <th>Summary</th>
-              <th>Category</th>
-            </tr>
-            {% for resource in resources %}
-              <tr>
-                <td data-th="Product Name">
-                {% if resource.url %}
-                  <a href="{{ resource.url }}">{{ resource.name }}</a>
-                {% else %}
-                  {{ resource.name }}
-                {% endif %}
-                </td>
-                <td data-th="Publication Date">{{ resource.publication_date }}</td>
-                <td data-th="Source">{{ resource.source }}</td>
-                <td data-th="Summary">{{ resource.summary }}</td>
-                <td data-th="Category">{{ resource.get_category_display }}</td>
-              </tr>
-            {% endfor %}
-          </table>
+          {% render_table resources %}
         {% else %}
           <p>There are no 
             {% if not category %}
@@ -66,28 +43,7 @@
       {% elif request.resolver_match.url_name == 'funding_resources' %}
         <h2>Funding Resources</h2>
         {% if resources %}
-          <table class="responsive_table">
-            <tr>
-              <th>Program Name</th>
-              <th>Due Date</th>
-              <th>Source</th>
-              <th>Description</th>
-            </tr>
-            {% for resource in resources %}
-              <tr>
-                <td data-th="Program Name"><a href="{{ resource.url }}">{{resource.name}}</a></td>
-                <td data-th="Due Date">
-                {% if resource.due_date %}  
-                  {{resource.due_date}}
-                {% else %}
-                  &nbsp;
-                {% endif %}
-                </td>
-                <td data-th="Source">{{ resource.source_name }}</td>
-                <td data-th="Description">{{ resource.description }}</td>
-              </tr>
-            {% endfor %}
-          </table>
+          {% render_table resources %} 
         {% else %}
           <p>There are no funding resources available at this time.</p>
         {% endif %}
