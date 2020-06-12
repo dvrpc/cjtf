@@ -256,13 +256,14 @@ def search(request):
         )
         funding_resources = (
             FundingResource.objects.annotate(search=vector, rank=SearchRank(vector, query))
-            .filter(search=query, due_date__gte=datetime.datetime.today())
+            .filter(search=query)
+            .exclude(due_date__lte=datetime.datetime.today())
             .order_by("rank")
         )
         if funding_resources.exists():
             results["funding_resources"] = funding_resources
 
         context.update(
-            [("search_attempt", True), ("search_term", search_term), ("results", results),]
+            [("search_attempt", True), ("search_term", search_term), ("results", results)]
         )
         return render(request, "web/search.html", context)
