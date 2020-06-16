@@ -34,7 +34,7 @@ def index(request):
     tech_resources = (
         TechnicalResource.objects.exclude(url__isnull=True)
         .exclude(pdf__isnull=True)
-        .order_by("publication_date")[0:3]
+        .order_by("-publication_date")[0:3]
     )
 
     funding_resources = FundingResource.objects.filter(

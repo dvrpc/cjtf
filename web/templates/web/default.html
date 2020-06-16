@@ -14,7 +14,7 @@
 
       {# Events & Meetings #}
       {% if request.resolver_match.url_name == 'events_meetings' %}
-        <br> 
+        <br>
         <h3>Upcoming Forum Meetings</h3>
         {% if upcoming_meetings %}
           {% for meeting in upcoming_meetings %}
@@ -27,40 +27,38 @@
             </p>
           {% endfor %}
         {% else %}
-          <p>There are no meetings scheduled at this time. Please 
-            <a href="/contact">contact the Forum</a> for initial thinking about the next regular 
+          <p>There are no meetings scheduled at this time. Please
+            <a href="/contact">contact the Forum</a> for initial thinking about the next regular
             meeting date, which will be posted here once it is set.
           </p>
         {% endif %}
 
         {% if upcoming_events %}
           <br>
-          <h3>Upcoming Events</h3> 
-          <div class="events">
-            {% for event in upcoming_events %}
-              <div class="event">
-                <p class="event_title">
-                  {% if event.url %}
-                    <a href="{{event.url}}">{{event.title}}</a>
-                  {% else %}
-                    {{ event.title }}
-                  {% endif %}
-                </p>
-                <p> 
-                  {{ event.start_date }}
-                  {% if event.end_date %}
-                    - {{ event.end_date }}
-                  {% endif %}
-                </p>
-                {% if event.location %}
-                  {{ event.location|safe }}
+          <h3>Upcoming Events</h3>
+          {% for event in upcoming_events %}
+            <div class="box">
+              <h4>
+                {% if event.url %}
+                  <a href="{{event.url}}">{{event.title}}</a>
+                {% else %}
+                  {{ event.title }}
                 {% endif %}
-                {% if event.description %}
-                  {{ event.description|safe }}
+              </h4>
+              <p>
+                {{ event.start_date }}
+                {% if event.end_date %}
+                  - {{ event.end_date }}
                 {% endif %}
-              </div>
-            {% endfor %}
-          </div>
+              </p>
+              {% if event.location %}
+                {{ event.location|safe }}
+              {% endif %}
+              {% if event.description %}
+                {{ event.description|safe }}
+              {% endif %}
+            </div>
+          {% endfor %}
         {% endif %}
 
       {# Membership #}
@@ -69,9 +67,9 @@
           This text is hard-coded into the template in a div named "map". Marc's webmap will go here.
         </div>
       {% endif %}
-      
+
     </div>
-    <div class="col2"> 
+    <div class="col2">
       {% if request.resolver_match.url_name == 'events_meetings' %}
         <h3>Past Forum Meetings</h3>
         {% if past_meetings %}
@@ -109,7 +107,7 @@
       {% else %}
         {% if page.sidebar %}
           {{ page.sidebar|safe }}
-        {% endif %}    
+        {% endif %}
       {% endif %}
     </div>
   </main>

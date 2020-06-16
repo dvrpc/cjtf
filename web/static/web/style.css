@@ -188,6 +188,7 @@ h3 {
 }
 h4 {
   font-size: 1.25rem;
+  margin-top: 0px;
   margin-bottom: 10px;
 }
 table {
@@ -246,23 +247,15 @@ table td {
 .resources td[data-th="Source"] {
   min-width: 125px;
 }
-.event {
+.box {
   min-width: 200px;
   background-color: hsla(0, 0%, 90%, 0.8);
   padding: 20px;
+  margin-bottom: 20px;
   color: var(--dark-gray);
 }
-.event p:last-of-type {
+.box p:last-of-type {
   margin-bottom: 0px;
-}
-.event_title {
-  margin-top: 0px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: var(--dark-orange);
-}
-.event_title a {
-  color: var(--dark-orange);
 }
 /* Responsive layout */
 @media screen and (max-width: 768px) {
