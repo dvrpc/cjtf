@@ -22,6 +22,9 @@ class CommentForm(forms.Form):
 
 
 class EventForm(forms.ModelForm):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField(max_length=100)
+
     class Meta:
         model = Event
         fields = [
@@ -35,12 +38,18 @@ class EventForm(forms.ModelForm):
 
 
 class TechnicalResourceForm(forms.ModelForm):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField(max_length=100)
+
     class Meta:
         model = TechnicalResource
         fields = ["name", "url", "summary", "publication_date", "source", "category"]
 
 
 class FundingResourceForm(forms.ModelForm):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField(max_length=100)
+
     class Meta:
         model = FundingResource
         fields = ["name"]

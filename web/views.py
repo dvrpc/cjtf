@@ -2,7 +2,7 @@ import datetime
 
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Q
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 
 import django_tables2 as tables
@@ -213,6 +213,7 @@ def contact(request):
                     form = TechnicalResourceForm()
                     submit_name = "submit_technical"
                     form_heading = "Submit a Technical Resource"
+
                 page = get_object_or_404(Page, internal_name="contact")
                 context = {
                     "title": page.title,
@@ -235,6 +236,7 @@ def contact(request):
                 if form.is_valid():
                     f = form.cleaned_data
                     submitted = "an event or meeting."
+
             if "submit_funding" in request.POST:
                 form = FundingResourceForm(request.POST)
                 if form.is_valid():
@@ -245,7 +247,9 @@ def contact(request):
                 if form.is_valid():
                     f = form.cleaned_data
                     submitted = "a technical resource."
+
             thank_you_message = "Thank you for submitting " + submitted
+
             # after any of these, send user back to contacts page with a thank you message
             form = TypeContactForm(label_suffix="")
             page = get_object_or_404(Page, internal_name="contact")
