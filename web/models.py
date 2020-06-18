@@ -12,11 +12,7 @@ class Meeting(models.Model):
             "time in 24 hr format, i.e. 09:00 for 9am or 13:00 for 1pm"
         )
     )
-    url = models.URLField(
-        blank=True,
-        null=True,
-        help_text="To the Ticketleap page. Include the full url, i.e. start with http://",
-    )
+    url = models.URLField(blank=True, null=True, help_text="To the Ticketleap page.")
     agenda = models.FileField(blank=True, null=True)
     minutes = models.FileField(blank=True, null=True)
     minutes_added = models.DateField(blank=True, null=True)
@@ -95,7 +91,7 @@ class TechnicalResource(models.Model):
         ("research_and_reports", "Research and Reports"),
     ]
     name = models.CharField(max_length=200, verbose_name="Product Name")
-    url = models.URLField(blank=True, null=True, help_text="Be sure to include http:// or https://")
+    url = models.URLField(blank=True, null=True)
     summary = models.TextField(blank=True, null=True)
     publication_date = models.DateField(verbose_name="Publication Date")
     source = models.CharField(max_length=100)
@@ -108,7 +104,7 @@ class TechnicalResource(models.Model):
 
 class FundingResource(models.Model):
     name = models.CharField(max_length=200, verbose_name="Program Name")
-    url = models.URLField(help_text="Include http://")
+    url = models.URLField()
     due_date = models.DateField(blank=True, null=True, verbose_name="Due Date")
     source_name = models.CharField(max_length=200, verbose_name="Source")
     description = models.TextField(blank=True, null=True)
