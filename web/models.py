@@ -32,20 +32,18 @@ class Meeting(models.Model):
     def simplified_date(self):
         return str(self.date.strftime("%Y - %B"))
 
+    def has_agenda(self):
+        return bool(self.agenda)
+
     def has_minutes(self):
-        if self.minutes:
-            return True
-        else:
-            return False
+        return bool(self.minutes)
 
     def has_presentation_materials(self):
-        if self.presentation_materials:
-            return True
-        else:
-            return False
+        return bool(self.presentation_materials)
 
     simplified_date.admin_order_field = "date"
     simplified_date.short_description = "date"  # so col heading is not "SIMPLIFIED DATE"
+    has_agenda.boolean = True
     has_minutes.boolean = True
     has_presentation_materials.boolean = True
 

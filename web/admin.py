@@ -13,7 +13,7 @@ class PageAdmin(admin.ModelAdmin):
 
 
 class MeetingAdmin(admin.ModelAdmin):
-    list_display = ("simplified_date", "has_minutes", "has_presentation_materials")
+    list_display = ("simplified_date", "has_agenda", "has_minutes", "has_presentation_materials")
     exclude = ("minutes_added", "pre_mat_added")
 
 
