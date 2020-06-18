@@ -2,11 +2,19 @@ import datetime
 
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Q
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 
 import django_tables2 as tables
 
 from .models import Meeting, Event, Page, TechnicalResource, FundingResource
+from .forms import (
+    TypeContactForm,
+    CommentForm,
+    EventForm,
+    FundingResourceForm,
+    TechnicalResourceForm,
+)
 from .tables import TechnicalResourceTable, FundingResourceTable
 
 
@@ -182,12 +190,82 @@ def partner_orgs(request):
 
 
 def contact(request):
+    if request.method == "POST":
+        # determine which form was submitted - from name of submit button - and process
+        if "submit_type" in request.POST:
+            form = TypeContactForm(request.POST)
+            if form.is_valid():
+
+                f = form.cleaned_data
+                if f["type_of_contact"] == "comment_or_question":
+                    form = CommentForm()
+                    submit_name = "submit_comment"
+                    form_heading = "Submit a Comment or Question"
+                elif f["type_of_contact"] == "event":
+                    form = EventForm()
+                    submit_name = "submit_event"
+                    form_heading = "Submit an Event or Meeting"
+                elif f["type_of_contact"] == "funding_resource":
+                    form = FundingResourceForm()
+                    submit_name = "submit_funding"
+                    form_heading = "Submit a Funding Resource"
+                elif f["type_of_contact"] == "technical_resource":
+                    form = TechnicalResourceForm()
+                    submit_name = "submit_technical"
+                    form_heading = "Submit a Technical Resource"
+                page = get_object_or_404(Page, internal_name="contact")
+                context = {
+                    "title": page.title,
+                    "page": page,
+                    "form": form,
+                    "second_form": True,
+                    "submit_name": submit_name,
+                    "form_heading": form_heading,
+                }
+                return render(request, "web/contact.html", context)
+        else:
+            submitted = ""
+            if "submit_comment" in request.POST:
+                form = CommentForm(request.POST)
+                if form.is_valid():
+                    f = form.cleaned_data
+                    submitted = "a comment or question."
+            if "submit_event" in request.POST:
+                form = EventForm(request.POST)
+                if form.is_valid():
+                    f = form.cleaned_data
+                    submitted = "an event or meeting."
+            if "submit_funding" in request.POST:
+                form = FundingResourceForm(request.POST)
+                if form.is_valid():
+                    f = form.cleaned_data
+                    submitted = "a funding resource."
+            if "submit_technical" in request.POST:
+                form = TechnicalResourceForm(request.POST)
+                if form.is_valid():
+                    f = form.cleaned_data
+                    submitted = "a technical resource."
+            thank_you_message = "Thank you for submitting " + submitted
+            # after any of these, send user back to contacts page with a thank you message
+            form = TypeContactForm(label_suffix="")
+            page = get_object_or_404(Page, internal_name="contact")
+            context = {
+                "title": page.title,
+                "page": page,
+                "first_form": True,
+                "form": form,
+                "thank_you_message": thank_you_message,
+            }
+            return render(request, "web/contact.html", context)
+    form = TypeContactForm(label_suffix="")
     page = get_object_or_404(Page, internal_name="contact")
     context = {
         "title": page.title,
         "page": page,
+        "first_form": True,
+        "form": form,
     }
-    return render(request, "web/default.html", context)
+    return render(request, "web/contact.html", context)
 
 
 def search(request):

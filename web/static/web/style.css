@@ -220,6 +220,15 @@ table th,
 table td {
   padding: 10px;
 }
+table.contact_form {
+  border: None;
+}
+table.contact_form tr {
+  border-bottom: None;
+}
+table.contact_form th {
+  background-color: transparent;
+}
 .bold {
   font-weight: bold;
 }
