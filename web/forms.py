@@ -16,13 +16,13 @@ class TypeContactForm(forms.Form):
 
 
 class CommentForm(forms.Form):
-    name = forms.CharField(max_length=100)
+    your_name = forms.CharField(max_length=100)
     email = forms.EmailField(max_length=100)
     comment = forms.CharField(max_length=1000, widget=forms.Textarea)
 
 
 class EventForm(forms.ModelForm):
-    name = forms.CharField(max_length=100)
+    your_name = forms.CharField(max_length=100)
     email = forms.EmailField(max_length=100)
 
     class Meta:
@@ -38,18 +38,18 @@ class EventForm(forms.ModelForm):
 
 
 class TechnicalResourceForm(forms.ModelForm):
-    name = forms.CharField(max_length=100)
+    your_name = forms.CharField(max_length=100)
     email = forms.EmailField(max_length=100)
 
     class Meta:
         model = TechnicalResource
-        fields = ["name", "url", "summary", "publication_date", "source", "category"]
+        fields = ["name", "url", "summary", "publication_date", "source"]
 
 
 class FundingResourceForm(forms.ModelForm):
-    name = forms.CharField(max_length=100)
+    your_name = forms.CharField(max_length=100)
     email = forms.EmailField(max_length=100)
 
     class Meta:
         model = FundingResource
-        fields = ["name"]
+        fields = ["name", "url", "due_date", "source_name", "description"]

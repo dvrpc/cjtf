@@ -15,4 +15,5 @@ urlpatterns = [
     path("resources/partner-orgs", views.partner_orgs, name="partner_orgs"),
     path("contact", views.contact, name="contact"),
     path("search", views.search, name="search"),
+    path("thanks", views.thanks, name="thanks"),
 ]

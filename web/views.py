@@ -1,6 +1,8 @@
 import datetime
+import textwrap
 
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+from django.core.mail import send_mail
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
@@ -225,42 +227,73 @@ def contact(request):
                 }
                 return render(request, "web/contact.html", context)
         else:
-            submitted = ""
             if "submit_comment" in request.POST:
                 form = CommentForm(request.POST)
                 if form.is_valid():
                     f = form.cleaned_data
-                    submitted = "a comment or question."
+                    submitted = "a comment or question"
+                    body = f["comment"]
             if "submit_event" in request.POST:
                 form = EventForm(request.POST)
                 if form.is_valid():
                     f = form.cleaned_data
-                    submitted = "an event or meeting."
-
+                    submitted = "an event or meeting"
+                    body = """
+                    Start date: {}\n
+                    End date: {}\n
+                    Title: {}|\n
+                    Location: {}\n
+                    Description: {}\n
+                    URL: {}
+                    """.format(
+                        f["start_date"],
+                        f["end_date"],
+                        f["title"],
+                        f["location"],
+                        f["description"],
+                        f["url"],
+                    )
             if "submit_funding" in request.POST:
                 form = FundingResourceForm(request.POST)
                 if form.is_valid():
                     f = form.cleaned_data
-                    submitted = "a funding resource."
+                    submitted = "a funding resource"
+                    body = """
+                    Name: {}\n
+                    URL: {}\n
+                    Due Date: {}\n
+                    Description: {}\n
+                    Source: {}\n
+                    """.format(
+                        f["name"], f["url"], f["due_date"], f["description"], f["source_name"]
+                    )
             if "submit_technical" in request.POST:
                 form = TechnicalResourceForm(request.POST)
                 if form.is_valid():
                     f = form.cleaned_data
-                    submitted = "a technical resource."
+                    submitted = "a technical resource"
+                    body = """
+                    Name: {}\n
+                    URL: {}\n
+                    Summary: {}\n
+                    Publication Date: {}\n
+                    Source: {}\n
+                    """.format(
+                        f["name"], f["url"], f["summary"], f["publication_date"], f["source"]
+                    )
 
-            thank_you_message = "Thank you for submitting " + submitted
+            # create the message from various fields
+            message = "{} ({}) submitted {} at centraljerseytf.org:\n {}".format(
+                f["your_name"], f["email"], submitted, textwrap.dedent(body)
+            )
+            send_mail(
+                "Submitted contact form from CJTF website",
+                message,
+                "contact@centraljerseytf.org",
+                ["kwarner@dvrpc.org"],
+            )
 
-            # after any of these, send user back to contacts page with a thank you message
-            form = TypeContactForm(label_suffix="")
-            page = get_object_or_404(Page, internal_name="contact")
-            context = {
-                "title": page.title,
-                "page": page,
-                "first_form": True,
-                "form": form,
-                "thank_you_message": thank_you_message,
-            }
-            return render(request, "web/contact.html", context)
+            return HttpResponseRedirect("/thanks")
     form = TypeContactForm(label_suffix="")
     page = get_object_or_404(Page, internal_name="contact")
     context = {
@@ -270,6 +303,10 @@ def contact(request):
         "form": form,
     }
     return render(request, "web/contact.html", context)
+
+
+def thanks(request):
+    return render(request, "web/thankyou.html")
 
 
 def search(request):
