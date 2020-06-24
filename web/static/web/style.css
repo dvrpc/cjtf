@@ -73,7 +73,7 @@ nav ul li:hover > ul {
   display: block;
 }
 nav ul li ul {
-  background-color: #FFF8F0;
+  background-color: var(--background);
   visibility: hidden;
   min-width: 15rem;
   position: absolute;
