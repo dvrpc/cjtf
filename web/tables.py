@@ -20,9 +20,9 @@ class TechnicalResourceTable(tables.Table):
 
     def render_name(self, value, record):
         if record.pdf:
-            return format_html("<a href=../files/{}>{}</a>", record.pdf, value)
+            return format_html("<a href='../files/{}' target='new'>{}</a>", record.pdf, value)
         if record.url:
-            return format_html("<a href={}>{}</a>", record.url, value)
+            return format_html("<a href='{}' target='new'>{}</a>", record.url, value)
 
 
 class FundingResourceTable(tables.Table):
