@@ -11,16 +11,6 @@
   --table-border-color: var(--light-gray);
   --background: white;
 }
-.color1 {
-  color: hsl(201, 85%, 20%);
-}
-.color2 {
-  color: hsl(201, 72%, 15%);
-}
-.color3 {
-  color: var(--medium-blue);
-  text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF;
-}
 .dark-blue {
   background-color: var(--dark-blue);
 }
@@ -267,6 +257,9 @@ table.contact_form th {
 }
 .center {
   text-align: center;
+}
+.bigger {
+  font-size: 1.1rem;
 }
 .download:after {
   content: "\2193";

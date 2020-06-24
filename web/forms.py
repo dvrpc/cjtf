@@ -13,6 +13,7 @@ class TypeContactForm(forms.Form):
         ],
         label="I would like to submit a ",
     )
+    type_of_contact.widget.attrs.update({"class": "bigger"})
 
 
 class CommentForm(forms.Form):
