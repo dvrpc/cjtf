@@ -8,44 +8,44 @@
         {{ page.main_content|safe }}
       {% elif request.resolver_match.url_name == 'technical_resources' %}
         <h2>
-        Technical Resources : 
+        Technical Resources :
         {% if not category %}
           All
         {% elif category == 'regional_plans' %}
           Regional Plans
         {% elif category == 'municipal_tools' %}
-          Municipal Tools 
+          Municipal Tools
         {% elif category == 'research_and_reports' %}
-          Research and Reports 
+          Research and Reports
         {% endif %}
         </h2>
         <p>
-          <a href="{% url 'web:technical_resources' %}">All</a> |           
-          <a href="{% url 'web:technical_resources' %}?category=regional_plans">Regional Plans</a> | 
-          <a href="{% url 'web:technical_resources' %}?category=municipal_tools">Municipal Tools</a> | 
+          <a href="{% url 'web:technical_resources' %}">All</a> |
+          <a href="{% url 'web:technical_resources' %}?category=regional_plans">Regional Plans</a> |
+          <a href="{% url 'web:technical_resources' %}?category=municipal_tools">Municipal Tools</a> |
           <a href="{% url 'web:technical_resources' %}?category=research_and_reports">Research and Reports</a>
         </p>
         {% if resources %}
           {% render_table resources %}
         {% else %}
-          <p>There are no 
+          <p>There are no
             {% if not category %}
-              technical resources 
+              technical resources
             {% elif category == 'regional_plans' %}
               regional plans
             {% elif category == 'municipal_tools' %}
-              municipal tools 
+              municipal tools
             {% elif category == 'research_and_reports' %}
-              research and reports 
+              research and reports
             {% endif %}
           available at this time.</p>
         {% endif %}
       {% elif request.resolver_match.url_name == 'funding_resources' %}
         <h2>Funding Resources</h2>
         {% if resources %}
-          {% render_table resources %} 
+          {% render_table resources %}
         {% else %}
-          <p>There are no funding resources available at this time.</p>
+          <p>There are no current funding opportunities listed. Please check back later, or submit an opportunity through the <a href="{% url 'web:contact' %}">Contact page</a>.</p>
         {% endif %}
       {% endif %}
     </div>

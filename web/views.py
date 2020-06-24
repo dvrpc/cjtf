@@ -143,16 +143,15 @@ def technical_resources(request):
     category = request.GET.get("category", "")
 
     if category in ["regional_plans", "municipal_tools", "research_and_reports"]:
-        technical_resources = TechnicalResourceTable(
-            TechnicalResource.objects.filter(category=category)
-        )
+        technical_resources = TechnicalResource.objects.filter(category=category)
     else:
-        # technical_resources = TechnicalResource.objects.order_by("-publication_date").all()
-        technical_resources = TechnicalResourceTable(TechnicalResource.objects.all())
+        technical_resources = TechnicalResource.objects.all()
 
-    # set default sort for the table and configure it so sorting is enabled
-    technical_resources.order_by = "-publication_date"
-    tables.RequestConfig(request).configure(technical_resources)
+    if technical_resources:
+        technical_resources = TechnicalResourceTable(technical_resources)
+        # set default sort for the table and configure it so sorting is enabled
+        technical_resources.order_by = "-publication_date"
+        tables.RequestConfig(request).configure(technical_resources)
 
     context = {
         "title": "Technical Resources",
@@ -166,13 +165,14 @@ def funding_resources(request):
 
     # get all funding resources, excluding those in the past (using .exclude rather than .filter
     # (gte rather than lte) ensures that those without a due date are included)
-    funding_resources = FundingResourceTable(
-        FundingResource.objects.exclude(due_date__lte=datetime.datetime.today())
-    )
+    funding_resources = FundingResource.objects.exclude(due_date__lte=datetime.datetime.today())
 
-    # set default sort for the table and configure it so sorting is enabled
-    funding_resources.order_by = "due_date"
-    tables.RequestConfig(request).configure(funding_resources)
+    if funding_resources:
+        funding_resources = FundingResourceTable(funding_resources)
+
+        # set default sort for the table and configure it so sorting is enabled
+        funding_resources.order_by = "due_date"
+        tables.RequestConfig(request).configure(funding_resources)
 
     context = {
         "title": "Funding Resources",
