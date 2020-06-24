@@ -164,6 +164,35 @@ main {
     .col2 {
       background-color: var(--green);
     }
+    
+    .mission {
+      grid-area: mission;
+      z-index: -1; // so the menu dropdown appears over the image
+      position: relative;
+      width: 100%;
+      max-width: 100vw;
+       
+      #heroimage img {
+        width: 100%;
+        max-width: 100vw;
+      }
+    }
+
+    .mission-text {
+      position: absolute;
+      display: block-inline;
+      z-index: 10;
+      bottom: 0;
+      left: 0;
+      padding: 20px;
+      font-size: 1.5rem;
+      letter-spacing: .1rem;
+      background: linear-gradient(90deg, var(--medium-blue), 65%, hsla(201, 72%, 30%, 0));
+      
+      .staccato {
+        word-spacing: .4rem;
+      }
+    }
   }
   
   &.default {
@@ -190,19 +219,6 @@ main {
     }
   }
 
-  .mission {
-    padding: 20px 20px 10px 80px;
-    padding-left: 80px;
-    grid-area: mission;
-    font-size: 1.5rem;
-    letter-spacing: .1rem;
-    background: linear-gradient(90deg, var(--medium-blue), 45%, var(--background));
-    
-    .staccato {
-      word-spacing: .4rem;
-    }
-  }
-    
   .col1 {
     grid-area: col1;
     padding: 0 20px 10px 80px;
@@ -449,6 +465,10 @@ table {
         "mission"
         "col1"
         "col2";
+
+      .mission-text {
+        font-size: 1rem;
+      }
     }
      
     &.default {
@@ -460,11 +480,6 @@ table {
     
     .col1, .col2, .full {
       padding: 0 20px 10px 20px;
-    }
-    .mission {
-      margin-left: 0px;
-      margin-right: 0px;
-      padding: 20px;
     }
   }
   

@@ -1,11 +1,18 @@
 {% extends "web/base.html" %}
 
+{% load static %}
 {% block main %}
   <main class="home">
     <div class="mission">
-      <div id="heroimage">TK</div>
-      <p><span class="staccato">Identify. Discuss. Coordinate. Research. Assist. Educate.</span><br>
-      We are the Central Jersey Transportation Forum.</p>
+      <div id="heroimage">
+          <img src="{% static 'web/images/bike.jpg' %}">
+          <img src="{% static 'web/images/transit.jpg' %}">
+          <img src="{% static 'web/images/getty-cars.jpg' %}">
+        </div>
+        <div class="mission-text">
+          <span class="staccato">Identify. Discuss. Coordinate. Research. Assist. Educate.</span><br>
+          We are the Central Jersey Transportation Forum.
+        </div>
     </div>
 
     <div class="col1">
@@ -113,5 +120,24 @@
       <a href="https://twitter.com/njtpa">NJTPA</a> on Twitter for more.</p>
     </div>
   </main>
+
+  {# slider from https://github.com/rchisholm/vanilla-slider #}
+  <script type="text/javascript" src="{% static 'web/js/vanilla-slider.js' %}"></script>
+  <script>
+    var options = {
+      transitionTime: 500,
+      transitionZoom: 'in',
+      arrows:true,
+      auto: true,
+      autoTime: 7000,
+      autoPauseOnHover: true,
+      //  images: [
+      //    '{% static 'web/images/bike.jpg' %}',
+      //    '{% static 'web/images/transit.jpg' %}',
+      //    '{% static 'web/images/getty-cars.jpg' %}',
+      //  ]
+    }
+    var mySlider = createSlider('heroimage', options);
+  </script>
 {% endblock %}
 
