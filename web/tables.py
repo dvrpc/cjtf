@@ -19,6 +19,8 @@ class TechnicalResourceTable(tables.Table):
     category = tables.Column(attrs={"td": {"data-th": "Category"}})
 
     def render_name(self, value, record):
+        if record.pdf:
+            return format_html("<a href=../files/{}>{}</a>", record.pdf, value)
         if record.url:
             return format_html("<a href={}>{}</a>", record.url, value)
 
