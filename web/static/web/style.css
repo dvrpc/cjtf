@@ -227,6 +227,22 @@ table th {
   text-align: left;
   background-color: var(--light-blue);
 }
+table th a {
+  color: white;
+}
+table th.orderable:not(.asc):after {
+  content: "\25B4";
+}
+table th.orderable.asc:after {
+  content: "\25B4";
+  padding-left: 1px;
+  color: var(--orange);
+}
+table th.orderable.desc:after {
+  content: "\25BE";
+  padding-left: 1px;
+  color: var(--orange);
+}
 table tr {
   border-bottom: 1px solid var(--table-border-color);
 }

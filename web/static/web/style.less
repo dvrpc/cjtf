@@ -274,6 +274,27 @@ table {
   th {
     text-align: left;
     background-color: var(--light-blue);
+
+    a {
+      color: white;
+    } 
+    
+    &.orderable {
+    
+      &:not(.asc):after {
+        content: "\25B4";
+      }
+      &.asc:after {
+        content: "\25B4";
+        padding-left: 1px;
+        color: var(--orange);
+      }
+      &.desc:after {
+        content: "\25BE";
+        padding-left: 1px;
+        color: var(--orange);
+      }
+    } 
   }
   
   tr {
@@ -294,6 +315,8 @@ table {
       background-color: transparent;
     }
   }
+
+
 }
 
 
