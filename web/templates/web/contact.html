@@ -19,8 +19,9 @@
           <form action="/contact" method="post">
             {% csrf_token %}
             {% if first_form %}
-              {{ form.as_p }}
-              <input type="submit" name="submit_type" value="Next">
+              <p class="bigger">
+                {{ form }} &nbsp; <input type="submit" name="submit_type" value="Next">
+              </p>
               <p>&nbsp;</p>
               <p>Want to be added to our mailing list? Sign up via the form below.</p>
               <p>[INSERT NEW EMMA mailing list signup]</p>
