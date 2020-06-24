@@ -41,11 +41,9 @@ def index(request):
     ).order_by("start_date")[0:3]
 
     # exclude tech resources without pdf and without url, because what's the use of including it?
-    tech_resources = (
-        TechnicalResource.objects.exclude(url__isnull=True)
-        .exclude(pdf__isnull=True)
-        .order_by("-publication_date")[0:3]
-    )
+    tech_resources = TechnicalResource.objects.exclude(
+        Q(url__isnull=True) & Q(pdf__isnull=True)
+    ).order_by("-publication_date")[0:3]
 
     funding_resources = FundingResource.objects.filter(
         due_date__gte=datetime.date.today()
