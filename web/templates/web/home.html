@@ -59,9 +59,15 @@
               <div class="box">
                 <h4><a href="{{ event.url }}" target="new">{{ event.title }}</a></h4>
                 <p>
-                  {{event.start_date}}
+                  {{ event.start_date }}
+                  {% if event.start_time %}
+                    {{ event.start_time }}
+                  {% endif %}
                   {% if event.end_date %}
                     - {{ event.end_date }}
+                    {% if event.end_time %}
+                      {{ event.end_time }}
+                    {% endif %}
                   {% endif %}
                 </p>
                 {{ event.description|safe }}

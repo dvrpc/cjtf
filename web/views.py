@@ -20,6 +20,16 @@ from .forms import (
 from .tables import TechnicalResourceTable, FundingResourceTable
 
 
+def email_us(message):
+    """Send email to designated DVRPC staff person when user submits a contact form."""
+    return send_mail(
+        "Submitted contact form from CJTF website",
+        message,
+        "contact@centraljerseytf.org",
+        ["kwarner@dvrpc.org"],
+    )
+
+
 def index(request):
     """
     Home Page. Get recently updated internal pages (events/meetings and resources) and also
@@ -37,7 +47,7 @@ def index(request):
         next_meeting = None
 
     upcoming_events = Event.objects.filter(
-        Q(start_date__gte=datetime.datetime.now()) | Q(end_date__gte=datetime.datetime.now())
+        Q(start_date__gte=datetime.date.today()) | Q(end_date__gte=datetime.date.today())
     ).order_by("start_date")[0:3]
 
     # exclude tech resources without pdf and without url, because what's the use of including it?
@@ -93,7 +103,7 @@ def membership(request):
 def events_meetings(request):
     page = get_object_or_404(Page, internal_name="events_meetings")
     upcoming_events = Event.objects.filter(
-        Q(start_date__gte=datetime.datetime.now()) | Q(end_date__gte=datetime.datetime.now())
+        Q(start_date__gte=datetime.date.today()) | Q(end_date__gte=datetime.date.today())
     ).order_by("start_date")
     upcoming_meetings = Meeting.objects.filter(date__gte=datetime.datetime.now()).order_by("date")
     past_meetings = Meeting.objects.filter(date__lt=datetime.date.today()).order_by("-date")
@@ -190,6 +200,8 @@ def partner_orgs(request):
 
 
 def contact(request):
+    form = ""
+
     if request.method == "POST":
         # determine which form was submitted - from name of submit button - and process
         if "submit_type" in request.POST:
@@ -200,62 +212,65 @@ def contact(request):
                 if f["type_of_contact"] == "comment_or_question":
                     form = CommentForm()
                     submit_name = "submit_comment"
-                    form_heading = "Submit a Comment or Question"
                 elif f["type_of_contact"] == "event":
                     form = EventForm()
                     submit_name = "submit_event"
-                    form_heading = "Submit an Event or Meeting"
                 elif f["type_of_contact"] == "funding_resource":
                     form = FundingResourceForm()
                     submit_name = "submit_funding"
-                    form_heading = "Submit a Funding Resource"
                 elif f["type_of_contact"] == "technical_resource":
                     form = TechnicalResourceForm()
                     submit_name = "submit_technical"
-                    form_heading = "Submit a Technical Resource"
 
                 page = get_object_or_404(Page, internal_name="contact")
                 context = {
                     "title": page.title,
                     "page": page,
                     "form": form,
-                    "second_form": True,
+                    "first_form": False,
                     "submit_name": submit_name,
-                    "form_heading": form_heading,
                 }
                 return render(request, "web/contact.html", context)
         else:
             if "submit_comment" in request.POST:
                 form = CommentForm(request.POST)
+                submit_name = "submit_comment"
                 if form.is_valid():
                     f = form.cleaned_data
-                    submitted = "a comment or question"
-                    body = f["comment"]
+                    # create the message from various fields
+                    message = (
+                        "{} ({}) submitted a comment or question at centraljerseytf.org:\n {}"
+                        .format(f["your_name"], f["email"], f["comment"])
+                    )
+                    email_us(message)
+                    return HttpResponseRedirect("/thanks")
             if "submit_event" in request.POST:
                 form = EventForm(request.POST)
+                submit_name = "submit_event"
                 if form.is_valid():
                     f = form.cleaned_data
-                    submitted = "an event or meeting"
+                    # create the message from various fields
                     body = """
                     Start date: {}\n
-                    End date: {}\n
                     Title: {}|\n
                     Location: {}\n
                     Description: {}\n
                     URL: {}
                     """.format(
-                        f["start_date"],
-                        f["end_date"],
-                        f["title"],
-                        f["location"],
-                        f["description"],
-                        f["url"],
+                        f["start_date"], f["title"], f["location"], f["description"], f["url"],
                     )
+                    message = (
+                        "{} ({}) submitted an event or meeting at centraljerseytf.org:\n {}".format(
+                            f["your_name"], f["email"], textwrap.dedent(body)
+                        )
+                    )
+                    email_us(message)
+                    return HttpResponseRedirect("/thanks")
             if "submit_funding" in request.POST:
                 form = FundingResourceForm(request.POST)
+                submit_name = "submit_funding"
                 if form.is_valid():
                     f = form.cleaned_data
-                    submitted = "a funding resource"
                     body = """
                     Name: {}\n
                     URL: {}\n
@@ -265,11 +280,18 @@ def contact(request):
                     """.format(
                         f["name"], f["url"], f["due_date"], f["description"], f["source_name"]
                     )
+                    message = (
+                        "{} ({}) submitted a funding resource at centraljerseytf.org:\n {}".format(
+                            f["your_name"], f["email"], textwrap.dedent(body)
+                        )
+                    )
+                    email_us(message)
+                    return HttpResponseRedirect("/thanks")
             if "submit_technical" in request.POST:
                 form = TechnicalResourceForm(request.POST)
+                submit_name = "submit_technical"
                 if form.is_valid():
                     f = form.cleaned_data
-                    submitted = "a technical resource"
                     body = """
                     Name: {}\n
                     URL: {}\n
@@ -279,25 +301,25 @@ def contact(request):
                     """.format(
                         f["name"], f["url"], f["summary"], f["publication_date"], f["source"]
                     )
+                    message = (
+                        "{} ({}) submitted a technical resource at centraljerseytf.org:\n {}"
+                        .format(f["your_name"], f["email"], textwrap.dedent(body))
+                    )
+                    email_us(message)
+                    return HttpResponseRedirect("/thanks")
+            first_form = False
 
-            # create the message from various fields
-            message = "{} ({}) submitted {} at centraljerseytf.org:\n {}".format(
-                f["your_name"], f["email"], submitted, textwrap.dedent(body)
-            )
-            send_mail(
-                "Submitted contact form from CJTF website",
-                message,
-                "contact@centraljerseytf.org",
-                ["kwarner@dvrpc.org"],
-            )
+    else:
+        form = TypeContactForm(label_suffix="")
+        first_form = True
+        submit_name = ""
 
-            return HttpResponseRedirect("/thanks")
-    form = TypeContactForm(label_suffix="")
     page = get_object_or_404(Page, internal_name="contact")
     context = {
         "title": page.title,
         "page": page,
-        "first_form": True,
+        "first_form": first_form,
+        "submit_name": submit_name,
         "form": form,
     }
     return render(request, "web/contact.html", context)

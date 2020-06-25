@@ -47,8 +47,14 @@
               </h4>
               <p>
                 {{ event.start_date }}
+                {% if event.start_time %}
+                  {{ event.start_time }}
+                {% endif %}
                 {% if event.end_date %}
                   - {{ event.end_date }}
+                  {% if event.end_time %}
+                    {{ event.end_time }}
+                  {% endif %}
                 {% endif %}
               </p>
               {% if event.location %}

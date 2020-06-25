@@ -1,8 +1,16 @@
 import datetime
 
 from django.db import models
+from django.core.exceptions import ValidationError
 
 from ckeditor.fields import RichTextField
+
+
+def validate_date_not_past(value):
+    if value < datetime.date.today():
+        raise ValidationError(
+            "%(value)s is in the past.", params={"value": value},
+        )
 
 
 class Meeting(models.Model):
@@ -49,13 +57,10 @@ class Meeting(models.Model):
 
 
 class Event(models.Model):
-    start_date = models.DateTimeField(
-        help_text=(
-            "Date in format m/d/yyyy, m/d/yy, yy-m-d, or yyyy-m-d  and "
-            "time in 24 hr format, i.e. 09:00 for 9am or 13:00 for 1pm"
-        )
-    )
-    end_date = models.DateTimeField(blank=True, null=True)
+    start_date = models.DateField(validators=[validate_date_not_past])
+    start_time = models.TimeField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
+    end_time = models.TimeField(blank=True, null=True)
     title = models.CharField(max_length=100)
     location = RichTextField(null=True, blank=True)
     description = RichTextField(null=True, blank=True)
