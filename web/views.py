@@ -127,15 +127,6 @@ def events_meetings(request):
     return render(request, "web/default.html", context)
 
 
-def meeting_detail(request, meeting_id):
-    meeting = get_object_or_404(Meeting, pk=meeting_id)
-    context = {
-        "meeting": meeting,
-        "title": "Regular Meeting",
-    }
-    return render(request, "web/meeting_detail.html", context)
-
-
 def resources(request):
 
     page = get_object_or_404(Page, internal_name="resources")
