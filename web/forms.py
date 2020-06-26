@@ -48,7 +48,7 @@ class EventForm(forms.ModelForm):
     def clean_start_date(self):
         data = self.cleaned_data["start_date"]
         if data < datetime.date.today():
-            raise ValidationError("Invald date - date cannot be in the past.")
+            raise ValidationError("Invalid date - date cannot be in the past.")
         return data
 
 
@@ -63,7 +63,7 @@ class TechnicalResourceForm(forms.ModelForm):
     def clean_publication_date(self):
         data = self.cleaned_data["publication_date"]
         if data > datetime.date.today():
-            raise ValidationError("Invald date - date cannot be in the future.")
+            raise ValidationError("Invalid date - date cannot be in the future.")
         return data
 
 
@@ -78,5 +78,5 @@ class FundingResourceForm(forms.ModelForm):
     def clean_due_date(self):
         data = self.cleaned_data["due_date"]
         if data < datetime.date.today():
-            raise ValidationError("Invald date - date cannot be in the past.")
+            raise ValidationError("Invalid date - date cannot be in the past.")
         return data

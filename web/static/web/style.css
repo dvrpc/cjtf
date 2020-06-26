@@ -261,6 +261,13 @@ table.contact_form th {
 .bigger {
   font-size: 1.1rem;
 }
+.errorlist {
+  color: var(--orange);
+  list-style-type: none;
+}
+.errorlist > li {
+  margin-left: -40px;
+}
 .download:after {
   content: "\2193";
   padding-left: 1px;
