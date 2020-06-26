@@ -20,6 +20,9 @@
 .light-blue {
   background-color: var(--light-blue);
 }
+.orange {
+  color: var(--orange);
+}
 body {
   margin: 0 auto;
   padding: 25px 0px 0px 0px;
@@ -267,6 +270,10 @@ table.contact_form th {
 }
 .errorlist > li {
   margin-left: -40px;
+}
+.required label:after {
+  content: "*";
+  color: var(--orange);
 }
 .download:after {
   content: "\2193";

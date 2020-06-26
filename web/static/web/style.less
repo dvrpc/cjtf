@@ -15,6 +15,7 @@
 .dark-blue { background-color: var(--dark-blue); }
 .medium-blue { background-color: var(--medium-blue); }
 .light-blue { background-color: var(--light-blue); }
+.orange { color: var(--orange); }
 
 body {
   margin: 0 auto;
@@ -305,7 +306,7 @@ table {
 .center { text-align: center; }
 .bigger { font-size: 1.1rem; }
 
-// form errors
+// forms
 .errorlist { 
   color: var(--orange); 
   list-style-type: none;
@@ -315,6 +316,12 @@ table {
     margin-left: -40px;
   }
 }
+
+.required label:after {
+    content: "*";
+    color: var(--orange);
+}
+// end forms
 
 .download:after {
   content: "\2193";

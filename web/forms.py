@@ -20,12 +20,14 @@ class TypeContactForm(forms.Form):
 
 
 class CommentForm(forms.Form):
+    required_css_class = "required"
     comment = forms.CharField(max_length=1000, widget=forms.Textarea)
     your_name = forms.CharField(max_length=100)
     email = forms.EmailField(max_length=100)
 
 
 class EventForm(forms.ModelForm):
+    required_css_class = "required"
     your_name = forms.CharField(max_length=100)
     email = forms.EmailField(max_length=100)
 
@@ -53,6 +55,7 @@ class EventForm(forms.ModelForm):
 
 
 class TechnicalResourceForm(forms.ModelForm):
+    required_css_class = "required"
     your_name = forms.CharField(max_length=100)
     email = forms.EmailField(max_length=100)
 
@@ -68,6 +71,7 @@ class TechnicalResourceForm(forms.ModelForm):
 
 
 class FundingResourceForm(forms.ModelForm):
+    required_css_class = "required"
     your_name = forms.CharField(max_length=100)
     email = forms.EmailField(max_length=100)
 
