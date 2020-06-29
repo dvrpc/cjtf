@@ -59,15 +59,12 @@ def index(request):
         due_date__gte=datetime.date.today()
     ).order_by("due_date")[0:3]
 
-    # get meetings with newly added minutes or presentation materials; exclude those that have
-    # no values for the file field (because the "added" fields will be updated whether files are
-    # added or deleted)
+    # get meetings with newly added/changed minutes or presentation materials;
     # Note that this orders by most recent date of meeting - not date of when these were added,
     # but that's ok because we don't really need to highlight updated materials from very old
     # meetings, if that should every happen
     meetings_updated = Meeting.objects.filter(
-        (Q(minutes_added__gte=six_weeks_ago) & ~Q(minutes=""))
-        | (Q(pre_mat_added__gte=six_weeks_ago) & ~Q(presentation_materials=""))
+        Q(minutes_added__gte=six_weeks_ago) | Q(pre_mat_added__gte=six_weeks_ago)
     ).order_by("-date")[0:3]
 
     context = {

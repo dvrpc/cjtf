@@ -24,18 +24,11 @@ class Meeting(models.Model):
     agenda = models.FileField(blank=True, null=True)
     minutes = models.FileField(blank=True, null=True)
     minutes_added = models.DateField(blank=True, null=True)
-    presentation_materials = models.FileField(blank=True)
+    presentation_materials = models.FileField(blank=True, null=True)
     pre_mat_added = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return str(self.date.strftime("%Y - %B"))
-
-    def save(self, *args, **kwargs):
-        if self.minutes:
-            self.minutes_added = datetime.date.today()
-        if self.presentation_materials:
-            self.pre_mat_added = datetime.date.today()
-        super().save(*args, **kwargs)
 
     def simplified_date(self):
         return str(self.date.strftime("%Y - %B"))
