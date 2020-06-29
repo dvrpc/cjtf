@@ -290,6 +290,9 @@ table.contact_form th {
 .past_meetings tr:last-child {
   border-bottom: none;
 }
+.resources {
+  float: left;
+}
 .resources td[data-th="Product Name"] {
   min-width: 175px;
 }
