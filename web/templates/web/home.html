@@ -5,17 +5,17 @@
   <main class="home">
     <div class="mission">
       <div id="heroimage">
-          <img src="{% static 'web/images/bikes.jpg' %}">
-          <img src="{% static 'web/images/bridge.jpg' %}">
-          <img src="{% static 'web/images/bus.jpg' %}">
-          <img src="{% static 'web/images/speedpost.jpg' %}">
-          <img src="{% static 'web/images/crosswalk.jpg' %}">
-          <img src="{% static 'web/images/traffic.jpg' %}">
-        </div>
-        <div class="mission-text">
-          Identify. Discuss. Coordinate. Research. Assist. Educate.<br>
-          We are the Central Jersey Transportation Forum.
-        </div>
+        <img src="{% static 'web/images/bikes.jpg' %}">
+        <img src="{% static 'web/images/bridge.jpg' %}">
+        <img src="{% static 'web/images/bus.jpg' %}">
+        <img src="{% static 'web/images/speedpost.jpg' %}">
+        <img src="{% static 'web/images/crosswalk.jpg' %}">
+        <img src="{% static 'web/images/traffic.jpg' %}">
+      </div>
+      <div class="mission-text">
+        Identify. Discuss. Coordinate. Research. Assist. Educate.<br>
+        We are the Central Jersey Transportation Forum.
+      </div>
     </div>
 
     <div class="col1">
@@ -133,21 +133,19 @@
     </div>
   </main>
 
-  {# slider from https://github.com/rchisholm/vanilla-slider #}
+  {% comment %}
+  slider from https://github.com/rchisholm/vanilla-slider, slightly modified so images
+  span full viewport width
+  {% endcomment %}
   <script type="text/javascript" src="{% static 'web/js/vanilla-slider.js' %}"></script>
   <script>
     var options = {
-      transitionTime: 500,
+      transitionTime: 750,
       transitionZoom: 'in',
-      arrows:true,
+      arrows:false,
       auto: true,
-      autoTime: 7000,
-      autoPauseOnHover: true,
-      //  images: [
-      //    '{% static 'web/images/bike.jpg' %}',
-      //    '{% static 'web/images/transit.jpg' %}',
-      //    '{% static 'web/images/getty-cars.jpg' %}',
-      //  ]
+      autoTime: 6000,
+      autoPauseOnHover: false,
     }
     var mySlider = createSlider('heroimage', options);
   </script>
