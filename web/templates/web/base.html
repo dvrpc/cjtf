@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{% static 'web/style.css' %}">
-  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <title>{{ title }}</title>
 </head>
 
@@ -16,15 +16,10 @@
   <header>
     <div class="cjtf_logo"><a href="/"><img src="{% static 'web/images/logo_header.png' %}"></a></div>
     <div class="search">{% include 'web/search_form.html' %}</div>
-    <div class="logos" style="text-align:right">
+    <div class="logos">
         <a href="https://www.dvrpc.org/">
-          <img 
-            src="{% static 'web/images/dvrpc_small.png' %}"
-            style="padding-bottom:15px">
-        </a>
-        <a href="https://www.njtpa.org">
-          <img src="{% static 'web/images/njtpa_small.png' %}">
-        </a>
+          <img src="{% static 'web/images/dvrpc_small.png' %}" style="padding-right: 15px"></a>
+        <a href="https://www.njtpa.org"><img src="{% static 'web/images/njtpa_small.png' %}"></a>
     </div>
     <nav>
       <button class="opener">&#9776;</button>
@@ -32,7 +27,7 @@
         <li><button class="closer">&#215;</button></li>
         <li><a href="{% url 'web:about' %}"
           {% if request.resolver_match.url_name == 'about' %}
-            class="active" 
+            class="active"
           {% endif %}
           >About</a>
         </li>
@@ -84,7 +79,7 @@
 </body>
 <script>
   const openerButton = document.querySelector('.opener');
-  const closerButton = document.querySelector('.closer'); 
+  const closerButton = document.querySelector('.closer');
 
   function toggleMenu() {
     ulItem = document.querySelector('nav > ul');
