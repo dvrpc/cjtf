@@ -3,6 +3,7 @@
   --medium-blue: hsl(198, 70%, 26%);
   --medium-blue-shadow: hsla(198, 70%, 26%, 0.3);
   --light-blue: hsl(206, 75%, 42%);
+  --lighter-blue: hsl(199, 83%, 86%);
   --orange: hsl(24, 69%, 46%);
   --dark-orange: hsl(24, 77%, 35%);
   --green: hsl(79, 48%, 47%);
@@ -135,6 +136,9 @@ main.home a {
   text-decoration: none;
   color: var(--light-blue);
 }
+main.home a:hover {
+  color: var(--orange);
+}
 main.home .col1 {
   background-color: var(--orange);
 }
@@ -144,6 +148,7 @@ main.home .col1 ul {
 main.home .col2 {
   background-color: var(--green);
 }
+
 main.home .mission {
   grid-area: mission;
   position: relative;
@@ -362,6 +367,7 @@ table.contact_form th {
     grid-area: nav;
     justify-self: end;
     padding-top: 0;
+    z-index: 99;
   }
   nav .opener,
   nav .closer {
