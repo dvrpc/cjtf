@@ -375,7 +375,8 @@ table.contact_form th {
     grid-area: logo;
   }
   header .cjtf_logo img {
-    width: 300px;
+    width: 100%;
+    min-width: 300px;
   }
   header .search {
     grid-area: search;
@@ -404,19 +405,19 @@ table.contact_form th {
     display: grid;
     justify-items: end;
     position: fixed;
-    right: -2px;
+    right: -4px;
     top: 0;
     width: 0;
     height: 100vh;
     overflow-x: hidden;
-    line-height: 1.3;
+    line-height: 1.2;
     font-size: 1rem;
     transition: all 400ms;
     padding-bottom: 5px;
     padding-top: 8px;
     white-space: nowrap;
     background-color: var(--medium-blue);
-    border: 1px solid var(--dark-gray);
+    border: 2px solid var(--dark-gray);
   }
   nav ul.show {
     width: 225px;
@@ -438,8 +439,12 @@ table.contact_form th {
   nav ul a:hover {
     color: var(--orange);
   }
+  nav ul a.active {
+    color: var(--orange);
+    font-weight: bold;
+  }
   nav ul a.active:hover {
-    color: white;
+    color: var(--orange);
   }
   main.home {
     grid-template-columns: 1fr;
