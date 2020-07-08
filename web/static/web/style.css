@@ -12,6 +12,12 @@
   --table-border-color: var(--light-gray);
   --background: white;
 }
+
+.new_link_color {
+  color: #bce6f9;
+  text-decoration: underline;
+}
+
 .dark-blue {
   background-color: var(--dark-blue);
 }
@@ -61,6 +67,8 @@ header .search {
 }
 header .search input {
   width: 225px;
+  font-family: "Roboto Thin";
+  font-size: .9rem;
 }
 header .search:after {
   content: "\1F50D";
@@ -223,6 +231,7 @@ h1 {
 }
 h2 {
   font-size: 1.4rem;
+  font-weight: bold;
   margin-bottom: 12px;
   border-bottom: 2px solid white;
 }
@@ -304,6 +313,7 @@ table.contact_form th {
   content: "\2193";
   padding-left: 1px;
   color: hsl(0, 0%, 85%);
+  text-decoration: none;
 }
 .past_meetings {
   border-collapse: collapse;
