@@ -12,10 +12,11 @@ class TechnicalResourceTable(tables.Table):
         attrs = {"class": "responsive_table resources"}
 
     # data-th attribute for responsive mode
+    # also disable ordering for summary
     name = tables.Column(attrs={"td": {"data-th": "Publication Name"}})
     publication_date = tables.Column(attrs={"td": {"data-th": "Publication Date"}})
     source = tables.Column(attrs={"td": {"data-th": "Source"}})
-    summary = tables.Column(attrs={"td": {"data-th": "Summary"}})
+    summary = tables.Column(attrs={"td": {"data-th": "Summary"}}, orderable=False)
     category = tables.Column(attrs={"td": {"data-th": "Category"}})
 
     def render_name(self, value, record):
@@ -35,7 +36,7 @@ class FundingResourceTable(tables.Table):
     name = tables.Column(attrs={"td": {"data-th": "Program Name"}})
     due_date = tables.Column(attrs={"td": {"data-th": "Due Date"}})
     source_name = tables.Column(attrs={"td": {"data-th": "Source"}})
-    description = tables.Column(attrs={"td": {"data-th": "Description"}})
+    description = tables.Column(attrs={"td": {"data-th": "Description"}}, orderable=False)
 
     def render_name(self, value, record):
         if record.url:

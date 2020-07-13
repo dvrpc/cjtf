@@ -55,7 +55,7 @@ class Event(models.Model):
     end_date = models.DateField(blank=True, null=True)
     end_time = models.TimeField(blank=True, null=True)
     title = models.CharField(max_length=100)
-    location = RichTextField(null=True, blank=True)
+    location = models.CharField(max_length=200, null=True, blank=True)
     description = RichTextField(null=True, blank=True)
     url = models.URLField()
 

@@ -55,7 +55,7 @@
                 {% endif %}
               </p>
               {% if event.location %}
-                Location: {{ event.location|striptags }}
+                Location: {{ event.location}}
               {% endif %}
               {% if event.description %}
                 {{ event.description|safe }}
