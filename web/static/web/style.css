@@ -3,6 +3,7 @@
   --medium-blue: hsl(198, 70%, 26%);
   --medium-blue-shadow: hsla(198, 70%, 26%, 0.3);
   --light-blue: hsl(206, 75%, 42%);
+  --white-blue: #bce6f9;
   --lighter-blue: hsl(199, 83%, 86%);
   --orange: hsl(24, 69%, 46%);
   --dark-orange: hsl(24, 77%, 35%);
@@ -11,11 +12,6 @@
   --light-gray: hsl(0, 0%, 60%);
   --table-border-color: var(--light-gray);
   --background: white;
-}
-
-.new_link_color {
-  color: #bce6f9;
-  text-decoration: underline;
 }
 
 .dark-blue {
@@ -136,8 +132,9 @@ main {
   color: white;
 }
 main a {
-  text-decoration: none;
-  color: var(--orange);
+  text-decoration: underline;
+  font-weight: bold;
+  color: var(--white-blue);
 }
 main a:hover {
   color: white;
@@ -149,23 +146,18 @@ main.home {
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "mission mission" "col1 col2";
 }
-main.home a {
-  text-decoration: none;
-  color: var(--light-blue);
-}
-main.home a:hover {
-  color: var(--orange);
-}
 main.home .col1 {
-  background-color: var(--orange);
+  background-color: var(--medium-blue);
 }
 main.home .col1 ul {
   margin-bottom: 2rem;
 }
 main.home .col2 {
-  background-color: var(--green);
+  background-color: var(--orange);
 }
-
+main.home h2 {
+  text-transform: uppercase;
+}
 main.home .mission {
   grid-area: mission;
   position: relative;
@@ -230,17 +222,17 @@ h1 {
   font-size: 2rem;
 }
 h2 {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: bold;
   margin-bottom: 12px;
   border-bottom: 2px solid white;
 }
 h3 {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   margin-bottom: 12px;
 }
 h4 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   margin-top: 0px;
   margin-bottom: 10px;
 }
@@ -289,11 +281,17 @@ table.contact_form th {
 .bold {
   font-weight: bold;
 }
+.not-bold {
+  font-weight: normal;
+}
 .italic {
   font-style: italic;
 }
 .center {
   text-align: center;
+}
+.smaller {
+  font-size: .9rem;
 }
 .bigger {
   font-size: 1.1rem;

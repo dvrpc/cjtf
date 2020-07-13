@@ -37,15 +37,12 @@
           <br>
           <h3>Upcoming Events</h3>
           {% for event in upcoming_events %}
-            <div class="box">
-              <h4>
-                {% if event.url %}
-                  <a href="{{event.url}}">{{event.title}}</a>
-                {% else %}
-                  {{ event.title }}
-                {% endif %}
-              </h4>
               <p>
+                {% if event.url %}
+                  <a href="{{event.url}}">{{event.title}}</a>:
+                {% else %}
+                  {{ event.title }}:
+                {% endif %}
                 {{ event.start_date }}
                 {% if event.start_time %}
                   {{ event.start_time }}
@@ -58,12 +55,11 @@
                 {% endif %}
               </p>
               {% if event.location %}
-                {{ event.location|safe }}
+                Location: {{ event.location|striptags }}
               {% endif %}
               {% if event.description %}
                 {{ event.description|safe }}
               {% endif %}
-            </div>
           {% endfor %}
         {% endif %}
 
@@ -87,22 +83,22 @@
                 <td>{{meeting.date|date:"M"}}</td>
                 <td>
                   {% if meeting.agenda %}
-                    <a href="{{ meeting.agenda.url }}" class="new_link_color">Agenda</a>↓
+                    <a href="{{ meeting.agenda.url }}" class="not-bold">Agenda</a>↓
                   {% else %}
                     &nbsp;
                   {% endif %}
                 </td>
                 <td>
                   {% if meeting.minutes %}
-                    <a href="{{ meeting.minutes.url }}" class="download">Minutes</a>
+                    <a href="{{ meeting.minutes.url }}" class="not-bold">Minutes</a>↓
                   {% else %}
                     &nbsp;
                   {% endif %}
                 </td>
                 <td>
                   {% if meeting.presentation_materials %}
-                    <a href="{{ meeting.presentation_materials.url }}" class="download">
-                    Materials</a>
+                    <a href="{{ meeting.presentation_materials.url }}" class="not-bold">
+                    Materials</a>↓
                   {% else %}
                     &nbsp;
                   {% endif %}
