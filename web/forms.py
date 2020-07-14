@@ -16,19 +16,19 @@ class TypeContactForm(forms.Form):
         ],
         label="I would like to submit a ",
     )
-    type_of_contact.widget.attrs.update({"class": "bigger"})
+    type_of_contact.widget.attrs.update({"class": "bigger form_buttons"})
 
 
 class CommentForm(forms.Form):
     required_css_class = "required"
     comment = forms.CharField(max_length=1000, widget=forms.Textarea)
-    your_name = forms.CharField(max_length=100)
+    your_name = forms.CharField(max_length=100, label="Your Name")
     email = forms.EmailField(max_length=100)
 
 
 class EventForm(forms.ModelForm):
     required_css_class = "required"
-    your_name = forms.CharField(max_length=100)
+    your_name = forms.CharField(max_length=100, label="Your Name")
     email = forms.EmailField(max_length=100)
 
     class Meta:
@@ -42,6 +42,7 @@ class EventForm(forms.ModelForm):
         ]
         labels = {
             "start_date": "Date",
+            "url": "URL",
         }
         help_texts = {
             "start_date": "mm/dd/yy",
@@ -56,12 +57,13 @@ class EventForm(forms.ModelForm):
 
 class TechnicalResourceForm(forms.ModelForm):
     required_css_class = "required"
-    your_name = forms.CharField(max_length=100)
+    your_name = forms.CharField(max_length=100, label="Your Name")
     email = forms.EmailField(max_length=100)
 
     class Meta:
         model = TechnicalResource
         fields = ["name", "url", "summary", "publication_date", "source"]
+        labels = {"url": "URL"}
 
     def clean_publication_date(self):
         data = self.cleaned_data["publication_date"]
@@ -72,12 +74,13 @@ class TechnicalResourceForm(forms.ModelForm):
 
 class FundingResourceForm(forms.ModelForm):
     required_css_class = "required"
-    your_name = forms.CharField(max_length=100)
+    your_name = forms.CharField(max_length=100, label="Your Name")
     email = forms.EmailField(max_length=100)
 
     class Meta:
         model = FundingResource
         fields = ["name", "url", "due_date", "source_name", "description"]
+        labels = {"url": "URL"}
 
     def clean_due_date(self):
         data = self.cleaned_data["due_date"]

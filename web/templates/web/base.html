@@ -15,7 +15,10 @@
 
   <header>
     <div class="cjtf_logo"><a href="/"><img src="{% static 'web/images/logo_header.png' %}"></a></div>
-    <div class="search">{% include 'web/search_form.html' %}</div>
+    <div class="search">
+      {% include 'web/search_form.html' %}
+      <img src="{% static 'web/images/magnifying_glass.png' %}" width="15px" height="16px">
+    </div>
     <div class="logos">
         <a href="https://www.dvrpc.org/">
           <img src="{% static 'web/images/dvrpc_small.png' %}" style="padding-right: 15px"></a>

@@ -31,7 +31,7 @@
         {% endif %}
 
         {% if funding_resources %}
-        <h3>Upcoming funding deadlines</h3>
+        <h3>Upcoming Funding Deadlines</h3>
           <p>
             {% if funding_resources|length > 1 %}
               <ul>
@@ -72,11 +72,10 @@
                 {% endif %}
               </p>
             {% endfor %}
-          <br>
         {% endif %}
 
         {% if meetings_updated %}
-          <h3>Updated meeting materials</h3>
+          <h3>Updated Meeting Materials</h3>
           {% for meeting in meetings_updated %}
             <p>
               {% if meeting.minutes and meeting.presentation_materials %}
@@ -90,11 +89,10 @@
               are available for the {{ meeting.date|date:"F Y" }} meeting</a>
             </p>
           {% endfor %}
-          <br>
         {% endif %}
 
         {% if tech_resources %}
-          <h3>Most recent publications</h3>
+          <h3>Most Recent Publications</h3>
           {% for resource in tech_resources %}
             <p>
               {% if resource.pdf %}
@@ -120,8 +118,7 @@
         data-tweet-limit="3"
         data-aria-polite="assertive"
         data-dnt="true"
-        data-theme="dark"
-        data-width="300">
+        data-theme="dark">
       </a>
       <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
       <p class="center">Follow <a href="https://twitter.com/cjtf_nj" target="new">CJTF</a> on Twitter for more news.</p>

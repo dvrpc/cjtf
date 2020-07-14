@@ -53,13 +53,14 @@
                     {{ event.end_time }}
                   {% endif %}
                 {% endif %}
-              </p>
+              <br>
               {% if event.location %}
                 Location: {{ event.location}}
               {% endif %}
               {% if event.description %}
                 {{ event.description|safe }}
               {% endif %}
+              </p>
           {% endfor %}
         {% endif %}
 
