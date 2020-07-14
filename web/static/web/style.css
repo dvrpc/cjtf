@@ -71,6 +71,9 @@ header .search input {
 header .search form {
   display: inline;
 }
+header .search img {
+  vertical-align: middle;
+}
 header .logos {
   grid-area: mid-right;
   justify-self: end;
@@ -434,6 +437,10 @@ table.contact_form th {
   nav ul li {
     margin-right: 15px;
     margin-left: 5px;
+  }
+  nav ul li:not(:last-child):not(:first-child):after {
+    content: none;
+    padding-left: 0;
   }
   nav ul li:hover > ul {
     display: none;
