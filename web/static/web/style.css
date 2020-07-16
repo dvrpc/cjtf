@@ -50,7 +50,7 @@ header {
     "left mid-right"
     "bottom bottom";
 }
-header .cjtf_logo {
+.cjtf_logo {
   grid-area: left;
 }
 header .cjtf_logo img {
@@ -328,14 +328,69 @@ table.contact_form th {
 }
 .past_meetings {
   border-collapse: collapse;
-  border: none;
+  min-width: 400px;
 }
 .past_meetings tr {
-  border-bottom: 1px solid gray;
-}
-.past_meetings tr:last-child {
+  border-top: none;
   border-bottom: none;
 }
+.past_meetings tr.first {
+  border-top: 1px solid var(--table-border-color);
+  border-bottom: 1px solid var(--table-border-color);
+}
+.past_meetings tr.first:not(.current-year):hover {
+  background-color: var(--table-border-color);
+}
+.past_meetings td {
+  width: 75px;
+}
+.past_meetings td.current-year {
+  padding: 15px;
+  font-weight: bold;
+}
+.past_meetings tr.first:not(.current-year) td {
+  padding: 0;
+}
+/* classes related to toggle display of prior year meeting info */
+.past_meetings .collapsible {
+  display: none;
+}
+.past_meetings .collapsible td:first-child {
+  padding-left: 25px;
+}
+button.toggleDisplay {
+  border: none;
+  text-decoration: none;
+  background-color: inherit;
+  color: var(--white-blue);
+  width: 100%;
+  padding: 15px;
+  margin: 0;
+  text-align: left;
+  font-size: 1rem;
+}
+.toggleDisplay:hover {
+  color:white;
+}
+.toggleDisplay:after {
+  content: "\002B";
+  color: var(--white-blue);
+  font-size: 1.5rem;
+  float: right;
+  vertical-align: bottom;
+  display: inline-block;
+}
+.toggleDisplay:hover:after {
+  color: white;
+}
+.toggleDisplay:active, .toggleDisplay:focus {
+  outline: none;
+}
+.minus:after {
+  content: "\2212";
+}
+/* end */
+
 .resources {
   float: left;
 }

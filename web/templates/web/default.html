@@ -77,34 +77,67 @@
       {% if request.resolver_match.url_name == 'events_meetings' %}
         <h3>Past Forum Meetings</h3>
         {% if past_meetings %}
-          <table class="past_meetings" align="left">
-            {% for meeting in past_meetings %}
-              <tr>
-                <td><b>{{meeting.year}}<b></td>
-                <td>{{meeting.date|date:"M"}}</td>
-                <td>
-                  {% if meeting.agenda %}
-                    <a href="{{ meeting.agenda.url }}" class="not-bold">Agenda</a>↓
-                  {% else %}
-                    &nbsp;
-                  {% endif %}
-                </td>
-                <td>
-                  {% if meeting.minutes %}
-                    <a href="{{ meeting.minutes.url }}" class="not-bold">Minutes</a>↓
-                  {% else %}
-                    &nbsp;
-                  {% endif %}
-                </td>
-                <td>
-                  {% if meeting.presentation_materials %}
-                    <a href="{{ meeting.presentation_materials.url }}" class="not-bold">
-                    Materials</a>↓
-                  {% else %}
-                    &nbsp;
-                  {% endif %}
+          {% regroup past_meetings by date.year as years %}
+
+          <table class="past_meetings">
+            {% for year, meeting_list in years|slice:":1" %}
+              <tr class="first current-year">
+                <td colspan="4" class="current-year">
+                  {{year}}
                 </td>
               </tr>
+              {% for meeting in meeting_list %}
+                <tr>
+                  <td>{{meeting.date|date:"M"}}</td>
+                  <td>
+                    {% if meeting.agenda %}
+                      <a href="{{ meeting.agenda.url }}" class="not-bold">Agenda</a>↓
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if meeting.minutes %}
+                      <a href="{{ meeting.minutes.url }}" class="not-bold">Minutes</a>↓
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if meeting.presentation_materials %}
+                      <a href="{{ meeting.presentation_materials.url }}" class="not-bold">
+                      Materials</a>↓
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            {% endfor %}
+          </table>
+
+          <table class="past_meetings">
+            {% for year, meeting_list in years|slice:"1:" %}
+              <tr class="first">
+                <td colspan="4">
+                  <button type="button" class="bold toggleDisplay" value="year{{year}}">{{year}}</button>
+                </td>
+              </tr>
+              {% for meeting in meeting_list %}
+                <tr class="collapsible year{{year}}">
+                  <td>{{meeting.date|date:"M"}}</td>
+                  <td>
+                    {% if meeting.agenda %}
+                      <a href="{{ meeting.agenda.url }}" class="not-bold">Agenda</a>↓
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if meeting.minutes %}
+                      <a href="{{ meeting.minutes.url }}" class="not-bold">Minutes</a>↓
+                    {% endif %}
+                  </td>
+                  <td>
+                    {% if meeting.presentation_materials %}
+                      <a href="{{ meeting.presentation_materials.url }}" class="not-bold">
+                      Materials</a>↓
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
             {% endfor %}
           </table>
         {% endif %}

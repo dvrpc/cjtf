@@ -79,17 +79,18 @@
     <a href="https://www.njtpa.org">
       <img src="{% static 'web/images/njtpa_small.png' %}"></a>
   </footer>
+  <script>
+    const openerButton = document.querySelector('.opener');
+    const closerButton = document.querySelector('.closer');
+
+    function toggleMenu() {
+      ulItem = document.querySelector('nav > ul');
+      ulItem.classList.toggle('show');
+    }
+
+    openerButton.addEventListener('click', toggleMenu);
+    closerButton.addEventListener('click', toggleMenu);
+  </script>
+  <script src="{% static 'web/js/collapse.js' %}"></script>
 </body>
-<script>
-  const openerButton = document.querySelector('.opener');
-  const closerButton = document.querySelector('.closer');
-
-  function toggleMenu() {
-    ulItem = document.querySelector('nav > ul');
-    ulItem.classList.toggle('show');
-  }
-
-  openerButton.addEventListener('click', toggleMenu);
-  closerButton.addEventListener('click', toggleMenu);
-</script>
 </html>
