@@ -355,7 +355,7 @@ table.contact_form th {
 .past_meetings .collapsible {
   display: none;
 }
-.past_meetings .collapsible td:first-child {
+.past_meetings td:first-child {
   padding-left: 25px;
 }
 button.toggleDisplay {
