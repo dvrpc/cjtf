@@ -1,7 +1,6 @@
 const toggleButtons = document.querySelectorAll(".toggleDisplay");
 
 function toggleDisplay(e) {
-    console.log(e.target);
     const rowsToToggle = document.querySelectorAll("."+e.target.value)
     rowsToToggle.forEach(function(row) {
         e.target.classList.toggle("minus")
