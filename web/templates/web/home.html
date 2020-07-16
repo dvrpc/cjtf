@@ -126,21 +126,5 @@
     </div>
   </main>
 
-  {% comment %}
-  slider from https://github.com/rchisholm/vanilla-slider, slightly modified so images
-  span full viewport width
-  {% endcomment %}
-  <script type="text/javascript" src="{% static 'web/js/vanilla-slider.js' %}"></script>
-  <script>
-    var options = {
-      transitionTime: 750,
-      transitionZoom: 'in',
-      arrows:false,
-      auto: true,
-      autoTime: 6000,
-      autoPauseOnHover: false,
-    }
-    var mySlider = createSlider('heroimage', options);
-  </script>
 {% endblock %}
 

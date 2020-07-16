@@ -79,7 +79,25 @@
     <a href="https://www.njtpa.org">
       <img src="{% static 'web/images/njtpa_small.png' %}"></a>
   </footer>
+  {% comment %}
+    slider from https://github.com/rchisholm/vanilla-slider, slightly modified so images
+    span full viewport width
+  {% endcomment %}
+  <script type="text/javascript" src="{% static 'web/js/collapse.js' %}"></script>
+  <script type="text/javascript" src="{% static 'web/js/vanilla-slider.js' %}"></script>
   <script>
+    /* initate slider */
+    var options = {
+      transitionTime: 750,
+      transitionZoom: 'in',
+      arrows:false,
+      auto: true,
+      autoTime: 6000,
+      autoPauseOnHover: false,
+    }
+    var mySlider = createSlider('heroimage', options);
+
+    /* responsive mode menu */
     const openerButton = document.querySelector('.opener');
     const closerButton = document.querySelector('.closer');
 
@@ -91,6 +109,5 @@
     openerButton.addEventListener('click', toggleMenu);
     closerButton.addEventListener('click', toggleMenu);
   </script>
-  <script src="{% static 'web/js/collapse.js' %}"></script>
 </body>
 </html>
