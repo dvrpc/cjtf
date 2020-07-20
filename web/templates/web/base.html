@@ -14,7 +14,6 @@
 
 <body>
 
-  <script type="text/javascript" src="{% static 'web/js/vanilla-slider.js' %}"></script>
   <header>
     <div class="cjtf_logo"><a href="/"><img src="{% static 'web/images/logo_header.png' %}"></a></div>
     <div class="search">
@@ -81,22 +80,7 @@
     <a href="https://www.njtpa.org">
       <img src="{% static 'web/images/njtpa_small.png' %}"></a>
   </footer>
-  {% comment %}
-    slider from https://github.com/rchisholm/vanilla-slider, slightly modified so images
-    span full viewport width
-  {% endcomment %}
   <script>
-    /* initate slider */
-    var options = {
-      transitionTime: 750,
-      transitionZoom: 'in',
-      arrows:false,
-      auto: true,
-      autoTime: 6000,
-      autoPauseOnHover: false,
-    }
-    var mySlider = createSlider('heroimage', options);
-
     /* responsive mode menu */
     const openerButton = document.querySelector('.opener');
     const closerButton = document.querySelector('.closer');

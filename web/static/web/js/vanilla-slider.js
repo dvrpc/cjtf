@@ -101,7 +101,7 @@ class VanillaSlider {
         }
 
         if (!document.getElementById(this.containerId)) {
-            throw ("Slider error: conatinerId must be a valid element or id");
+            throw ("Slider error: containerId must be a valid element or id");
         }
 
         // place images in container
