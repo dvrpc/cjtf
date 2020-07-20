@@ -26,7 +26,7 @@ def email_us(message):
         "Submitted contact form from CJTF website",
         message,
         "contact@centraljerseytf.org",
-        ["kwarner@dvrpc.org"],
+        ["jdavis@dvrpc.org"],
     )
 
 
