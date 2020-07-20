@@ -8,11 +8,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{% static 'web/style.css' %}">
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" type="image/png" href="{% static 'web/images/favicon.ico' %}"/>
   <title>{{ title }}</title>
 </head>
 
 <body>
 
+  <script type="text/javascript" src="{% static 'web/js/vanilla-slider.js' %}"></script>
   <header>
     <div class="cjtf_logo"><a href="/"><img src="{% static 'web/images/logo_header.png' %}"></a></div>
     <div class="search">
@@ -83,8 +85,6 @@
     slider from https://github.com/rchisholm/vanilla-slider, slightly modified so images
     span full viewport width
   {% endcomment %}
-  <script type="text/javascript" src="{% static 'web/js/collapse.js' %}"></script>
-  <script type="text/javascript" src="{% static 'web/js/vanilla-slider.js' %}"></script>
   <script>
     /* initate slider */
     var options = {
@@ -109,5 +109,6 @@
     openerButton.addEventListener('click', toggleMenu);
     closerButton.addEventListener('click', toggleMenu);
   </script>
+  <script type="text/javascript" src="{% static 'web/js/collapse.js' %}"></script>
 </body>
 </html>

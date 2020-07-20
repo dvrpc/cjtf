@@ -439,7 +439,7 @@ button.toggleDisplay {
   }
   header .cjtf_logo {
     grid-area: logo;
-    padding-bottom: 50px;
+    padding-bottom: 10px;
   }
   header .cjtf_logo img {
     width: 100%;
@@ -526,7 +526,7 @@ button.toggleDisplay {
     font-size: 1rem;
     padding: 10px;
     width: calc(100% - 20px);
-    background: var(--medium-blue);
+    background: var(--dark-gray);
   }
   main.default {
     grid-template-columns: 1fr;
