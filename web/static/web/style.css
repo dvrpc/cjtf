@@ -416,6 +416,13 @@ button.toggleDisplay {
 .resources td[data-th="Source"] {
   min-width: 125px;
 }
+table.partner_orgs {
+  border: 0;
+}
+table.partner_orgs td {
+  width: 50%;
+  vertical-align: top;
+}
 /* Responsive layout */
 @media screen and (max-width: 975px) and (min-width: 768px) {
   header .cjtf_logo img {
@@ -543,6 +550,9 @@ button.toggleDisplay {
   main .col2,
   main .full {
     padding: 0 20px 10px 20px;
+  }
+  main.default .col2 {
+    padding-top: 0;
   }
   footer {
     display: block;
