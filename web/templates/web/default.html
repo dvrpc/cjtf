@@ -39,20 +39,11 @@
           {% for event in upcoming_events %}
               <p>
                 {% if event.url %}
-                  <a href="{{event.url}}">{{event.title}}</a>:
+                <a href="{{event.url}}">{{event.title}}</a>:
                 {% else %}
                   {{ event.title }}:
                 {% endif %}
-                {{ event.start_date }}
-                {% if event.start_time %}
-                  {{ event.start_time }}
-                {% endif %}
-                {% if event.end_date %}
-                  - {{ event.end_date }}
-                  {% if event.end_time %}
-                    {{ event.end_time }}
-                  {% endif %}
-                {% endif %}
+                {{ event.display_date }}
               <br>
               {% if event.location %}
                 Location: {{ event.location}}

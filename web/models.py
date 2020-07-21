@@ -62,6 +62,48 @@ class Event(models.Model):
     def __str__(self):
         return self.title
 
+    def display_date(self):
+        date = (
+            datetime.datetime.strftime(self.start_date, "%B %d, %Y").lstrip("0").replace(" 0", " ")
+        )
+        if self.start_time:
+            date += ",  " + datetime.time.strftime(self.start_time, "%I:%M %p").lstrip("0").replace(
+                " 0", " "
+            )
+
+        if self.end_date:
+            if self.start_date == self.end_date:
+                if self.end_time:
+                    date += " - " + datetime.time.strftime(self.end_time, "%I:%M %p").lstrip(
+                        "0"
+                    ).replace(" 0", " ")
+            else:
+                if self.end_time:
+                    date += " - " + datetime.datetime.strftime(self.end_date, "%B %d, %Y").lstrip(
+                        "0"
+                    ).replace(" 0", " ")
+                    date += ", " + datetime.time.strftime(self.end_time, "%I:%M %p").lstrip(
+                        "0"
+                    ).replace(" 0", " ")
+                else:
+                    date += " - " + datetime.datetime.strftime(self.end_date, "%B %d, %Y").lstrip(
+                        "0"
+                    ).replace(" 0", " ")
+
+        return date
+        """
+                {{ event.start_date }}
+                {% if event.start_time %}
+                  {{ event.start_time }}
+                {% endif %}
+                {% if event.end_date %}
+                  - {{ event.end_date }}
+                  {% if event.end_time %}
+                    {{ event.end_time }}
+                  {% endif %}
+                {% endif %}
+        """
+
 
 class Page(models.Model):
     title = models.CharField(max_length=30, help_text="Title of the page.")
