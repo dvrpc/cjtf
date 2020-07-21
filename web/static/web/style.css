@@ -123,6 +123,10 @@ nav ul li ul {
   padding: 1rem 0.5rem 0.5rem 0.5rem;
   left: 0;
   display: none;
+  z-index: 11;
+}
+nav ul li ul li:not(:last-child):not(:first-child):after {
+  content: none;
 }
 nav a {
   text-decoration: none;
