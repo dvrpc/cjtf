@@ -91,18 +91,6 @@ class Event(models.Model):
                     ).replace(" 0", " ")
 
         return date
-        """
-                {{ event.start_date }}
-                {% if event.start_time %}
-                  {{ event.start_time }}
-                {% endif %}
-                {% if event.end_date %}
-                  - {{ event.end_date }}
-                  {% if event.end_time %}
-                    {{ event.end_time }}
-                  {% endif %}
-                {% endif %}
-        """
 
 
 class Page(models.Model):

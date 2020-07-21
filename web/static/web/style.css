@@ -335,8 +335,9 @@ table.contact_form th {
   text-decoration: none;
 }
 .past_meetings {
-  border-collapse: collapse;
-  min-width: 400px;
+  width: 400px;
+  table-layout: fixed;
+  float: left;
 }
 .past_meetings tr {
   border-top: none;
@@ -350,11 +351,15 @@ table.contact_form th {
   background-color: var(--table-border-color);
 }
 .past_meetings td {
-  width: 75px;
+  text-align: right;
 }
 .past_meetings td.current-year {
   padding: 15px;
   font-weight: bold;
+  text-align: left;
+}
+.past_meetings td:first-child:not(.current-year) {
+  text-align: center;
 }
 .past_meetings tr.first:not(.current-year) td {
   padding: 0;
@@ -362,9 +367,6 @@ table.contact_form th {
 /* classes related to toggle display of prior year meeting info */
 .past_meetings .collapsible {
   display: none;
-}
-.past_meetings td:first-child {
-  padding-left: 25px;
 }
 button.toggleDisplay {
   border: none;
@@ -426,6 +428,7 @@ table.partner_orgs {
 table.partner_orgs td {
   width: 50%;
   vertical-align: top;
+  padding-left: 0;
 }
 /* Responsive layout */
 @media screen and (max-width: 975px) and (min-width: 768px) {

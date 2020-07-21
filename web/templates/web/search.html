@@ -2,15 +2,15 @@
 
 {% block main %}
   <main class="default">
-    <div class="col1"> 
-      {% if not search_attempt %} 
+    <div class="col1">
+      {% if not search_attempt %}
         <h2>Search</h2>
         {% if not search_term %}
           <div>
-            {% include 'web/search_form.html' %}      
+            {% include 'web/search_form.html' %}
           </div>
           <br>
-        {% endif %} 
+        {% endif %}
 
       {% else %}
         <h2>Search Results</h2>
@@ -25,8 +25,8 @@
             <br>
           {% endif %}
           {% if results.events %}
-            <p class="bold">Events</p> 
-            <ul> 
+            <p class="bold">Events</p>
+            <ul>
             {% for event in results.events %}
               <li>
               {% if event.url %}
@@ -42,7 +42,7 @@
           {% endif %}
           {% if results.tech_resources %}
             <p class="bold">Technical Resources</p>
-            <ul> 
+            <ul>
             {% for resource in results.tech_resources %}
                 <li><a href="{{ resource.url }}">{{ resource.name }}</a>:
                 published {{ resource.publication_date }}, Source: {{ resource.source }}</li>
@@ -55,8 +55,12 @@
             <ul>
             {% for resource in results.funding_resources %}
               <li>
-                <a href="{{ resource.url }}">{{ resource.name }}</a>:
-                due {{ resource.due_date }}, Source: {{ resource.source_name }}
+                <a href="{{ resource.url }}">{{ resource.name }}</a>
+                {% if resource.due_date %}
+                  due {{ resource.due_date }}, Source: {{ resource.source_name }}
+                {% else %}
+                  Source: {{ resource.source_name }}
+                {% endif %}
               </li>
             {% endfor %}
             </ul>
