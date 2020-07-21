@@ -10,7 +10,7 @@
           {{ title }}
         {% endif %}
       </h2>
-      <div>{{ page.main_content|safe|linebreaks }}</div>
+      <div>{{ page.main_content|safe }}</div>
 
       {# Events & Meetings #}
       {% if request.resolver_match.url_name == 'events_meetings' %}
@@ -75,7 +75,7 @@
     </div>
     <div class="col2">
       {% if request.resolver_match.url_name == 'events_meetings' %}
-        <h3>Past Forum Meetings</h3>
+        <p class="bold">Past Forum Meetings</p>
         {% if past_meetings %}
           {% regroup past_meetings by date.year as years %}
 

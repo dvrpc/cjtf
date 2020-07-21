@@ -195,6 +195,9 @@ main.default {
   grid-template-areas: "col1 col2";
   padding-bottom: 20px;
 }
+main.default .col2 {
+  padding-top: 3rem;
+}
 main.default .map {
   position: relative;
   width: 100%;
@@ -272,9 +275,10 @@ table th.orderable.desc:after {
   padding-left: 1px;
   color: var(--orange);
 }
-table tr {
+/*table tr {
   border-bottom: 1px solid var(--table-border-color);
 }
+*/
 table th,
 table td {
   padding: 10px;
@@ -393,6 +397,9 @@ button.toggleDisplay {
 
 .resources {
   float: left;
+}
+.resources tr {
+  border-bottom: 1px solid var(--table-border-color);
 }
 .resources td[data-th="Product Name"] {
   min-width: 175px;
