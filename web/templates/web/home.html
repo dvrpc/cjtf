@@ -67,10 +67,10 @@
           {% for meeting in meetings_updated %}
             <p>
               {% if meeting.minutes and meeting.presentation_materials %}
-                <a href="{{ meeting.minutes.url }}">Minutes</a> and
+                <a href="{{ meeting.minutes.url }}">Highlights</a> and
                 <a href="{{ meeting.presentation_materials.url }}">Presentation Materials</a>
               {% elif meeting.minutes and not meeting.presentation_materials %}
-                <a href="{{ meeting.minutes.url }}">Minutes</a>
+                <a href="{{ meeting.minutes.url }}">Highlights</a>
               {% elif not meeting.minutes and meeting.presentation_materials %}
                 <a href="{{ meeting.presetnation_materials.url }}">Presentation Materials</a>
               {% endif %}
