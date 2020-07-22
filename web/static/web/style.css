@@ -52,6 +52,8 @@ header {
 }
 .cjtf_logo {
   grid-area: left;
+  padding-top: 5px;
+  margin-left: -4px;
 }
 header .cjtf_logo img {
   width: 500px;
