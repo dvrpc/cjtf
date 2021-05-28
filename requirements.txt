@@ -1,4 +1,5 @@
 Django==3.0.14
 django-ckeditor==5.9.0
-psycopg2==2.8.5
+django-cors-headers
 django-tables2==2.3.1
+psycopg2-binary==2.8.6
