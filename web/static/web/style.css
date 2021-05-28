@@ -186,7 +186,7 @@ main.home .col2 {
 .mission-text {
   position: absolute;
   display: block;
-  z-index: 99;
+  z-index: 10;
   bottom: 0;
   left: 0;
   padding: 10px 10px 10px 80px;
@@ -492,6 +492,7 @@ table.partner_orgs td {
     padding-right: 0px;
   }
   nav ul {
+    z-index: 99;
     display: grid;
     justify-items: end;
     position: fixed;
