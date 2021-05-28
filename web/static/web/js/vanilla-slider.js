@@ -13,11 +13,6 @@ class VanillaSlider {
      * options.transitionDirectionX: x direction for fading out element to move - 'left', 'right', or 'random'
      * options.transitionDirectionY: y direction for fading out element to move - 'up', 'down', or 'random'
      * options.transitionZoom: direction for zooming the fading out element - 'in', 'out', or 'random'
-     * options.bullets: whether to show bullets
-     * options.bulletColor: color for active bullet
-     * options.bulletsHide: whether to hide bullets on mouse out
-     * options.arrows: whether to show arrows
-     * options.arrowsHide: whether to hide arrows on mouse out
      * options.swipe: whether to allow swipe support
      * options.auto: whether to automatically move slides
      * options.autoTime: time in ms for slides to automatically move
@@ -31,11 +26,6 @@ class VanillaSlider {
         this.transitionDirectionX = options.transitionDirectionX;
         this.transitionDirectionY = options.transitionDirectionY;
         this.transitionZoom = options.transitionZoom;
-        this.bullets = options.bullets;
-        this.bulletColor = options.bulletColor;
-        this.bulletsHide = options.bulletsHide;
-        this.arrows = options.arrows;
-        this.arrowsHide = options.arrowsHide;
         this.swipe = options.swipe;
         this.auto = options.auto;
         this.autoTime = options.autoTime;
@@ -51,10 +41,6 @@ class VanillaSlider {
 
         // adjusting values
         this.transitionTime = this.transitionTime ? this.transitionTime : 250;
-        this.bullets = typeof this.bullets === 'boolean' ? this.bullets : false;
-        this.bulletsHide = typeof this.bulletsHide === 'boolean' && this.bullets ? this.bulletsHide : false;
-        this.arrows = typeof this.arrows === 'boolean' ? this.arrows : true;
-        this.arrowsHide = typeof this.arrowsHide === 'boolean' && this.arrows ? this.arrowsHide : true;
         this.swipe = typeof this.swipe === 'boolean' ? this.swipe : true;
         this.auto = typeof this.auto === 'boolean' ? this.auto : false;
         this.autoTime = typeof this.autoTime === 'number' ? this.autoTime : 10000;
@@ -76,18 +62,6 @@ class VanillaSlider {
                 webpTest = elem.toDataURL('image/webp').indexOf('data:image/webp') == 0;
             }
             this.webp = (webpTest || ffSupport || ieSupport);
-        }
-
-        // check color
-        if (this.bulletColor) {
-            const isColor = (strColor) => {
-                const s = new Option().style;
-                s.color = strColor;
-                return s.color !== '';
-            };
-            this.bulletColor = isColor(this.bulletColor) ? this.bulletColor : 'red';
-        } else {
-            this.bulletColor = 'red'; // default bulletColor
         }
 
         if (!Array.isArray(this.images)) {
@@ -208,165 +182,11 @@ class VanillaSlider {
             return navigator.userAgent.indexOf("MSIE ") > -1 || navigator.userAgent.indexOf("Trident/") > -1;
         };
 
-        // style container
-        this.container.classList.add('vanilla-slider-container');
-        this.container.style.marginLeft = 'auto';
-        this.container.style.marginRight = 'auto';
-        this.container.style.maxWidth = '100%';
-        this.container.style.display = 'flex';
-        this.container.style.overflow = 'hidden';
-        this.container.style.position = 'relative';
-        if(isIE()) {
-            this.container.style.alignItems = 'flex-end';
-        }
-
-        const addArrowStyles = (arrow) => {
-            arrow.style.zIndex = 6;
-            arrow.style.color = '#fff';
-            arrow.style.fontSize = '2.5em';
-            arrow.style.fontWeight = 'bold';
-            arrow.style.cursor = 'pointer';
-            arrow.style.transition = 'all 0.3s linear';
-            arrow.style.textShadow = '0px 0px 10px rgba(0,0,0,0.5)';
-            return arrow;
-        };
-
-        if (this.arrows) {
-            // create left arrow
-            this.leftArrow = document.createElement('SPAN');
-            this.leftArrow.id = this.containerId + '-arrow-left';
-            this.leftArrow.classList.add('vanilla-slider-arrow');
-            this.leftArrow.classList.add('vanilla-slider-arrow-left');
-            this.leftArrow = addArrowStyles(this.leftArrow);
-            this.leftArrow.style.margin = 'auto auto auto 10px';
-            this.leftArrow.innerHTML = '&#10094;';
-            this.leftArrow.addEventListener('click', (event) => {
-                this.prevSlide();
-                event.stopPropagation();
-            });
-            if (isIE()) {
-                this.leftArrow.style.marginTop = '45%';
-                this.leftArrow.style.transform = 'translateY(-55%)';
-            }
-            // this.leftArrow.addEventListener('mouseover', () => {
-            //     this.leftArrow.style.transform = 'scale(1.2)';
-            // });
-            // this.leftArrow.addEventListener('mouseout', () => {
-            //     this.leftArrow.style.transform = 'scale(1.0)';
-            // });
-            this.container.appendChild(this.leftArrow);
-        }
-
-        if (this.bullets) {
-            // create bullet container
-            this.bulletContainer = document.createElement('DIV');
-            this.bulletContainer.id = this.containerId + '-bullet-container';
-            this.bulletContainer.classList.add('vanilla-slider-bullet-container');
-            this.bulletContainer.style.zIndex = 6;
-            this.bulletContainer.style.position = 'relative';
-            this.bulletContainer.style.margin = 'auto auto 0';
-            this.bulletContainer.style.textAlign = 'center';
-            if (isIE()) {
-                this.bulletContainer.style.marginTop = '65%';
-            }
-            this.container.appendChild(this.bulletContainer);
-            // create bullets
-            this.bullets = [];
-            var bullet;
-            this.imageElements.forEach((element, index) => {
-                bullet = document.createElement('SPAN');
-                bullet.id = this.containerId + '-bullet-' + index;
-                bullet.classList.add('vanilla-slider-bullet');
-                bullet.style.color = '#fff';
-                bullet.style.zIndex = 10;
-                bullet.style.fontSize = '2em';
-                bullet.style.margin = '0 5px';
-                bullet.style.cursor = 'pointer';
-                bullet.style.transition = 'all ' + (this.transitionTime / 1000) + 's linear';
-                bullet.style.textShadow = '0px 0px 5px rgba(0,0,0,0.5)';
-                bullet.innerHTML = '&bull;';
-                bullet.addEventListener('click', (event) => {
-                    this.goToSlide(index);
-                    event.stopPropagation();
-                });
-                if (index === 0) {
-                    bullet.style.color = this.bulletColor;
-                }
-                this.bullets[index] = bullet;
-                this.bulletContainer.appendChild(bullet);
-            });
-            // hide bullets
-            if (this.bulletsHide) {
-                this.bulletContainer.style.visibility = 'hidden';
-                this.bulletContainer.style.opacity = 0;
-                this.bulletContainer.style.transition = 'visibility 0.3s linear,opacity 0.3s linear';
-                this.container.addEventListener('mouseenter', () => {
-                    this.bulletContainer.style.visibility = 'visible';
-                    this.bulletContainer.style.opacity = 1;
-                });
-                this.container.addEventListener('mouseleave', () => {
-                    this.bulletContainer.style.visibility = 'hidden';
-                    this.bulletContainer.style.opacity = 0;
-                });
-            }
-        }
-
-        if (this.arrows) {
-            // create right arrow
-            this.rightArrow = document.createElement('SPAN');
-            this.rightArrow.id = this.containerId + '-arrow-right';
-            this.rightArrow.classList.add('vanilla-slider-arrow');
-            this.rightArrow.classList.add('vanilla-slider-arrow-right');
-            this.rightArrow = addArrowStyles(this.rightArrow);
-            this.rightArrow.style.margin = 'auto 10px auto auto';
-            this.rightArrow.innerHTML = '&#10095;';
-            this.rightArrow.addEventListener('click', (event) => {
-                this.nextSlide();
-                event.stopPropagation();
-            });
-            if (isIE()) {
-                this.rightArrow.style.marginTop = '45%';
-                this.rightArrow.style.transform = 'translateY(-55%)';
-            }
-            // this.rightArrow.addEventListener('mouseover', () => {
-            //     this.rightArrow.style.transform = 'scale(1.2)';
-            // });
-            // this.rightArrow.addEventListener('mouseout', () => {
-            //     this.rightArrow.style.transform = 'scale(1.0)';
-            // });
-            this.container.appendChild(this.rightArrow);
-
-            // hide arrows
-            if (this.arrowsHide) {
-                this.leftArrow.style.visibility = 'hidden';
-                this.leftArrow.style.opacity = 0;
-                this.rightArrow.style.visibility = 'hidden';
-                this.rightArrow.style.opacity = 0;
-                this.container.addEventListener('mouseenter', () => {
-                    this.leftArrow.style.visibility = 'visible';
-                    this.leftArrow.style.opacity = 1;
-                    this.rightArrow.style.visibility = 'visible';
-                    this.rightArrow.style.opacity = 1;
-                });
-                this.container.addEventListener('mouseleave', () => {
-                    this.leftArrow.style.visibility = 'hidden';
-                    this.leftArrow.style.opacity = 0;
-                    this.rightArrow.style.visibility = 'hidden';
-                    this.rightArrow.style.opacity = 0;
-                });
-            }
-        }
-
-        /**
-         * resize container, called on resizing browser window
-        */ 
-        this.resizeContainer = () => {
-            this.container.style.width = this.container.parentNode.clientWidth + 'px';
-            var imageXYRatio = this.imageElements[0].naturalWidth / this.imageElements[0].naturalHeight;
-            this.container.style.height = parseFloat(this.container.style.width.replace('px', '')) / imageXYRatio + 'px';
-        };
-         
-        window.addEventListener('resize', this.resizeContainer);
+        // // style container
+        // this.container.classList.add('vanilla-slider-container');
+        // if(isIE()) {
+        //     this.container.style.alignItems = 'flex-end';
+        // }
         
         /**
          * fades the target out
@@ -403,7 +223,8 @@ class VanillaSlider {
             options.fadeTime = options.fadeTime ? options.fadeTime : defaultFadeTime;
             options.directionX = options.directionX ? options.directionX : null;
             options.directionY = options.directionY ? options.directionY : null;
-            options.zoom = options.zoom ? options.zoom : null;
+            // options.zoom = options.zoom ? options.zoom : null;
+            options.zoom = null;
 
 
             var isVisible = (element) => {
@@ -555,14 +376,8 @@ class VanillaSlider {
                 }
             } else if (!this.sliderLock) {
                 this.pauseAuto();
-                if (this.bullets) {
-                    this.bullets[this.currentIndex].style.color = '#fff';
-                    this.bullets[newIndex].style.color = this.bulletColor;
-                }
                 var finishSlide = () => {
                     this.currentIndex = newIndex;
-                    this.setSlideLink(newIndex);
-                    this.setSlideText(newIndex);
                     this.sliderLock = false;
                     if (typeof callback === 'function') {
                         callback();
@@ -647,94 +462,16 @@ class VanillaSlider {
         };
 
         /**
-         * clear the link div for the slide, and if the next slide has a link, create the link div
-         */
-        this.setSlideText = (index) => {
-            if (this.textOverlay) {
-                this.container.removeChild(this.textOverlay);
-                this.textOverlay = null;
-            }
-            if (this.images[index].textTitle || this.images[index].textBody) {
-                this.textOverlay = document.createElement('DIV');
-                this.textOverlay.id = this.containerId + '-text-overlay';
-                this.textOverlay.classList.add('vanilla-slider-text-overlay');
-                this.textOverlay.style.zIndex = 6;
-                this.textOverlay.style.position = 'absolute';
-                this.textOverlay.style.padding = "0 20px";
-                this.textOverlay.style.textAlign = 'left';
-                this.textOverlay.style.color = '#fff';
-                this.textOverlay.style.textShadow = '0 0 20px black';
-                this.textOverlay.style.backgroundColor = 'rgba(0,0,0,0.3)';
-                this.textOverlay.style.opacity = 0;
-                this.textOverlay.style.transition = 'all 0.5s linear';
-                var textOverlayContent = '';
-                if (this.images[index].textTitle) {
-                    textOverlayContent += '<h1>' + this.images[index].textTitle + '</h1>';
-                }
-                if (this.images[index].textBody) {
-                    textOverlayContent += '<h3>' + this.images[index].textBody + '</h3>';
-                }
-                this.images[index].textPosition = typeof this.images[index].textPosition === 'string' ? this.images[index].textPosition : 'SW';
-                switch (this.images[index].textPosition) {
-                    case 'NW':
-                        this.textOverlay.style.top = '20px';
-                        this.textOverlay.style.left = '20px';
-                        break;
-                    case 'NE':
-                        this.textOverlay.style.top = '20px';
-                        this.textOverlay.style.right = '20px';
-                        break;
-                    case 'SE':
-                        this.textOverlay.style.bottom = '20px';
-                        this.textOverlay.style.right = '20px';
-                        break;
-                    default: // SW
-                        this.textOverlay.style.bottom = '20px';
-                        this.textOverlay.style.left = '20px';
-                        break;
-                }
-
-                this.textOverlay.innerHTML = textOverlayContent;
-                if (this.images[index].linkUrl) {
-                    this.textOverlay.style.cursor = 'pointer';
-                    if (this.images[index].linkNewTab) {
-                        this.textOverlay.addEventListener('click', () => {
-                            window.open(this.images[index].linkUrl, '_blank');
-                        });
-                    } else {
-                        this.textOverlay.addEventListener('click', () => {
-                            window.location.href = this.images[index].linkUrl;
-                        });
-                    }
-                }
-                this.container.appendChild(this.textOverlay);
-            }
-        };
-
-        this.revealSlideText = (index) => {
-            if ((this.images[index].textTitle || this.images[index].textBody) && this.textOverlay) {
-                var revealEffect = setInterval(() => {
-                    this.textOverlay.style.opacity = parseFloat(this.textOverlay.style.opacity) + parseFloat(0.1);
-                    if (this.textOverlay.style.opacity >= 1) {
-                        clearInterval(revealEffect);
-                    }
-                }, 5);
-            }
-        };
-
-        /**
          * transition from one slide to another
          */
         this.transitionSlide = (newIndex, callback) => {
             this.imageElements[newIndex].style.zIndex = 1;
             this.imageElements[newIndex].style.opacity = 1;
             this.imageElements[newIndex].style.visibility = 'visible';
-            this.setSlideText(newIndex);
             this.slideFadeOut(this.imageElements[this.currentIndex], () => {
                 this.imageElements[this.currentIndex].style.zIndex = 0;
                 this.imageElements[newIndex].style.zIndex = 2;
                 callback();
-                this.revealSlideText(newIndex);
             }, {
                 fadeTime: this.transitionTime,
                 directionX: this.transitionDirectionX,
@@ -742,13 +479,6 @@ class VanillaSlider {
                 zoom: this.transitionZoom
             });
         };
-
-        // set link of 1st slide
-        this.setSlideLink(this.currentIndex);
-
-        // set text of 1st slide
-        this.setSlideText(this.currentIndex);
-        this.revealSlideText(this.currentIndex);
 
 
         // set swipe listener
@@ -842,10 +572,6 @@ class VanillaSlider {
                 this.hover = false;
             });
         }
-
-        // resize again to be safe
-        this.resizeContainer();
-
     }
 }
 

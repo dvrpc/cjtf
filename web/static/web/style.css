@@ -172,25 +172,25 @@ main.home .col1 ul {
 main.home .col2 {
   background-color: var(--orange);
 }
-main.home .mission {
+.mission {
   grid-area: mission;
   position: relative;
-  max-width: 100vw;
-}
-main.home .mission #heroimage img {
   width: 100%;
-  max-width: 100vw;
 }
-main.home .mission-text {
+
+#heroimage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mission-text {
   position: absolute;
   display: block;
-  z-index: 10;
+  z-index: 99;
   bottom: 0;
   left: 0;
   padding: 10px 10px 10px 80px;
   font-size: 1.4rem;
-  /* I don't know why, but the padding is getting added to the width, so remove it */
-  width: calc(100% - 90px);
   background: linear-gradient(90deg, var(--dark-gray), 65%, hsla(198, 70%, 26%, 0));
 }
 main.default {
@@ -544,8 +544,11 @@ table.partner_orgs td {
     grid-template-columns: 1fr;
     grid-template-areas: "mission" "col1" "col2";
   }
+  main .mission {
+    height: 50vh;
+  }
   main.home .mission-text {
-    position: relative;
+    /* position: relative; */
     font-size: 1rem;
     padding: 10px;
     width: calc(100% - 20px);
