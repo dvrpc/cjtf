@@ -20,25 +20,28 @@
 
     <div class="col1">
       <h2>Updated Materials</h2>
-        {% if next_meeting %}
-          <p>Next regular meeting of the Forum:
+        <h3>Next regular meeting of the Forum</h3>
+        <p>
+          {% if next_meeting %}
             {% if next_meeting.url %}
               <a href="{{ next_meeting.url }}" target="new">{{ next_meeting.date }}</a>
             {% else %}
               {{ next_meeting.date }}
             {% endif %}
-          </p>
-        {% endif %}
+          {% else %}
+            TBD
+          {% endif %}
+        </p>
 
         {% if funding_resources %}
-        <h3>Upcoming Funding Deadlines</h3>
+          <h3>Upcoming Funding Deadlines</h3>
           <p>
             {% if funding_resources|length > 1 %}
               <ul>
                 {% for resource in funding_resources %}
                   <li>
                     {% if resource.due_date %}
-                      {{resource.due_date}}: <a href="{{ resource.url }}" target="new">{{ resource.name }}</a>
+                      <a href="{{ resource.url }}" target="new">{{ resource.name }}</a>: {{ resource.due_date }}
                     {% else %}
                       <a href="{{ resource.url }}" target="new">{{ resource.name }}</a>
                     {% endif %}
@@ -57,42 +60,52 @@
 
         {% if upcoming_events %}
           <h3>Events</h3>
-            {% for event in upcoming_events %}
-              <p><a href="{{ event.url }}" target="new">{{ event.title }}</a>: {{ event.display_date }}</p>
-            {% endfor %}
+          <p>
+            <ul>
+              {% for event in upcoming_events %}
+              <li><a href="{{ event.url }}" target="new">{{ event.title }}</a>: {{ event.display_date }}</li>
+              {% endfor %}
+            </ul>
+          </p>
         {% endif %}
 
         {% if meetings_updated %}
           <h3>Updated Meeting Materials</h3>
-          {% for meeting in meetings_updated %}
-            <p>
-              {% if meeting.minutes and meeting.presentation_materials %}
-                <a href="{{ meeting.minutes.url }}">Highlights</a> and
-                <a href="{{ meeting.presentation_materials.url }}">Presentation Materials</a>
-              {% elif meeting.minutes and not meeting.presentation_materials %}
-                <a href="{{ meeting.minutes.url }}">Highlights</a>
-              {% elif not meeting.minutes and meeting.presentation_materials %}
-                <a href="{{ meeting.presetnation_materials.url }}">Presentation Materials</a>
-              {% endif %}
-              are available for the {{ meeting.date|date:"F Y" }} meeting</a>
-            </p>
-          {% endfor %}
+          <p>
+            <ul>
+              {% for meeting in meetings_updated %}
+                <li>
+                  {% if meeting.minutes and meeting.presentation_materials %}
+                    <a href="{{ meeting.minutes.url }}">Highlights</a> and
+                    <a href="{{ meeting.presentation_materials.url }}">Presentation Materials</a>
+                  {% elif meeting.minutes and not meeting.presentation_materials %}
+                    <a href="{{ meeting.minutes.url }}">Highlights</a>
+                  {% elif not meeting.minutes and meeting.presentation_materials %}
+                    <a href="{{ meeting.presetnation_materials.url }}">Presentation Materials</a>
+                  {% endif %}
+                  are available for the {{ meeting.date|date:"F Y" }} meeting</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </p>
         {% endif %}
 
         {% if tech_resources %}
           <h3>Most Recent Publications</h3>
-          {% for resource in tech_resources %}
-            <p>
-              {% if resource.pdf %}
-                <a href="files/{{ resource.pdf }}" target="new">{{ resource.name }}</a>
-              {% elif resource.url %}
-                <a href="{{ resource.url }}" target="new">{{ resource.name }}</a>
-              {% endif %}
-              | {{ resource.publication_date }}<br>
-              <span class="smaller italic">{{ resource.summary }}</span>
-            </p>
-          {% endfor %}
-          <br>
+          <p>
+            <ul>  
+              {% for resource in tech_resources %}
+                <li>
+                  {% if resource.pdf %}
+                    <a href="files/{{ resource.pdf }}" target="new">{{ resource.name }}</a>
+                  {% elif resource.url %}
+                    <a href="{{ resource.url }}" target="new">{{ resource.name }}</a>
+                  {% endif %}
+                  | {{ resource.publication_date }}<br>
+                  <span class="smaller italic">{{ resource.summary }}</span>
+                </li>
+              {% endfor %}
+          </p>
         {% endif %}
 
     </div>
