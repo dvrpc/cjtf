@@ -138,7 +138,7 @@ def technical_resources(request):
         technical_resources = TechnicalResourceTable(technical_resources)
         # set default sort for the table and configure it so sorting is enabled
         technical_resources.order_by = "-publication_date"
-        tables.RequestConfig(request).configure(technical_resources)
+        tables.RequestConfig(request, paginate=False).configure(technical_resources)
 
     context = {
         "title": "Technical Resources",
@@ -159,7 +159,7 @@ def funding_resources(request):
 
         # set default sort for the table and configure it so sorting is enabled
         funding_resources.order_by = "due_date"
-        tables.RequestConfig(request).configure(funding_resources)
+        tables.RequestConfig(request, paginate=False).configure(funding_resources)
 
     context = {
         "title": "Funding Resources",
@@ -217,9 +217,8 @@ def contact(request):
                 if form.is_valid():
                     f = form.cleaned_data
                     # create the message from various fields
-                    message = (
-                        "{} ({}) submitted a comment or question at centraljerseytf.org:\n {}"
-                        .format(f["your_name"], f["email"], f["comment"])
+                    message = "{} ({}) submitted a comment or question at centraljerseytf.org:\n {}".format(
+                        f["your_name"], f["email"], f["comment"]
                     )
                     email_us(message)
                     return HttpResponseRedirect("/thanks")
@@ -236,7 +235,11 @@ def contact(request):
                     Description: {}\n
                     URL: {}
                     """.format(
-                        f["start_date"], f["title"], f["location"], f["description"], f["url"],
+                        f["start_date"],
+                        f["title"],
+                        f["location"],
+                        f["description"],
+                        f["url"],
                     )
                     message = (
                         "{} ({}) submitted an event or meeting at centraljerseytf.org:\n {}".format(
@@ -280,9 +283,8 @@ def contact(request):
                     """.format(
                         f["name"], f["url"], f["summary"], f["publication_date"], f["source"]
                     )
-                    message = (
-                        "{} ({}) submitted a technical resource at centraljerseytf.org:\n {}"
-                        .format(f["your_name"], f["email"], textwrap.dedent(body))
+                    message = "{} ({}) submitted a technical resource at centraljerseytf.org:\n {}".format(
+                        f["your_name"], f["email"], textwrap.dedent(body)
                     )
                     email_us(message)
                     return HttpResponseRedirect("/thanks")
