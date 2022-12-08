@@ -4,7 +4,7 @@ import textwrap
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.core.mail import send_mail
 from django.db.models import Q
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 
 import django_tables2 as tables
@@ -63,16 +63,14 @@ def index(request):
     # Note that this orders by most recent date of meeting - not date of when these were added,
     # but that's ok because we don't really need to highlight updated materials from very old
     # meetings, if that should every happen
-    meetings_updated = Meeting.objects.filter(
-        Q(minutes_added__gte=six_weeks_ago) | Q(pre_mat_added__gte=six_weeks_ago)
-    ).order_by("-date")[0:3]
+    last_meeting = Meeting.objects.filter().order_by("-date")[0]
 
     context = {
         "title": "Central Jersey Transportation Forum",
         "next_meeting": next_meeting,
         "tech_resources": tech_resources,
         "funding_resources": funding_resources,
-        "meetings_updated": meetings_updated,
+        "last_meeting": last_meeting,
         "upcoming_events": upcoming_events,
     }
     return render(request, "web/home.html", context)
