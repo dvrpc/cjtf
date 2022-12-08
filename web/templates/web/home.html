@@ -3,25 +3,9 @@
 {% load static %}
 {% block main %}
   <main class="home">
-    <div class="mission">
-      <div id="heroimage">
-        <img src="{% static 'web/images/bikes.jpg' %}" alt="bikes">
-        <img src="{% static 'web/images/bridge.jpg' %}" alt="bridges">
-        <img src="{% static 'web/images/bus.jpg' %}" alt="bus">
-        <img src="{% static 'web/images/speedpost.jpg' %}" alt="speedpost">
-        <img src="{% static 'web/images/crosswalk.jpg' %}" alt="crosswalk">
-        <img src="{% static 'web/images/traffic.jpg' %}" alt="traffic">
-      </div>
-      <div class="mission-text">
-        Identify. Discuss. Coordinate. Research. Assist. Educate.<br>
-        We are the Central Jersey Transportation Forum.
-      </div>
-    </div>
-
     <div class="col1">
-      <h2>Updated Materials</h2>
-        <h3>Next regular meeting of the Forum</h3>
-        <p>
+      <h2>Announcements</h2>
+        <p>Next regular meeting of the Forum: 
           {% if next_meeting %}
             {% if next_meeting.url %}
               <a href="{{ next_meeting.url }}" target="new">{{ next_meeting.date }}</a>
@@ -29,12 +13,12 @@
               {{ next_meeting.date }}
             {% endif %}
           {% else %}
-            TBD
+            To be determined.
           {% endif %}
         </p>
 
         {% if funding_resources %}
-          <h3>Upcoming Funding Deadlines</h3>
+          <h3>Funding Deadlines</h3>
           <p>
             {% if funding_resources|length > 1 %}
               <ul>
@@ -91,7 +75,7 @@
         {% endif %}
 
         {% if tech_resources %}
-          <h3>Most Recent Publications</h3>
+          <h3>Recent Publications</h3>
           <p>
             <ul>
               {% for resource in tech_resources %}
@@ -117,22 +101,5 @@
     </div>
   </main>
 
-  {% comment %}
-    slider from https://github.com/rchisholm/vanilla-slider, slightly modified so images
-    span full viewport width
-  {% endcomment %}
-  <script type="text/javascript" src="{% static 'web/js/vanilla-slider.js' %}"></script>
-  <script>
-    /* initate slider */
-    var options = {
-      transitionTime: 750,
-      transitionZoom: 'in',
-      arrows:false,
-      auto: true,
-      autoTime: 6000,
-      autoPauseOnHover: false,
-    }
-    var mySlider = createSlider('heroimage', options);
-  </script>
 {% endblock %}
 
