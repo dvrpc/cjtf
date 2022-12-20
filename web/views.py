@@ -32,8 +32,7 @@ def email_us(message):
 
 def index(request):
     """
-    Home Page. Get recently updated internal pages (events/meetings and resources) and also
-    set up the Twitter list feed.
+    Home Page. Get recently updated internal pages (events/meetings and resources).
     """
 
     # how far back to check for added tech resources or added meeting minutes/presentations
