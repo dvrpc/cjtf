@@ -32,7 +32,10 @@ body {
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  grid-template-areas: "header" "main" "footer";
+  grid-template-areas: 
+    "header" 
+    "main" 
+    "footer";
 }
 header {
   padding: 10px 80px 5px 80px;
@@ -142,6 +145,7 @@ main {
   grid-area: main;
   color: var(--lightest-gray);
   background-color: var(--medium-blue);
+  box-shadow: var(--shadow);
 }
 main a {
   text-decoration: underline;
@@ -205,7 +209,30 @@ main a:hover {
   grid-area: span 1 / span 2;
 }
 footer {
-  display: none;
+  grid-area: footer;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "footer-logos" "footer-text";
+  padding: 25px 80px 25px 80px;
+  font-size: .8rem;
+}
+.footer-logos {
+  grid-area: footer-logos;
+  display: grid;
+  gap: 15px;
+  padding-right: 15px;
+}
+.footer-logos img {
+  width: 125px;
+}
+.footer-text {
+  max-width: 500px;
+}
+.footer-text img {
+  padding-right: 5px;
+  vertical-align: middle;
+  width: 15px;
 }
 hr {
   margin-bottom: 10px;
@@ -223,12 +250,10 @@ h3 {
   margin-top: 0px;
   margin-bottom: 10px;
 }
-
 table {
   border-collapse: collapse;
   border: 1px solid var(--table-border-color);  
 }
-
 table.resources {
   border: none;
   margin: 0 auto;
@@ -265,15 +290,6 @@ th, tr {
 }
 tr:last-child {
   border-bottom: none;
-}
-table.contact_form {
-  border: None;
-}
-table.contact_form tr {
-  border-bottom: None;
-}
-table.contact_form th {
-  background-color: transparent;
 }
 .form_buttons  {
   color: var(--medium-blue);
@@ -549,14 +565,17 @@ table.partner_orgs td {
     padding-top: 0;
   }
   footer {
-    display: block;
-    grid-area: footer;
-    text-align: center;
-    padding-top: 25px;
-    padding-bottom: 25px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    padding: 15px;
   }
-  footer img {
-    width: 125px;
+  .footer-logos {
+    display: inline;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+  .footer-text {
+    max-width: none;
   }
   .past_meetings {
     font-size: 0.8rem;

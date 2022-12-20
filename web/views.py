@@ -1,33 +1,14 @@
 import datetime
-import textwrap
 
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.core.mail import send_mail
 from django.db.models import Q
-from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 
 import django_tables2 as tables
 
 from .models import Meeting, Event, Page, TechnicalResource, FundingResource
-from .forms import (
-    TypeContactForm,
-    CommentForm,
-    EventForm,
-    FundingResourceForm,
-    TechnicalResourceForm,
-)
 from .tables import TechnicalResourceTable, FundingResourceTable
-
-
-def email_us(message):
-    """Send email to designated DVRPC staff person when user submits a contact form."""
-    return send_mail(
-        "Submitted contact form from CJTF website",
-        message,
-        "contact@centraljerseytf.org",
-        ["jdavis@dvrpc.org"],
-    )
 
 
 def index(request):
@@ -173,138 +154,6 @@ def partner_orgs(request):
         "page": page,
     }
     return render(request, "web/default.html", context)
-
-
-def contact(request):
-    form = ""
-
-    if request.method == "POST":
-        # determine which form was submitted - from name of submit button - and process
-        if "submit_type" in request.POST:
-            form = TypeContactForm(request.POST)
-            if form.is_valid():
-
-                f = form.cleaned_data
-                if f["type_of_contact"] == "comment_or_question":
-                    form = CommentForm()
-                    submit_name = "submit_comment"
-                elif f["type_of_contact"] == "event":
-                    form = EventForm()
-                    submit_name = "submit_event"
-                elif f["type_of_contact"] == "funding_resource":
-                    form = FundingResourceForm()
-                    submit_name = "submit_funding"
-                elif f["type_of_contact"] == "technical_resource":
-                    form = TechnicalResourceForm()
-                    submit_name = "submit_technical"
-
-                page = get_object_or_404(Page, internal_name="contact")
-                context = {
-                    "title": page.title,
-                    "page": page,
-                    "form": form,
-                    "first_form": False,
-                    "submit_name": submit_name,
-                }
-                return render(request, "web/contact.html", context)
-        else:
-            if "submit_comment" in request.POST:
-                form = CommentForm(request.POST)
-                submit_name = "submit_comment"
-                if form.is_valid():
-                    f = form.cleaned_data
-                    # create the message from various fields
-                    message = "{} ({}) submitted a comment or question at centraljerseytf.org:\n {}".format(
-                        f["your_name"], f["email"], f["comment"]
-                    )
-                    email_us(message)
-                    return HttpResponseRedirect("/thanks")
-            if "submit_event" in request.POST:
-                form = EventForm(request.POST)
-                submit_name = "submit_event"
-                if form.is_valid():
-                    f = form.cleaned_data
-                    # create the message from various fields
-                    body = """
-                    Start date: {}\n
-                    Title: {}|\n
-                    Location: {}\n
-                    Description: {}\n
-                    URL: {}
-                    """.format(
-                        f["start_date"],
-                        f["title"],
-                        f["location"],
-                        f["description"],
-                        f["url"],
-                    )
-                    message = (
-                        "{} ({}) submitted an event or meeting at centraljerseytf.org:\n {}".format(
-                            f["your_name"], f["email"], textwrap.dedent(body)
-                        )
-                    )
-                    email_us(message)
-                    return HttpResponseRedirect("/thanks")
-            if "submit_funding" in request.POST:
-                form = FundingResourceForm(request.POST)
-                submit_name = "submit_funding"
-                if form.is_valid():
-                    f = form.cleaned_data
-                    body = """
-                    Name: {}\n
-                    URL: {}\n
-                    Due Date: {}\n
-                    Description: {}\n
-                    Source: {}\n
-                    """.format(
-                        f["name"], f["url"], f["due_date"], f["description"], f["source_name"]
-                    )
-                    message = (
-                        "{} ({}) submitted a funding resource at centraljerseytf.org:\n {}".format(
-                            f["your_name"], f["email"], textwrap.dedent(body)
-                        )
-                    )
-                    email_us(message)
-                    return HttpResponseRedirect("/thanks")
-            if "submit_technical" in request.POST:
-                form = TechnicalResourceForm(request.POST)
-                submit_name = "submit_technical"
-                if form.is_valid():
-                    f = form.cleaned_data
-                    body = """
-                    Name: {}\n
-                    URL: {}\n
-                    Summary: {}\n
-                    Publication Date: {}\n
-                    Source: {}\n
-                    """.format(
-                        f["name"], f["url"], f["summary"], f["publication_date"], f["source"]
-                    )
-                    message = "{} ({}) submitted a technical resource at centraljerseytf.org:\n {}".format(
-                        f["your_name"], f["email"], textwrap.dedent(body)
-                    )
-                    email_us(message)
-                    return HttpResponseRedirect("/thanks")
-            first_form = False
-
-    else:
-        form = TypeContactForm(label_suffix="")
-        first_form = True
-        submit_name = ""
-
-    page = get_object_or_404(Page, internal_name="contact")
-    context = {
-        "title": page.title,
-        "page": page,
-        "first_form": first_form,
-        "submit_name": submit_name,
-        "form": form,
-    }
-    return render(request, "web/contact.html", context)
-
-
-def thanks(request):
-    return render(request, "web/thankyou.html")
 
 
 def search(request):

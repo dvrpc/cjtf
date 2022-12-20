@@ -67,12 +67,6 @@
             <li><a href="{% url 'web:partner_orgs' %}">Partner Organizations</a></li><br>
           </ul>
         </li>
-        <li>
-          <a href="{% url 'web:contact' %}"
-          {% if request.resolver_match.url_name == 'contact' %}
-            class="active"
-          {% endif %}
-          >Contact</a>
       </ul>
     </nav>
   </header>
@@ -81,10 +75,18 @@
   {% endblock %}
 
   <footer>
-    <a href="https://www.dvrpc.org/">
-      <img src="{% static 'web/images/dvrpc_small.png' %}" style="padding-right: 15px"></a>
-    <a href="https://www.njtpa.org">
-      <img src="{% static 'web/images/njtpa_small.png' %}"></a>
+    <div class="footer-logos">
+      <a href="https://www.dvrpc.org/">
+        <img src="{% static 'web/images/dvrpc_small.png' %}"></a>
+      <a href="https://www.njtpa.org">
+        <img src="{% static 'web/images/njtpa_small.png' %}"></a>
+    </div>
+    <div class="footer-text">
+      The Central Jersey Transportation Forum (CJTF) was formed in 1999 to coordinate planning among municipal and county leaders at the border of the DVRPC and NJTPA metropolitan planning organizations, with the goals of managing growth and increasing mobility throughout the Central Jersey area.
+      <br/><br/>
+      Contact us at <a href="mailto:cjtf@dvrpc.org">cjtf<span style="display:none">123</span>@dvrpc.org</a>. Follow us on <a href="https://twitter.com/CJTF_NJ">
+        <img src="{% static 'web/images/twitter-blue-transparent.png' %}">Twitter</a>.
+    </div>
   </footer>
   <script>
     /* responsive mode menu */
