@@ -24,28 +24,28 @@
   color: var(--orange);
 }
 body {
-  margin: 0 auto;
-  padding: 0px;
-  background-color: var(--lightest-gray);
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-template-areas: 
     "header" 
     "main" 
     "footer";
+  margin: 0 auto;
+  padding: 0px;
+  background-color: var(--lightest-gray);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  height: 100vh;
 }
 header {
-  padding: 10px 80px 5px 80px;
-  grid-area: header;
   display: grid;
+  grid-area: header;
   gap: 5px;
   grid-template-areas:
     "left top-right"
     "left mid-right"
     "bottom bottom";
+  padding: 10px 80px 5px 80px;
   box-shadow: var(--shadow);
   z-index: 10;
 }
@@ -142,7 +142,7 @@ nav a.active:hover {
   color: var(--medium-blue);
 }
 main {
-  grid-area: main;
+  padding: 30px 80px 50px 80px;
   color: var(--lightest-gray);
   background-color: var(--medium-blue);
   box-shadow: var(--shadow);
@@ -156,7 +156,6 @@ main a:hover {
   color: var(--medium-gray);
 }
 .home {
-  padding: 30px 80px 50px 80px;
   display: grid;
   gap: 20px;
   grid-template-columns: 1fr 1fr;
@@ -174,21 +173,16 @@ main a:hover {
   border-radius: 10px;
 }
 .default {
-  padding: 30px 80px 50px 80px;
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-areas: "col1 col2";
+  gap: 50px;
   padding-bottom: 20px;
-}
-.default .col2 {
-  padding-top: 3rem;
 }
 .map {
   position: relative;
   width: 100%;
   padding-top: 85%;
 }
-
 .map1 iframe {
   width: 100%;
   height: 500px;
@@ -200,11 +194,6 @@ main a:hover {
   width: 100%;
   height: 100%;
 }
-.col2 {
-  grid-area: col2;
-  padding: 0 80px 10px 80px;
-}
-
 .full {
   grid-area: span 1 / span 2;
 }
@@ -212,8 +201,7 @@ footer {
   grid-area: footer;
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-areas:
-    "footer-logos" "footer-text";
+  grid-template-areas: "footer-logos footer-text";
   padding: 25px 80px 25px 80px;
   font-size: .8rem;
 }
@@ -442,13 +430,13 @@ table.partner_orgs td {
 }
 @media screen and (max-width: 768px) {
   body {
-    padding: 0px;
-    margin: 0px;
     grid-template-columns: auto;
     grid-template-areas: 
       "header" 
       "main" 
       "footer";
+    padding: 0px;
+    margin: 0px;
   }
   header {
     grid-area: header;
@@ -486,7 +474,6 @@ table.partner_orgs td {
     background: transparent;
   }
   nav ul {
-    z-index: 99;
     display: grid;
     justify-items: end;
     position: fixed;
@@ -504,6 +491,7 @@ table.partner_orgs td {
     white-space: nowrap;
     background-color: var(--medium-blue);
     border: 2px solid var(--dark-gray);
+    z-index: 99;
   }
   nav ul.show {
     width: 225px;
@@ -536,33 +524,19 @@ table.partner_orgs td {
   nav ul a.active:hover {
     color: var(--orange);
   }
-  main.home {
+  .home {
     grid-template-columns: 1fr;
-    grid-template-areas: 
-      "mission" 
-      "col1" 
-      "col2";
+    padding: 15px;
   }
-  main.home .mission-text {
-    /* position: relative; */
-    font-size: 1rem;
-    padding: 10px;
-    width: calc(100% - 20px);
-    background: var(--dark-gray);
-  }
-  main.default {
+  .default {
     grid-template-columns: 1fr;
-    grid-template-areas: 
-      "col1" 
-      "col2";
+    grid-gap: 15px;
+    padding: 15px;
   }
-  main .col1,
-  main .col2,
-  main .full {
+  .col1,
+  .col2,
+  .full {
     padding: 0 20px 10px 20px;
-  }
-  main.default .col2 {
-    padding-top: 0;
   }
   footer {
     grid-template-columns: 1fr;
