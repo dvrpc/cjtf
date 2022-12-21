@@ -54,14 +54,7 @@
               </p>
           {% endfor %}
         {% endif %}
-
-      {# Membership #}
-      {% elif request.resolver_match.url_name == 'membership' %}
-        <div class="map">
-        <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="CJTF membership" src="https://dvrpcgis.maps.arcgis.com/apps/Embed/index.html?webmap=3b9e9534f4c2429a911877e5c25bcb04&extent=-75.1726,40.17,-73.8625,40.6843&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light"></iframe>
-        </div>
       {% endif %}
-
     </div>
     <div class="col2">
       {% if request.resolver_match.url_name == 'events_meetings' %}
