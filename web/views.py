@@ -56,16 +56,6 @@ def index(request):
     return render(request, "web/home.html", context)
 
 
-def about(request):
-    page = get_object_or_404(Page, internal_name="about")
-
-    context = {
-        "title": page.title,
-        "page": page,
-    }
-    return render(request, "web/default.html", context)
-
-
 def membership(request):
     page = get_object_or_404(Page, internal_name="membership")
     context = {

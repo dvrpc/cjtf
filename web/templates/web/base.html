@@ -35,12 +35,6 @@
       <button class="opener">&#9776;</button>
       <ul>
         <li><button class="closer">&#215;</button></li>
-        <li><a href="{% url 'web:about' %}"
-          {% if request.resolver_match.url_name == 'about' %}
-            class="active"
-          {% endif %}
-          >About</a>
-        </li>
         <li>
           <a href="{% url 'web:membership' %}"
           {% if request.resolver_match.url_name == 'membership' %}
