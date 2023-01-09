@@ -1,7 +1,6 @@
 import datetime
 
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
-from django.core.mail import send_mail
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, render
 
@@ -16,15 +15,20 @@ def index(request):
     Home Page. Get recently updated internal pages (events/meetings and resources).
     """
 
-    # how far back to check for added tech resources or added meeting minutes/presentations
-    six_weeks_ago = datetime.date.today() - datetime.timedelta(days=14)
-
+    # get next and most recent meeting
     try:
         next_meeting = (
             Meeting.objects.filter(date__gte=datetime.datetime.now()).order_by("date").first()
         )
     except Meeting.DoesNotExist:
         next_meeting = None
+
+    try:
+        last_meeting = (
+            Meeting.objects.filter(date__lt=datetime.datetime.now()).order_by("-date").first()
+        )
+    except Meeting.DoesNotExist:
+        last_meeting = None
 
     upcoming_events = Event.objects.filter(
         Q(start_date__gte=datetime.date.today()) | Q(end_date__gte=datetime.date.today())
@@ -38,12 +42,6 @@ def index(request):
     funding_resources = FundingResource.objects.filter(
         due_date__gte=datetime.date.today()
     ).order_by("due_date")[0:3]
-
-    # get meetings with newly added/changed minutes or presentation materials;
-    # Note that this orders by most recent date of meeting - not date of when these were added,
-    # but that's ok because we don't really need to highlight updated materials from very old
-    # meetings, if that should every happen
-    last_meeting = Meeting.objects.filter().order_by("-date")[0]
 
     context = {
         "title": "Central Jersey Transportation Forum",

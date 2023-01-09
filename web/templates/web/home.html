@@ -19,20 +19,26 @@
         {% else %}
           to be determined.
         {% endif %}
+        {% if next_meeting.agenda %}
+          View the <a href="{{ next_meeting.agenda.url }}">agenda</a>.
+        {% endif %}
+          
       </p>
       
       {% if last_meeting %}
-        <p>
-            {% if last_meeting.minutes and last_meeting.presentation_materials %}
-              <a href="{{ last_meeting.minutes.url }}">Highlights</a> and
-              <a href="{{ last_meeting.presentation_materials.url }}">Presentation Materials</a>
-            {% elif last_meeting.minutes and not last_meeting.presentation_materials %}
-              <a href="{{ last_meeting.minutes.url }}">Highlights</a>
-            {% elif not last_meeting.minutes and last_meeting.presentation_materials %}
-              <a href="{{ last_meeting.presetnation_materials.url }}">Presentation Materials</a>
-            {% endif %}
-            are available for the {{ last_meeting.date|date:"F Y" }} meeting.</a>
-        </p>
+        {% if last_meeting.minutes or last_meeting.presentation_materials %}
+          <p>
+              {% if last_meeting.minutes and last_meeting.presentation_materials %}
+                <a href="{{ last_meeting.minutes.url }}">Highlights</a> and
+                <a href="{{ last_meeting.presentation_materials.url }}">Presentation Materials</a>
+              {% elif last_meeting.minutes and not last_meeting.presentation_materials %}
+                <a href="{{ last_meeting.minutes.url }}">Highlights</a>
+              {% elif not last_meeting.minutes and last_meeting.presentation_materials %}
+                <a href="{{ last_meeting.presentation_materials.url }}">Presentation Materials</a>
+              {% endif %}
+              are available for the {{ last_meeting.date|date:"F Y" }} meeting.</a>
+          </p>
+        {% endif %}
       {% endif %}
 
       {% if funding_resources %}
