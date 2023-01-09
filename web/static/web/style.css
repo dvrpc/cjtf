@@ -62,9 +62,10 @@ header .search {
   white-space: nowrap;
 }
 header .search input {
-  width: 253px;
+  width: 300px;
   font-family: "Roboto Thin";
-  font-size: .9rem;
+  color: var(--dark-gray);
+  font-size: 1.2rem;
   border: 1px solid var(--lighter-gray);
 }
 header .search form {
@@ -72,13 +73,8 @@ header .search form {
 }
 header .search img {
   vertical-align: middle;
-}
-header .logos {
-  grid-area: mid-right;
-  justify-self: end;
-}
-header .logos img {
-  width: 130px;
+  height: 1.2rem;
+  width: 1.2rem;
 }
 nav {
   grid-area: bottom;
@@ -401,11 +397,8 @@ table.partner_orgs td {
 }
 /* Responsive layout */
 @media screen and (max-width: 975px) and (min-width: 768px) {
-  header .logos img {
-    width: 90px;
-  }
   header .search input {
-    width: 155px;
+    width: 150px;
   }
   main .col1,
   main .col2 {
@@ -433,9 +426,6 @@ table.partner_orgs td {
   header .cjtf_logo {
     grid-area: logo;
     padding: 0 10px 0 0;
-  }
-  header .logos {
-    display: none;
   }
   header .search {
     display: none;
