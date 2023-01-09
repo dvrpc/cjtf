@@ -302,37 +302,25 @@ tr:last-child {
   min-width: 400px;
   width: 100%;
   table-layout: fixed;
-  /* float: left; */
+  color: var(--lightest-gray);
+  border: none;
 }
 .past_meetings tr {
-  border-top: none;
-  border-bottom: none;
+  border: none;
 }
-.past_meetings tr.first {
-  border-top: 1px solid var(--table-border-color);
-  border-bottom: 1px solid var(--table-border-color);
-}
-.past_meetings tr.first:not(.current-year):hover {
-  background-color: var(--table-border-color);
+.past_meetings tr.year {
+  border-bottom: 1px solid white;
 }
 .past_meetings td {
   text-align: right;
 }
-.past_meetings td.current-year {
-  padding: 15px;
+.past_meetings td.year {
+  padding: 5px;
   font-weight: bold;
   text-align: left;
+  vertical-align: top;
 }
-.past_meetings td:first-child:not(.current-year) {
-  text-align: center;
-}
-.past_meetings tr.first:not(.current-year) td {
-  padding: 0;
-}
-/* classes related to toggle display of prior year meeting info */
-.past_meetings .collapsible {
-  display: none;
-}
+
 button.toggleDisplay {
   border: none;
   text-decoration: none;

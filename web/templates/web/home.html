@@ -7,9 +7,9 @@
       Membership map to go here
     </div>
     <div class="box">
-      <p>Some brief "about" text to go here.</p>
       <h2>Meetings</h2>
-        <p>The next regular meeting of the forum is
+        <p>Forum meetings are held three to four times per year. 
+          The next regular meeting of the forum is
         {% if next_meeting %}
           {% if next_meeting.url %}
             <a href="{{ next_meeting.url }}" target="new">{{ next_meeting.date }}</a>
@@ -17,7 +17,7 @@
             {{ next_meeting.date }}
           {% endif %}
         {% else %}
-          to be determined.
+          yet to be scheduled.
         {% endif %}
         {% if next_meeting.agenda %}
           View the <a href="{{ next_meeting.agenda.url }}">agenda</a>.
@@ -40,6 +40,8 @@
           </p>
         {% endif %}
       {% endif %}
+
+      <p>View archived meetings <a href="events-meetings">here</a>.</p>
 
       {% if funding_resources %}
         <h2>Funding Deadlines</h2>
