@@ -38,13 +38,6 @@
           >Membership</a>
         </li>
         <li>
-          <a href="{% url 'web:events_meetings' %}"
-          {% if request.resolver_match.url_name == 'events_meetings' %}
-            class="active"
-          {% endif %}
-          >Events & Meetings</a>
-        </li>
-        <li>
           <a href="{% url 'web:resources' %}"
           {% if 'resources' in request.resolver_match.url_name %}
             class="active"
