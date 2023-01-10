@@ -63,6 +63,15 @@ def membership(request):
     return render(request, "web/default.html", context)
 
 
+def strategic_plan(request):
+    page = get_object_or_404(Page, internal_name="strategic_plan")
+    context = {
+        "title": page.title,
+        "page": page,
+    }
+    return render(request, "web/default.html", context)
+
+
 def events_meetings(request):
     page = get_object_or_404(Page, internal_name="events_meetings")
     upcoming_events = Event.objects.filter(

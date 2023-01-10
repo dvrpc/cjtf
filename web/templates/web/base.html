@@ -38,6 +38,12 @@
           >Membership</a>
         </li>
         <li>
+          <a href="{% url 'web:strategic_plan' %}"
+          {% if request.resolve_match.url_name == 'strategic_plan' %}
+            class="active"
+          {% endif %}
+          >Strategic Plan</a>
+        <li>
           <a href="{% url 'web:resources' %}"
           {% if 'resources' in request.resolver_match.url_name %}
             class="active"

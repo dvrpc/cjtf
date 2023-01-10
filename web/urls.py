@@ -6,6 +6,7 @@ app_name = "web"
 urlpatterns = [
     path("", views.index, name="index"),
     path("membership", views.membership, name="membership"),
+    path("strategic-plan", views.strategic_plan, name="strategic_plan"),
     path("events-meetings", views.events_meetings, name="events_meetings"),
     path("resources", views.resources, name="resources"),
     path("resources/technical", views.technical_resources, name="technical_resources"),
