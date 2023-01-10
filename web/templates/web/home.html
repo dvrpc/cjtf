@@ -90,6 +90,7 @@
                 {% elif resource.url %}
                   <a href="{{ resource.url }}" target="new">{{ resource.name }}</a>
                 {% endif %}
+                ({{ resource.source }})
               </li>
             {% endfor %}
           </ul>
