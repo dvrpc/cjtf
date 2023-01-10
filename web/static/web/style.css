@@ -162,6 +162,14 @@ main a:hover {
 .home li {
   margin-bottom: 5px;
 }
+.home img {
+  box-shadow: var(--shadow);
+  border-radius: 10px;
+  width: 100%;
+  min-width: 500px;
+  margin-bottom: -5px;
+}
+
 .box {
   background-color: var(--light-blue);
   padding: 5px 15px 5px 15px;
@@ -384,16 +392,7 @@ table.partner_orgs td {
   padding-left: 0;
 }
 /* Responsive layout */
-@media screen and (max-width: 975px) and (min-width: 768px) {
-  header .search input {
-    width: 150px;
-  }
-  main .col1,
-  main .col2 {
-    padding: 0 20px 10px 20px;
-  }
-}
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1100px) {
   body {
     grid-template-columns: auto;
     grid-template-areas: 
