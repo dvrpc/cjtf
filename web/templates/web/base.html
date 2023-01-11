@@ -21,7 +21,7 @@
 
 <body>
   <header>
-    <div class="cjtf_logo"><a href="/"><img src="{% static 'web/images/logo_header.png' %}"></a></div>
+    <div class="cjtf_logo"><a href="{% url 'web:index' %}"><img src="{% static 'web/images/logo_header.png' %}"></a></div>
     <div class="search">
       {% include 'web/search_form.html' %}
       <img src="{% static 'web/images/magnifying_glass.png' %}">
