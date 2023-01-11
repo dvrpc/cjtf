@@ -39,7 +39,7 @@
         </li>
         <li>
           <a href="{% url 'web:strategic_plan' %}"
-          {% if request.resolve_match.url_name == 'strategic_plan' %}
+          {% if request.resolver_match.url_name == 'strategic_plan' %}
             class="active"
           {% endif %}
           >Strategic Plan</a>
