@@ -49,7 +49,12 @@
             {% endfor %}
           </table>
         {% endif %}
-    {% endif %}
+      {% endif %}
     </div>
+    {% if page.sidebar %}
+      <div class="col2">
+        {{ page.sidebar|safe }}
+      </div>
+    {% endif %}
   </main>
 {% endblock %}
