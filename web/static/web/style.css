@@ -204,6 +204,7 @@ footer {
 }
 .footer-text {
   max-width: 500px;
+  color: var(--medium-blue);
 }
 .footer-text img {
   padding-right: 5px;
