@@ -95,8 +95,11 @@
                   <a href="files/{{ resource.pdf }}" target="new">{{ resource.name }}</a>
                 {% elif resource.url %}
                   <a href="{{ resource.url }}" target="new">{{ resource.name }}</a>
+                {% else %}
+                  {{ resource.name }}
                 {% endif %}
                 ({{ resource.source }})
+                (MPO covered: {{ resource.mpo|join:", "|upper }})
               </li>
             {% endfor %}
           </ul>

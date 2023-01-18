@@ -1,7 +1,9 @@
 import datetime
 
+from django import forms
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.contrib.postgres.fields import ArrayField
 
 from ckeditor.fields import RichTextField
 
@@ -9,8 +11,24 @@ from ckeditor.fields import RichTextField
 def validate_date_not_past(value):
     if value < datetime.date.today():
         raise ValidationError(
-            "%(value)s is in the past.", params={"value": value},
+            "%(value)s is in the past.",
+            params={"value": value},
         )
+
+
+def default_mpo():
+    return ["dvrpc", "njtpa"]
+
+
+class ModifiedArrayField(ArrayField):
+    def formfield(self, **kwargs):
+        defaults = {
+            "form_class": forms.MultipleChoiceField,
+            "choices": self.base_field.choices,
+            "widget": forms.CheckboxSelectMultiple,
+            **kwargs,
+        }
+        return super(ArrayField, self).formfield(**defaults)
 
 
 class Meeting(models.Model):
@@ -116,12 +134,21 @@ class TechnicalResource(models.Model):
         ("municipal_tools", "Municipal Tools"),
         ("research_and_reports", "Research and Reports"),
     ]
+    mpo_choices = (("dvrpc", "DVRPC"), ("njtpa", "NJTPA"))
     name = models.CharField(max_length=200, verbose_name="Product Name")
     url = models.URLField(blank=True, null=True)
     summary = models.TextField(blank=True, null=True)
+    mpo = ModifiedArrayField(
+        models.CharField(choices=mpo_choices, max_length=5),
+        default=default_mpo,
+        verbose_name="MPO Covered",
+    )
     publication_date = models.DateField(verbose_name="Publication Date")
     source = models.CharField(max_length=100)
-    category = models.CharField(max_length=30, choices=category_choices,)
+    category = models.CharField(
+        max_length=30,
+        choices=category_choices,
+    )
     pdf = models.FileField(blank=True)
 
     def __str__(self):
