@@ -2,7 +2,7 @@
 
 {% block main %}
   <main class="default">
-    <div class="col1">
+    <div class="col1 box">
       <h2>
         {% if page.title %}
           {{ page.title|safe }}
@@ -15,98 +15,15 @@
       {# Events & Meetings #}
       {% if request.resolver_match.url_name == 'events_meetings' %}
         <br>
-        <h3>Upcoming Forum Meetings</h3>
-        {% if upcoming_meetings %}
-          {% for meeting in upcoming_meetings %}
-            <p>
-              {% if meeting.url %}
-                <a href="{{ meeting.url }}">{{ meeting.date }}</a>
-              {% else %}
-                {{ meeting.date }}
-              {% endif %}
-            </p>
-          {% endfor %}
-        {% else %}
-          <p>There are no meetings scheduled at this time. Please
-            <a href="/contact">contact the Forum</a> for initial thinking about the next regular
-            meeting date, which will be posted here once it is set.
-          </p>
-        {% endif %}
-
-        {% if upcoming_events %}
-          <br>
-          <h3>Upcoming Events</h3>
-          {% for event in upcoming_events %}
-              <p>
-                {% if event.url %}
-                <a href="{{event.url}}">{{event.title}}</a>:
-                {% else %}
-                  {{ event.title }}:
-                {% endif %}
-                {{ event.display_date }}
-              <br>
-              {% if event.location %}
-                Location: {{ event.location}}
-              {% endif %}
-              {% if event.description %}
-                {{ event.description|safe }}
-              {% endif %}
-              </p>
-          {% endfor %}
-        {% endif %}
-
-      {# Membership #}
-      {% elif request.resolver_match.url_name == 'membership' %}
-        <div class="map">
-        <iframe
-          frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="CJFT Membership" src="//dvrpcgis.maps.arcgis.com/apps/Embed/index.html?webmap=3b9e9534f4c2429a911877e5c25bcb04&extent=-75.1726,40.17,-73.8625,40.6843&zoom=true&previewImage=false&scale=true&disable_scroll=true&theme=light"></iframe>
-        </div>
-      {% endif %}
-
-    </div>
-    <div class="col2">
-      {% if request.resolver_match.url_name == 'events_meetings' %}
         {% if past_meetings %}
           {% regroup past_meetings by date.year as years %}
 
           <table class="past_meetings">
-              <tr>
-                <th colspan="4" class="bold">Past Forum Meetings</th>
+            {% for year, meeting_list in years %}
+              <tr class="year">
+                <td class="year">{{year}}</td>
               </tr>
-            {% for year, meeting_list in years|slice:":1" %}
-              <tr class="first current-year">
-                <td colspan="4" class="current-year">{{year}}</td>
-              </tr>
-              {% for meeting in meeting_list %}
-                <tr>
-                  <td>{{meeting.date|date:"M"}}</td>
-                  <td>
-                    {% if meeting.agenda %}
-                      <a href="{{ meeting.agenda.url }}" class="not-bold">Agenda</a>↓
-                    {% endif %}
-                  </td>
-                  <td>
-                    {% if meeting.minutes %}
-                      <a href="{{ meeting.minutes.url }}" class="not-bold">Highlights</a>↓
-                    {% endif %}
-                  </td>
-                  <td>
-                    {% if meeting.presentation_materials %}
-                      <a href="{{ meeting.presentation_materials.url }}" class="not-bold">
-                      Materials</a>↓
-                    {% endif %}
-                  </td>
-                </tr>
-              {% endfor %}
-            {% endfor %}
-
-            {% for year, meeting_list in years|slice:"1:" %}
-              <tr class="first">
-                <td colspan="4">
-                  <button type="button" class="bold toggleDisplay" value="year{{year}}">{{year}}</button>
-                </td>
-              </tr>
-              <tbody class="collapsible year{{year}}">
+              <tbody>
                 {% for meeting in meeting_list %}
                   <tr>
                     <td>{{meeting.date|date:"M"}}</td>
@@ -132,11 +49,12 @@
             {% endfor %}
           </table>
         {% endif %}
-      {% else %}
-        {% if page.sidebar %}
-          {{ page.sidebar|safe }}
-        {% endif %}
       {% endif %}
     </div>
+    {% if page.sidebar %}
+      <div class="col2">
+        {{ page.sidebar|safe }}
+      </div>
+    {% endif %}
   </main>
 {% endblock %}

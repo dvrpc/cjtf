@@ -8,7 +8,7 @@ from .models import TechnicalResource, FundingResource
 class TechnicalResourceTable(tables.Table):
     class Meta:
         model = TechnicalResource
-        fields = ("name", "publication_date", "source", "summary", "category")
+        fields = ("name", "publication_date", "source", "summary", "category", "mpo")
         attrs = {"class": "responsive_table resources"}
 
     # data-th attribute for responsive mode
@@ -18,12 +18,19 @@ class TechnicalResourceTable(tables.Table):
     source = tables.Column(attrs={"td": {"data-th": "Source"}})
     summary = tables.Column(attrs={"td": {"data-th": "Summary"}}, orderable=False)
     category = tables.Column(attrs={"td": {"data-th": "Category"}})
+    mpo = tables.Column(attrs={"td": {"data-th": "MPO Covered"}})
 
     def render_name(self, value, record):
         if record.pdf:
             return format_html("<a href='../files/{}' target='new'>{}</a>", record.pdf, value)
         if record.url:
             return format_html("<a href='{}' target='new'>{}</a>", record.url, value)
+
+    def render_mpo(self, value, record):
+        # List to string. We get the mpo value (not the lable) here, so make it uppercase.
+        if record.mpo:
+            mpo_string = ", ".join(record.mpo)
+            return format_html(f"{mpo_string.upper()}")
 
 
 class FundingResourceTable(tables.Table):

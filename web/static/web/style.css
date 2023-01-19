@@ -1,18 +1,14 @@
 :root {
   --dark-blue: hsl(229, 71%, 33%);
-  --medium-blue: hsl(198, 70%, 26%);
-  --medium-blue-shadow: hsla(198, 70%, 26%, 0.3);
-  --light-blue: hsl(206, 75%, 42%);
-  --white-blue: #bce6f9;
-  --lighter-blue: hsl(199, 83%, 86%);
+  --medium-blue: #1b5382;
+  --light-blue: #436993;
   --orange: hsl(24, 69%, 46%);
-  --dark-orange: hsl(24, 77%, 35%);
-  --green: hsl(79, 48%, 47%);
   --dark-gray: hsl(0, 0%, 30%);
   --light-gray: hsl(0, 0%, 60%);
   --lighter-gray: hsl(0, 0%, 80%);
+  --lightest-gray: hsl(0, 0%, 90%);
   --table-border-color: var(--light-gray);
-  --background: white;
+  --shadow: 5px 5px 5px 0px rgba(0,0,0,0.2);
 }
 
 .dark-blue {
@@ -28,35 +24,36 @@
   color: var(--orange);
 }
 body {
-  margin: 0 auto;
-  padding: 10px 0px 0px 0px;
-  background-color: var(--background);
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  grid-template-areas: "header" "main" "footer";
+  grid-template-areas: 
+    "header" 
+    "main" 
+    "footer";
+  margin: 0 auto;
+  padding: 0px;
+  background-color: var(--lightest-gray);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  height: 100vh;
 }
 header {
-  margin-left: 80px;
-  margin-right: 80px;
-  padding-bottom: 10px;
-  grid-area: header;
   display: grid;
+  grid-area: header;
   gap: 5px;
   grid-template-areas:
     "left top-right"
     "left mid-right"
     "bottom bottom";
+  padding: 10px 80px 5px 80px;
+  box-shadow: var(--shadow);
+  z-index: 10;
 }
 .cjtf_logo {
   grid-area: left;
-  padding-top: 5px;
-  margin-left: -4px;
 }
 header .cjtf_logo img {
-  width: 500px;
+  width: 400px;
 }
 header .search {
   grid-area: top-right;
@@ -65,9 +62,10 @@ header .search {
   white-space: nowrap;
 }
 header .search input {
-  width: 253px;
+  width: 300px;
   font-family: "Roboto Thin";
-  font-size: .9rem;
+  color: var(--dark-gray);
+  font-size: 1.2rem;
   border: 1px solid var(--lighter-gray);
 }
 header .search form {
@@ -75,13 +73,8 @@ header .search form {
 }
 header .search img {
   vertical-align: middle;
-}
-header .logos {
-  grid-area: mid-right;
-  justify-self: end;
-}
-header .logos img {
-  width: 130px;
+  height: 1.2rem;
+  width: 1.2rem;
 }
 nav {
   grid-area: bottom;
@@ -118,7 +111,7 @@ nav ul li:hover > ul {
   display: block;
 }
 nav ul li ul {
-  background-color: var(--background);
+  background-color: var(--lightest-gray);
   visibility: hidden;
   min-width: 15rem;
   position: absolute;
@@ -145,91 +138,78 @@ nav a.active:hover {
   color: var(--medium-blue);
 }
 main {
-  grid-area: main;
-  color: white;
+  padding: 30px 80px 50px 80px;
+  color: var(--lightest-gray);
+  background-color: var(--medium-blue);
+  box-shadow: var(--shadow);
 }
 main a {
   text-decoration: underline;
-  font-weight: bold;
-  color: var(--white-blue);
+  color: white;
+  transition: .2s;
 }
 main a:hover {
-  color: white;
+  color: var(--medium-gray);
 }
-main.home {
-  background-color: transparent;
+.home {
   display: grid;
-  grid-gap: 20px;
+  gap: 20px;
   grid-template-columns: 1fr 1fr;
-  grid-template-areas: "mission mission" "col1 col2";
 }
-main.home .col1 {
-  background-color: var(--medium-blue);
-}
-main.home .col1 ul {
+.home ul {
   margin-bottom: 2rem;
 }
-main.home .col2 {
-  background-color: var(--orange);
+.home li {
+  margin-bottom: 5px;
 }
-.mission {
-  grid-area: mission;
-  position: relative;
+.home img {
+  box-shadow: var(--shadow);
+  border-radius: 10px;
   width: 100%;
+  min-width: 500px;
+  margin-bottom: -5px;
 }
 
-#heroimage img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.box {
+  background-color: var(--light-blue);
+  padding: 5px 15px 5px 15px;
+  box-shadow: var(--shadow);
+  border-radius: 10px;
 }
-.mission-text {
-  position: absolute;
-  display: block;
-  z-index: 10;
-  bottom: 0;
-  left: 0;
-  padding: 10px 10px 10px 80px;
-  font-size: 1.4rem;
-  background: linear-gradient(90deg, var(--dark-gray), 65%, hsla(198, 70%, 26%, 0));
-}
-main.default {
-  background-color: var(--medium-blue);
-  box-shadow: 0px -5px 25px 25px var(--medium-blue-shadow);
+.default {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-areas: "col1 col2";
+  gap: 50px;
   padding-bottom: 20px;
 }
-main.default .col2 {
-  padding-top: 3rem;
-}
-main.default .map {
-  position: relative;
-  width: 100%;
-  padding-top: 85%;
-}
-main.default .map iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-main .col1 {
-  grid-area: col1;
-  padding: 0 20px 10px 80px;
-}
-main .col2 {
-  grid-area: col2;
-  padding: 0 20px 10px 80px;
-}
-main .full {
+.full {
   grid-area: span 1 / span 2;
-  padding: 0 20px 10px 80px;
 }
 footer {
-  display: none;
+  grid-area: footer;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "footer-logos footer-text";
+  padding: 25px 80px 25px 80px;
+  font-size: .8rem;
+}
+.footer-logos {
+  grid-area: footer-logos;
+  display: grid;
+  gap: 15px;
+  padding-right: 15px;
+}
+.footer-logos img {
+  width: 125px;
+}
+.footer-text {
+  max-width: 500px;
+  color: var(--medium-blue);
+}
+.footer-text img {
+  padding-right: 5px;
+  vertical-align: middle;
+  width: 15px;
 }
 hr {
   margin-bottom: 10px;
@@ -239,27 +219,25 @@ h1 {
   font-size: 2rem;
 }
 h2 {
-  font-size: 1.7777777rem;
-  font-weight: bold;
+  font-size: 1.3rem;
   margin-bottom: 12px;
-  border-bottom: 2px solid white;
-  letter-spacing: 2px;
-  text-transform: uppercase;
 }
 h3 {
-  font-size: 1.5rem;
-  margin-bottom: 12px;
-}
-h4 {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   margin-top: 0px;
   margin-bottom: 10px;
 }
 table {
-  border: 2px solid var(--table-border-color);
   border-collapse: collapse;
+  border: 1px solid var(--table-border-color);  
+}
+table.resources {
+  border: none;
   margin: 0 auto;
   align: left;
+}
+table tr:last-child {
+  border-bottom: none;
 }
 table th {
   text-align: left;
@@ -281,22 +259,14 @@ table th.orderable.desc:after {
   padding-left: 1px;
   color: var(--orange);
 }
-/*table tr {
-  border-bottom: 1px solid var(--table-border-color);
-}
-*/
-table th,
-table td {
+th, td {
   padding: 10px;
 }
-table.contact_form {
-  border: None;
+th, tr {
+  border-bottom: 1px solid var(--table-border-color);
 }
-table.contact_form tr {
-  border-bottom: None;
-}
-table.contact_form th {
-  background-color: transparent;
+tr:last-child {
+  border-bottom: none;
 }
 .form_buttons  {
   color: var(--medium-blue);
@@ -337,44 +307,34 @@ table.contact_form th {
   text-decoration: none;
 }
 .past_meetings {
-  width: 400px;
+  margin-top: 20px;
+  min-width: 400px;
+  width: 100%;
   table-layout: fixed;
-  float: left;
+  color: var(--lightest-gray);
+  border: none;
 }
 .past_meetings tr {
-  border-top: none;
-  border-bottom: none;
+  border: none;
 }
-.past_meetings tr.first {
-  border-top: 1px solid var(--table-border-color);
-  border-bottom: 1px solid var(--table-border-color);
-}
-.past_meetings tr.first:not(.current-year):hover {
-  background-color: var(--table-border-color);
+.past_meetings tr.year {
+  border-bottom: 1px solid white;
 }
 .past_meetings td {
   text-align: right;
 }
-.past_meetings td.current-year {
-  padding: 15px;
+.past_meetings td.year {
+  padding: 5px;
   font-weight: bold;
   text-align: left;
+  vertical-align: top;
 }
-.past_meetings td:first-child:not(.current-year) {
-  text-align: center;
-}
-.past_meetings tr.first:not(.current-year) td {
-  padding: 0;
-}
-/* classes related to toggle display of prior year meeting info */
-.past_meetings .collapsible {
-  display: none;
-}
+
 button.toggleDisplay {
   border: none;
   text-decoration: none;
   background-color: inherit;
-  color: var(--white-blue);
+  color: var(--light-blue);
   width: 100%;
   padding: 15px;
   margin: 0;
@@ -386,7 +346,7 @@ button.toggleDisplay {
 }
 .toggleDisplay:after {
   content: "\002B";
-  color: var(--white-blue);
+  color: var(--light-blue);
   font-size: 1.5rem;
   float: right;
   vertical-align: bottom;
@@ -433,66 +393,49 @@ table.partner_orgs td {
   padding-left: 0;
 }
 /* Responsive layout */
-@media screen and (max-width: 975px) and (min-width: 768px) {
-  header .cjtf_logo img {
-    width: 375px;
-  }
-  header .logos img {
-    width: 90px;
-  }
-  header .search input {
-    width: 155px;
-  }
-}
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1100px) {
   body {
+    grid-template-columns: auto;
+    grid-template-areas: 
+      "header" 
+      "main" 
+      "footer";
     padding: 0px;
     margin: 0px;
-    grid-template-columns: auto auto;
-    grid-template-areas: "header header" "main main" "footer footer";
   }
   header {
-    margin-left: 20px;
-    margin-right: 20px;
     grid-area: header;
     display: grid;
-    grid-gap: 5px;
-    grid-template-columns: auto auto;
-    grid-template-areas: "search nav" "logo logo";
+    grid-gap: 0px;
+    grid-template-areas: "logo nav";
+    padding: 10px 10px 10px 15px;
+    margin: 0;
   }
   header .cjtf_logo {
     grid-area: logo;
-    padding-bottom: 10px;
-  }
-  header .cjtf_logo img {
-    width: 100%;
-    min-width: 300px;
+    padding: 0 10px 0 0;
   }
   header .search {
-    grid-area: search;
-    justify-self: start;
-    padding-top: 8px;
-    padding-bottom: 20px;
-  }
-  header .logos {
     display: none;
   }
   nav {
     grid-area: nav;
+    align-self: start;
     justify-self: end;
-    padding-top: 0;
+    margin: 0;
+    padding: 0;
     z-index: 99;
   }
   nav .opener,
   nav .closer {
     display: block;
     border: none;
+    padding: 0 5px 5px 0;
+    margin: 0;
     font-size: 2rem;
     background: transparent;
-    padding-right: 0px;
   }
   nav ul {
-    z-index: 99;
     display: grid;
     justify-items: end;
     position: fixed;
@@ -505,16 +448,18 @@ table.partner_orgs td {
     font-size: 1rem;
     transition: all 400ms;
     padding-bottom: 5px;
-    padding-top: 8px;
+    padding-top: 5px;
+    margin-top: 0;
     white-space: nowrap;
     background-color: var(--medium-blue);
     border: 2px solid var(--dark-gray);
+    z-index: 99;
   }
   nav ul.show {
     width: 225px;
   }
   nav ul li {
-    margin-right: 15px;
+    margin-right: 5px;
     margin-left: 5px;
   }
   nav ul li:not(:last-child):not(:first-child):after {
@@ -541,41 +486,32 @@ table.partner_orgs td {
   nav ul a.active:hover {
     color: var(--orange);
   }
-  main.home {
+  .home {
     grid-template-columns: 1fr;
-    grid-template-areas: "mission" "col1" "col2";
+    padding: 15px;
   }
-  main .mission {
-    height: 50vh;
-  }
-  main.home .mission-text {
-    /* position: relative; */
-    font-size: 1rem;
-    padding: 10px;
-    width: calc(100% - 20px);
-    background: var(--dark-gray);
-  }
-  main.default {
+  .default {
     grid-template-columns: 1fr;
-    grid-template-areas: "col1" "col2";
+    grid-gap: 15px;
+    padding: 15px;
   }
-  main .col1,
-  main .col2,
-  main .full {
+  .col1,
+  .col2,
+  .full {
     padding: 0 20px 10px 20px;
   }
-  main.default .col2 {
-    padding-top: 0;
-  }
   footer {
-    display: block;
-    grid-area: footer;
-    text-align: center;
-    padding-top: 50px;
-    padding-bottom: 25px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    padding: 15px;
   }
-  footer img {
-    width: 125px;
+  .footer-logos {
+    display: inline;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+  .footer-text {
+    max-width: none;
   }
   .past_meetings {
     font-size: 0.8rem;

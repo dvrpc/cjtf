@@ -7,7 +7,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="{% static 'web/style.css' %}">
-  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
   <link rel="shortcut icon" type="image/png" href="{% static 'web/images/favicon.ico' %}"/>
   <title>{{ title }}</title>
   <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -16,35 +15,21 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-0JR28GEFRF');
   </script>
-
 </head>
 
 <body>
-
   <header>
-    <div class="cjtf_logo"><a href="/"><img src="{% static 'web/images/logo_header.png' %}"></a></div>
+    <div class="cjtf_logo"><a href="{% url 'web:index' %}"><img src="{% static 'web/images/logo_header.png' %}"></a></div>
     <div class="search">
       {% include 'web/search_form.html' %}
-      <img src="{% static 'web/images/magnifying_glass.png' %}" width="15px" height="16px">
-    </div>
-    <div class="logos">
-        <a href="https://www.dvrpc.org/">
-          <img src="{% static 'web/images/dvrpc_small.png' %}" style="padding-right: 15px"></a>
-        <a href="https://www.njtpa.org"><img src="{% static 'web/images/njtpa_small.png' %}"></a>
+      <img src="{% static 'web/images/magnifying_glass.png' %}">
     </div>
     <nav>
       <button class="opener">&#9776;</button>
       <ul>
         <li><button class="closer">&#215;</button></li>
-        <li><a href="{% url 'web:about' %}"
-          {% if request.resolver_match.url_name == 'about' %}
-            class="active"
-          {% endif %}
-          >About</a>
-        </li>
         <li>
           <a href="{% url 'web:membership' %}"
           {% if request.resolver_match.url_name == 'membership' %}
@@ -53,12 +38,11 @@
           >Membership</a>
         </li>
         <li>
-          <a href="{% url 'web:events_meetings' %}"
-          {% if request.resolver_match.url_name == 'events_meetings' %}
+          <a href="{% url 'web:strategic_plan' %}"
+          {% if request.resolver_match.url_name == 'strategic_plan' %}
             class="active"
           {% endif %}
-          >Events & Meetings</a>
-        </li>
+          >Strategic Plan</a>
         <li>
           <a href="{% url 'web:resources' %}"
           {% if 'resources' in request.resolver_match.url_name %}
@@ -71,12 +55,6 @@
             <li><a href="{% url 'web:partner_orgs' %}">Partner Organizations</a></li><br>
           </ul>
         </li>
-        <li>
-          <a href="{% url 'web:contact' %}"
-          {% if request.resolver_match.url_name == 'contact' %}
-            class="active"
-          {% endif %}
-          >Contact</a>
       </ul>
     </nav>
   </header>
@@ -85,10 +63,18 @@
   {% endblock %}
 
   <footer>
-    <a href="https://www.dvrpc.org/">
-      <img src="{% static 'web/images/dvrpc_small.png' %}" style="padding-right: 15px"></a>
-    <a href="https://www.njtpa.org">
-      <img src="{% static 'web/images/njtpa_small.png' %}"></a>
+    <div class="footer-logos">
+      <a href="https://www.dvrpc.org/">
+        <img src="{% static 'web/images/dvrpc_small.png' %}"></a>
+      <a href="https://www.njtpa.org">
+        <img src="{% static 'web/images/njtpa_small.png' %}"></a>
+    </div>
+    <div class="footer-text">
+      Formed in 1999, the Central Jersey Transportation Forum (CJTF) strives to integrate land use and transportation integration among municipal and county leaders at the border of two Metropolitan Planning Organizations in the Central Jersey area. Facilitated by the Delaware Valley Regional Planning Commission in coordination with North Jersey Transportation Planning Authority and New Jersey Department of Transportation, this partnership has maintained progress toward coordinated land use and transportation planning and development, information sharing and collaboration, and the exchange of information and resources. 
+      <br/><br/>
+      Contact us at <a href="mailto:cjtf@dvrpc.org">cjtf<span style="display:none">123</span>@dvrpc.org</a>. Follow us on <a href="https://twitter.com/CJTF_NJ">
+        <img src="{% static 'web/images/twitter-blue-transparent.png' %}">Twitter</a>.
+    </div>
   </footer>
   <script>
     /* responsive mode menu */
