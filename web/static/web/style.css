@@ -308,7 +308,6 @@ tr:last-child {
 }
 .past_meetings {
   margin-top: 20px;
-  min-width: 400px;
   width: 100%;
   table-layout: fixed;
   color: var(--lightest-gray);
