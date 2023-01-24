@@ -117,7 +117,7 @@ nav ul li ul {
   position: absolute;
   padding: 1rem 0.5rem 0.5rem 0.5rem;
   left: 0;
-  display: none;
+  top: 2rem;
   z-index: 11;
 }
 nav ul li ul li:not(:last-child):not(:first-child):after {
@@ -166,7 +166,6 @@ main a:hover {
   box-shadow: var(--shadow);
   border-radius: 10px;
   width: 100%;
-  min-width: 500px;
   margin-bottom: -5px;
 }
 
@@ -234,7 +233,7 @@ table {
 table.resources {
   border: none;
   margin: 0 auto;
-  align: left;
+  text-align: left;
 }
 table tr:last-child {
   border-bottom: none;
@@ -469,9 +468,6 @@ table.partner_orgs td {
   nav ul li:hover > ul {
     display: none;
   }
-  nav ul li ul {
-    display: hidden;
-  }
   nav ul a {
     text-decoration: none;
     color: white;
@@ -506,9 +502,8 @@ table.partner_orgs td {
     padding: 15px;
   }
   .footer-logos {
-    display: inline;
-    text-align: center;
-    padding-bottom: 10px;
+    display: grid;
+    padding-bottom: 0px;
   }
   .footer-text {
     max-width: none;
