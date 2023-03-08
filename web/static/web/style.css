@@ -162,7 +162,6 @@ main a:hover {
   width: 100%;
   margin-bottom: -5px;
 }
-
 .box {
   background-color: var(--light-blue);
   padding: 5px 15px 5px 15px;
@@ -174,6 +173,10 @@ main a:hover {
   grid-template-columns: 2fr 1fr;
   gap: 50px;
   padding-bottom: 20px;
+}
+.default img {
+  box-shadow: var(--shadow);
+  width: 100%;
 }
 .full {
   grid-area: span 1 / span 2;
