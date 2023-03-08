@@ -42,29 +42,23 @@ header {
   grid-area: header;
   gap: 5px;
   grid-template-areas:
-    "left top-right"
-    "left mid-right"
+    "top-left top-right"
     "bottom bottom";
   padding: 10px 80px 5px 80px;
   box-shadow: var(--shadow);
   z-index: 10;
-}
-.cjtf_logo {
-  grid-area: left;
 }
 header .cjtf_logo img {
   width: 100%;
   max-width: 400px;
 }
 header .search {
-  grid-area: top-right;
   justify-self: end;
-  align-self: center;
   white-space: nowrap;
 }
 header .search input {
   width: 300px;
-  font-family: "Roboto Thin";
+  font-family: "Open Sans", sans-serif;
   color: var(--dark-gray);
   font-size: 1.2rem;
   border: 1px solid var(--lighter-gray);
@@ -73,9 +67,8 @@ header .search form {
   display: inline;
 }
 header .search img {
-  vertical-align: middle;
   height: 1.2rem;
-  width: 1.2rem;
+  vertical-align: text-top;
 }
 nav {
   grid-area: bottom;
@@ -406,19 +399,19 @@ table.partner_orgs td {
     grid-area: header;
     display: grid;
     grid-gap: 0px;
-    grid-template-areas: "logo nav";
+    grid-template-areas: "left right";
     padding: 10px 10px 10px 15px;
     margin: 0;
   }
   header .cjtf_logo {
-    grid-area: logo;
+    grid-area: left;
     padding: 0 10px 0 0;
   }
   header .search {
     display: none;
   }
   nav {
-    grid-area: nav;
+    grid-area: right;
     align-self: start;
     justify-self: end;
     margin: 0;

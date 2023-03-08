@@ -6,6 +6,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="description" content="The Central Jersey Transportation Forum (CJTF) strives to integrate land use and transportation integration among municipal and county leaders at the border of two Metropolitan Planning Organizations in the Central Jersey area.">
   <link rel="stylesheet" type="text/css" href="{% static 'web/style.css' %}">
   <link rel="shortcut icon" type="image/png" href="{% static 'web/images/favicon.ico' %}"/>
   <title>{{ title }}</title>
@@ -21,10 +22,10 @@
 
 <body>
   <header>
-    <div class="cjtf_logo"><a href="{% url 'web:index' %}"><img src="{% static 'web/images/logo_header.png' %}"></a></div>
+    <div class="cjtf_logo"><a href="{% url 'web:index' %}"><img src="{% static 'web/images/logo_header.png' %}" alt="CJTF logo"></a></div>
     <div class="search">
       {% include 'web/search_form.html' %}
-      <img src="{% static 'web/images/magnifying_glass.png' %}">
+      <img src="{% static 'web/images/magnifying_glass.png' %}" alt="search icon">
     </div>
     <nav>
       <button class="opener">&#9776;</button>
@@ -65,15 +66,15 @@
   <footer>
     <div class="footer-logos">
       <a href="https://www.dvrpc.org/">
-        <img src="{% static 'web/images/dvrpc_small.png' %}"></a>
+        <img src="{% static 'web/images/dvrpc_small.png' %}" alt="DVRPC logo"></a>
       <a href="https://www.njtpa.org">
-        <img src="{% static 'web/images/njtpa_small.png' %}"></a>
+        <img src="{% static 'web/images/njtpa_small.png' %}" alt="NJTPA logo"></a>
     </div>
     <div class="footer-text">
       Formed in 1999, the Central Jersey Transportation Forum (CJTF) strives to integrate land use and transportation integration among municipal and county leaders at the border of two Metropolitan Planning Organizations in the Central Jersey area. Facilitated by the Delaware Valley Regional Planning Commission in coordination with North Jersey Transportation Planning Authority and New Jersey Department of Transportation, this partnership has maintained progress toward coordinated land use and transportation planning and development, information sharing and collaboration, and the exchange of information and resources. 
       <br/><br/>
       Contact us at <a href="mailto:cjtf@dvrpc.org">cjtf<span style="display:none">123</span>@dvrpc.org</a>. Follow us on <a href="https://twitter.com/CJTF_NJ">
-        <img src="{% static 'web/images/twitter-blue-transparent.png' %}">Twitter</a>.
+        <img src="{% static 'web/images/twitter-blue-transparent.png' %}" alt="twitter logo">Twitter</a>.
     </div>
   </footer>
   <script>
